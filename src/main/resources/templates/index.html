@@ -6,11 +6,25 @@
         <div th:replace="fragments/navigation :: navigation"></div>
 
         <div class="container">
-            <h1>Welcome <span th:text="${loggedUser.firstName}"></span></h1>
+            <h1>Hello, <span th:text="${loggedUser.firstName}"></span></h1>
             <br/>
-            This is your personal page!<br/>
-            <p th:text="${loggedUser.email}"></p>
-            <a class="btn btn-warning" href="/logout">Logout</a>
+            You have <span th:text="${tasksLeft}"></span> tasks that you have to complete!
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Something
+                        </div>
+                        <div class="panel-body">
+                            This layout uses tabs to demonstrate what you could do with it. It probably makes more sense to use individual pages/templates in a production app.
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </body>
 </html>

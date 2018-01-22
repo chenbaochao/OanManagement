@@ -82,4 +82,33 @@ public class TaskController {
         return "redirect:/task-list";
     }
 
+    @GetMapping("/task-edit")
+    public String editTaskOnScreen(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        User userLogged = userService.findByEmail(authentication.getName());
+        List<Task> taskList = taskService.findByUser(userLogged);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("tasks", taskList);
+        }
+
+        model.addAttribute("task", taskService.getOne(id));
+        return "/task-list";
+    }
+
+    @PostMapping("/task-edit")
+    public String editTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        User userLogged = userService.findByEmail(authentication.getName());
+        List<Task> taskList = taskService.findByUser(userLogged);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("tasks", taskList);
+        }
+
+        taskService.deleteById(id);
+
+        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), false));
+
+        return "redirect:/task-list";
+    }
+
 }
