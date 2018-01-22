@@ -6,7 +6,7 @@
     <div th:replace="fragments/navigation :: navigation"></div>
 
     <div class="container">
-        <h1> <span th:text="${username}"></span>'s tasks: </h1>
+        <h1> <span th:text="${loggedUser.firstName}"></span>'s tasks: </h1>
         <br/>
         <ul>
             <li th:each="task : ${tasks}" th:text="${task.description}"></li>

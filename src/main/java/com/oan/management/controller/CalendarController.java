@@ -23,7 +23,7 @@ public class CalendarController {
         User userLogged = userService.findByEmail(authentication.getName());
 
         if (userLogged != null) {
-            model.addAttribute("username", userLogged.getFirstName());
+            model.addAttribute("loggedUser", userLogged);
         }
 
         return "calendar";

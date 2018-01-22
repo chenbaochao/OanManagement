@@ -23,7 +23,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAuthenticated()" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span th:text="${firstName} + ' ' + ${lastName}"></span> <span><b class="caret"></b></span></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></span> <span><b class="caret"></b></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Messages</a></li>
                             <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>

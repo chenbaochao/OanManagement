@@ -19,11 +19,7 @@ public class ProfileController {
         User userLogged = userService.findByEmail(authentication.getName());
 
         if (userLogged != null) {
-            model.addAttribute("firstName", userLogged.getFirstName());
-            model.addAttribute("lastName", userLogged.getLastName());
-            model.addAttribute("email", userLogged.getEmail());
-            model.addAttribute("roles", userLogged.getRoles());
-            model.addAttribute("id", userLogged.getId());
+            model.addAttribute("loggedUser", userLogged);
         }
 
         return "profile";

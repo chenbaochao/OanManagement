@@ -33,9 +33,10 @@ public class TaskController {
 
         List<Task> taskList = taskService.findByUser(userLogged);
 
-        model.addAttribute("tasks", taskList);
-        model.addAttribute("username", userLogged.getFirstName());
-        model.addAttribute("email", userLogged.getEmail());
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("tasks", taskList);
+        }
         return "tasks";
     }
 

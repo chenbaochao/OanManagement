@@ -1,7 +1,6 @@
 package com.oan.management.controller;
 
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,9 +21,7 @@ public class MainController {
         User userLogged = userService.findByEmail(authentication.getName());
 
         if (userLogged != null) {
-            model.addAttribute("firstName", userLogged.getFirstName());
-            model.addAttribute("lastName", userLogged.getLastName());
-            model.addAttribute("email", userLogged.getEmail());
+            model.addAttribute("loggedUser", userLogged);
         }
 
         return "index";
