@@ -3,7 +3,7 @@
 # ===============================
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/oan_management
+    url: jdbc:mysql://localhost:3306/oan_management?zeroDateTimeBehavior=convertToNull
     username: root
     password: root98
 

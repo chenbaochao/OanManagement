@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+
+    <div class="container">
+        <h1> <span th:text="${loggedUser.firstName}"></span>'s tasks: </h1>
+        <form th:action="@{/task-list}" th:object="${task}" method="post">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Add a new task: </label>
+                <input type="text" th:field="*{description}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Target date: </label>
+                <input type="text" th:field="*{targetDate}"
+                       name="targetDate"
+                       class="form-control"
+                       autofocus="autofocus"
+                       placeholder="e.g. 22/05/2019"/>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit"
+                               name="task-submit"
+                               id="task-submit"
+                               class="form-control btn btn-info"
+                               value="New task"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+        <ul>
+            <li th:each="task : ${tasks}" th:text="${task.description}"></li>
+        </ul>
+    </div>
+</body>
+</html>
