@@ -6,7 +6,7 @@
     <div th:replace="fragments/navigation :: navigation"></div>
 
     <div class="container">
-        <h1> <span th:text="${loggedUser.firstName}"></span>'s tasks: </h1>
+        <h1>New task: </h1>
         <form th:action="@{/task-list}" th:object="${task}" method="post">
             <div class="form-group">
                 <label class="control-label col-sm-2">Add a new task: </label>
@@ -17,8 +17,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Target date: </label>
-                <input type="text" th:field="*{targetDate}"
-                       name="targetDate"
+                <input type="date" th:field="*{targetDate}"
                        class="form-control"
                        autofocus="autofocus"
                        placeholder="e.g. 22/05/2019"/>
@@ -36,11 +35,28 @@
             </div>
         </form>
 
-
-
-        <ul>
-            <li th:each="task : ${tasks}" th:text="${task.description}"></li>
-        </ul>
+        <h1> <span th:text="${loggedUser.firstName}"></span>'s tasks: </h1>
+        <table class="table table-hover table-striped">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Completed</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody th:each="task : ${tasks}">
+                <tr>
+                    <td th:text="${task.description}"></td>
+                    <td th:text="${task.targetDate}"></td>
+                    <td th:text="${task.completed}"></td>
+                    <td>
+                        <a href="/task-update?id" class="btn btn-warning">Delete</a>
+                        <a href="/" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

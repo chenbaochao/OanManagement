@@ -24,7 +24,6 @@ public class Task {
     @ManyToOne
     private User user;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull
     @Future
     private Date targetDate;
