@@ -18,14 +18,12 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 1, message = "Description should have atleast one character")
     private String description;
 
     @ManyToOne
     private User user;
 
     @NotNull
-    @Future
     private Date targetDate;
 
     private boolean completed;
