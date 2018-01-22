@@ -15,19 +15,6 @@ import java.time.LocalDate;
 public class Run {
 
     public static void main(String[] args) {
-
         SpringApplication.run(Run.class, args);
-
-        /**
-        ConfigurableApplicationContext configurableApplicationContext =
-        SpringApplication.run(Run.class, args);
-
-        UserRepository userRepository = configurableApplicationContext.getBean(UserRepository.class);
-        User user = userRepository.findOne(3L);
-
-        TaskRepository tr = configurableApplicationContext.getBean(TaskRepository.class);
-        Task task = new Task(user, "description", Date.valueOf(LocalDate.of(2019,1,21)), false);
-        tr.save(task);
-        **/
     }
 }

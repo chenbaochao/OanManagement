@@ -64,9 +64,9 @@ public class TaskController {
         }
 
         if (result.hasErrors() && task.getTargetDate()==null) {
-            result.rejectValue("description", null, "ERRORRR");
             for (ObjectError error : result.getAllErrors()) {
                 System.out.println(error.toString());
+                result.rejectValue("taskname", "Error");
             }
             return "task-list";
         }

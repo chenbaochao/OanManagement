@@ -29,6 +29,9 @@ public class User {
     @OneToMany
     private List<Task> tasks;
 
+    @OneToMany
+    private List<Contact> contacts;
+
     public User() {
     }
 

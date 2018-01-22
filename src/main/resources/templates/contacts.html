@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+
+    <div class="container">
+
+        <h1>New contact: </h1>
+        <form th:action="@{/contacts}" th:object="${contact}" method="post">
+            <div class="form-group">
+                <label for="firstName" class="control-label col-sm-2">First Name: </label>
+                <input id="firstName" type="text" th:field="*{firstName}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="control-label col-sm-2">Last Name: </label>
+                <input id="lastName" type="text" th:field="*{lastName}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label col-sm-2">Email: </label>
+                <input id="email" type="text" th:field="*{email}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label for="mobileNumber" class="control-label col-sm-2">Mobile Number: </label>
+                <input id="mobileNumber" type="text" th:field="*{mobileNumber}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label for="address" class="control-label col-sm-2">Address: </label>
+                <input id="address" type="text" th:field="*{address}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+            <div class="form-group">
+                <label for="notes" class="control-label col-sm-2">Notes: </label>
+                <input id="notes" type="text" th:field="*{notes}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""/>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit"
+                               name="contact-submit"
+                               id="contact-submit"
+                               class="form-control btn btn-info"
+                               value="New contact"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+
+        <h1> <span th:text="${loggedUser.firstName}"></span>'s contacts: </h1>
+        <table class="table table-hover table-striped">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Mobile number</th>
+                    <th>Notes</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody th:each="contact : ${contacts}">
+                <tr>
+                    <td th:text="${contact.firstName}"></td>
+                    <td th:text="${contact.lastName}"></td>
+                    <td th:text="${contact.email}"></td>
+                    <td th:text="${contact.mobileNumber}"></td>
+                    <td th:text="${contact.notes}"></td>
+                    <td th:text="${contact.address}"></td>
+                    <td>
+                        <a href="/task-update?id" class="btn btn-warning">Delete</a>
+                        <a href="/" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
