@@ -53,8 +53,8 @@
                     <td th:text="${task.targetDate}"></td>
                     <td th:text="${task.completed}"></td>
                     <td>
-                        <a href="/task-update?id" class="btn btn-warning">Delete</a>
-                        <a href="/" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/task-edit(id=${task.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/task-delete(id=${task.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>

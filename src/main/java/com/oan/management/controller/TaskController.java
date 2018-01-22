@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -72,11 +73,12 @@ public class TaskController {
         }
 
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), false ));
+        return "redirect:/task-list";
+    }
 
-        if (userLogged != null) {
-            model.addAttribute("loggedUser", userLogged);
-            model.addAttribute("tasks", taskList);
-        }
+    @GetMapping("/task-delete")
+    public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        taskService.delete(id);
         return "redirect:/task-list";
     }
 
