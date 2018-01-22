@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/header :: header"></head>
+
+    <body>
+        <div th:replace="fragments/navigation :: navigation"></div>
+
+        <div class="container">
+            <h1><span th:text="${firstName} + ' ' +  ${lastName}"></span></h1>
+            ID: <p th:text="${id}"></p>
+            Email: <p th:text="${email}"></p>
+            Role:
+            <table>
+                <th:block th:each="role: ${roles}">
+                    <tr>
+                        <td th:text="${role.name}">.</td>
+                    </tr>
+                </th:block>
+            </table>
+
+            <a class="btn btn-warning" href="/logout">Logout</a>
+        </div>
+    </body>
+</html>
