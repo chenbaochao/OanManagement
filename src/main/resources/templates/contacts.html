@@ -7,64 +7,66 @@
 
     <div class="container">
 
-        <h1>New contact: </h1>
+        <h1>New contact </h1>
         <form th:action="@{/contacts}" th:object="${contact}" method="post">
-            <div class="form-group">
-                <label for="firstName" class="control-label col-sm-2">First Name: </label>
-                <input id="firstName" type="text" th:field="*{firstName}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="lastName" class="control-label col-sm-2">Last Name: </label>
-                <input id="lastName" type="text" th:field="*{lastName}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="email" class="control-label col-sm-2">Email: </label>
-                <input id="email" type="text" th:field="*{email}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="mobileNumber" class="control-label col-sm-2">Mobile Number: </label>
-                <input id="mobileNumber" type="text" th:field="*{mobileNumber}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="address" class="control-label col-sm-2">Address: </label>
-                <input id="address" type="text" th:field="*{address}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="notes" class="control-label col-sm-2">Notes: </label>
-                <input id="notes" type="text" th:field="*{notes}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       placeholder=""/>
-            </div>
+            <div class="panel panel-login">
+                <div class="form-group">
+                    <label for="firstName" class="control-label col-sm-2">First Name: </label>
+                    <input id="firstName" type="text" th:field="*{firstName}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="control-label col-sm-2">Last Name: </label>
+                    <input id="lastName" type="text" th:field="*{lastName}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label col-sm-2">Email: </label>
+                    <input id="email" type="text" th:field="*{email}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNumber" class="control-label col-sm-2">Mobile Number: </label>
+                    <input id="mobileNumber" type="text" th:field="*{mobileNumber}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="control-label col-sm-2">Address: </label>
+                    <input id="address" type="text" th:field="*{address}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="notes" class="control-label col-sm-2">Notes: </label>
+                    <input id="notes" type="text" th:field="*{notes}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder=""/>
+                </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit"
-                               name="contact-submit"
-                               id="contact-submit"
-                               class="form-control btn btn-info"
-                               value="New contact"/>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="contact-submit"
+                                   id="contact-submit"
+                                   class="form-control btn btn-info"
+                                   value="New contact"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,7 +75,7 @@
 
 
 
-        <h1> <span th:text="${loggedUser.firstName}"></span>'s contacts: </h1>
+        <h1>Contacts </h1>
         <table class="table table-hover table-striped">
             <thead class="thead-inverse">
                 <tr>
@@ -94,8 +96,8 @@
                     <td th:text="${contact.address}"></td>
                     <td th:text="${contact.notes}"></td>
                     <td>
-                        <a href="/task-update?id" class="btn btn-warning">Delete</a>
-                        <a href="/" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/contacts-edit(id=${contact.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/contacts-delete(id=${contact.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>

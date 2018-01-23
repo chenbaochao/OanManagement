@@ -18,8 +18,9 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/calendar">Calendar</a></li>
-                    <li sec:authorize="isAuthenticated()"><a href="/task-list">To-do's</a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/task-list">To-do's  <span th:text="${session.tasksLeftSession}" class="badge badge-notify"></span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/contacts">Contacts</a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="#">File Manager</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -33,6 +34,7 @@
                             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
                     </li>
+
 
                     <li sec:authorize="!isAuthenticated()">
                         <a href="/registration">Sign up</a>

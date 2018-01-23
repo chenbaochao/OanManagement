@@ -6,23 +6,25 @@
     <div th:replace="fragments/navigation :: navigation"></div>
 
     <div class="container">
-        <h1>New task: </h1>
+        <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>
         <form th:action="@{/task-list}" th:object="${task}" method="post">
-            <div class="form-group">
-                <label for="description" class="control-label col-sm-2">Description: </label>
-                <input id="description" type="text" th:field="*{description}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""/>
-            </div>
-            <div class="form-group">
-                <label for="taskdate" class="control-label col-md-3">Target date: </label>
-                <input id="taskdate" type="date" th:field="*{targetDate}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder="e.g. 22/05/2019"/>
+            <div class="panel panel-login">
+                <div class="form-group">
+                    <label for="description" class="control-label col-sm-2">Description: </label>
+                    <input id="description" type="text" th:field="*{description}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="taskdate" class="control-label col-md-3">Target date: </label>
+                    <input id="taskdate" type="date" th:field="*{targetDate}"
+                           class="form-control"
+                           autofocus="autofocus"
+                           required="required"
+                           placeholder="e.g. 22/05/2019"/>
+                </div>
             </div>
             <div class="form-group">
                 <div class="row">
@@ -37,7 +39,7 @@
             </div>
         </form>
 
-        <h1> <span th:text="${loggedUser.firstName}"></span>'s tasks: </h1>
+        <h1><span class="glyphicon glyphicon-check"></span> <span th:text="${loggedUser.firstName}"></span>'s Tasks: </h1>
         <table class="table table-hover table-striped">
             <thead class="thead-inverse">
                 <tr>
@@ -51,7 +53,8 @@
                 <tr>
                     <td th:text="${task.description}"></td>
                     <td th:text="${task.targetDate}"></td>
-                    <td th:text="${task.completed}"></td>
+                    <td th:if="${task.completed} == true"><span class="glyphicon glyphicon-ok"></span> </td>
+                    <td th:if="${task.completed} == false"><span class="glyphicon glyphicon-remove"></span> </td>
                     <td>
                         <!--
                         <a th:href="@{/task-edit(id=${task.id})}" class="btn btn-warning">Edit</a>

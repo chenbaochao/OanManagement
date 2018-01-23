@@ -1,5 +1,19 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image:url("https://i.imgur.com/IjN2obf.png");
+}
+
 h1 {
     color: #78ab46;
+}
+
+.panel-login {
+    margin-top: 20px;
+    border-color: #ccc;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    padding: 20px;
 }
 
 footer {
@@ -24,10 +38,6 @@ footer p {
 
 .navbar{
     margin-top: 20px;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
 }
 
 #calendar {
@@ -97,4 +107,42 @@ body {
     color:#a94442;
     background-color:#f2dede;
     border-color:#ebccd1;
+}
+
+blockquote{
+    border-left:none
+}
+
+.quote-badge{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.quote-box{
+
+    overflow: hidden;
+    margin-top: -50px;
+    padding-top: -100px;
+    border-radius: 17px;
+    background-color: #4ADFCC;
+    margin-top: 25px;
+    color:white;
+    width: 325px;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+
+}
+
+.quotation-mark{
+
+    margin-top: -10px;
+    font-weight: bold;
+    font-size:100px;
+    color:white;
+    font-family: "Times New Roman", Georgia, Serif;
+
+}
+
+.quote-text{
+
+    font-size: 19px;
+    margin-top: -65px;
 }

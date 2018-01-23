@@ -28,7 +28,7 @@ public class ContactController {
     private ContactRepository contactService;
 
     @GetMapping("/contacts")
-    public String tasklist(Model model, Authentication authentication) {
+    public String contactlist(Model model, Authentication authentication) {
         User userLogged = userService.findByEmail(authentication.getName());
         model.addAttribute("contact", new Contact());
         List<Contact> contactList = contactService.findByUser(userLogged);
@@ -57,10 +57,40 @@ public class ContactController {
         return "redirect:/contacts";
     }
 
-    @GetMapping("/contact-delete")
-    public String deleteTask(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
+    @GetMapping("/contacts-delete")
+    public String deleteContact(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
         contactService.delete(id);
-        return "redirect:/task-list";
+        return "redirect:/contacts";
+    }
+
+    @GetMapping("/contacts-edit")
+    public String editContactOnScreen(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
+        User userLogged = userService.findByEmail(authentication.getName());
+        List<Contact> contactList = contactService.findByUser(userLogged);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("contacts", contactList);
+        }
+
+        model.addAttribute("contact", contactService.getOne(id));
+        return "/contacts-edit";
+    }
+
+    @PostMapping("/contacts-edit")
+    public String editContact(Model model, Contact contact, Authentication authentication) {
+        User userLogged = userService.findByEmail(authentication.getName());
+        List<Contact> contactList = contactService.findByUser(userLogged);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("contacts", contactList);
+        }
+
+        Long previous_id = contact.getId();
+        contactService.save(new Contact(userLogged, contact.getFirstName(), contact.getLastName(), contact.getEmail(),
+                contact.getMobileNumber(), contact.getNotes(), contact.getAddress()));
+        contactService.delete(contactService.findById(previous_id));
+
+        return "redirect:contacts";
     }
 
 }

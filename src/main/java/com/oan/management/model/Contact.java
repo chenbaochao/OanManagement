@@ -1,8 +1,6 @@
 package com.oan.management.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
 /**
  * Created by Oan on 18/01/2018.
@@ -83,5 +81,21 @@ public class Contact {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
