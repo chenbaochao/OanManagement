@@ -42,7 +42,9 @@ public class MainController {
             Quote quote = mapper.readValue(new URL("https://talaikis.com/api/quotes/random/"), Quote.class);
             model.addAttribute("quote", quote);
         } catch (IOException e) {
-            e.printStackTrace();
+            // This is just added so I could work offline in the train
+            Quote quote = new Quote("","","");
+            model.addAttribute("quote", quote);
         }
 
         return "index";

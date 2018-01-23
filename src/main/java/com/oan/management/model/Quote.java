@@ -8,6 +8,15 @@ public class Quote {
     private String author;
     private String cat;
 
+    public Quote() {
+    }
+
+    public Quote(String quote, String author, String cat) {
+        this.quote = quote;
+        this.author = author;
+        this.cat = cat;
+    }
+
     public String getQuote() {
         return quote;
     }
