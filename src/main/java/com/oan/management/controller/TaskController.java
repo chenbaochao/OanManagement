@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -92,23 +91,24 @@ public class TaskController {
         }
 
         model.addAttribute("task", taskService.getOne(id));
-        return "/task-list";
+        return "/task-edit";
     }
 
     @PostMapping("/task-edit")
-    public String editTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+    public String editTask(Model model, Task task, Authentication authentication) {
         User userLogged = userService.findByEmail(authentication.getName());
         List<Task> taskList = taskService.findByUser(userLogged);
+
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
         }
 
-        taskService.deleteById(id);
+        Long previous_id = task.getId();
+        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted()));
+        taskService.delete(taskService.findById(previous_id));
 
-        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), false));
-
-        return "redirect:/task-list";
+        return "redirect:task-list";
     }
 
 }

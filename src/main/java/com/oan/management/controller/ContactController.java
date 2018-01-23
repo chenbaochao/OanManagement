@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 /**
@@ -53,6 +55,12 @@ public class ContactController {
 
 
         return "redirect:/contacts";
+    }
+
+    @GetMapping("/contact-delete")
+    public String deleteTask(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
+        contactService.delete(id);
+        return "redirect:/task-list";
     }
 
 }
