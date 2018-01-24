@@ -59,7 +59,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.getById(id);
         task.setDescription(desc);
         task.setTargetDate(date);
-        task.setCompleted(completed);
+        task.setCompleted(task.isCompleted());
         return taskRepository.save(task);
     }
 

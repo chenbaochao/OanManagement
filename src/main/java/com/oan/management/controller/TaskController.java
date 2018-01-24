@@ -73,7 +73,7 @@ public class TaskController {
             return "task-list";
         }
 
-        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), false ));
+        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted() ));
         return "redirect:/task-list";
     }
 
