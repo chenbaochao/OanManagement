@@ -37,7 +37,10 @@
 
 
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="/registration">Sign up</a>
+                        <a href="/registration"> <span class="glyphicon glyphicon-user"> </span> Sign up</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login"> <span class="glyphicon glyphicon-log-in"> </span> Login</a>
                     </li>
                 </ul>
             </div>
