@@ -2,7 +2,7 @@ package com.oan.management.controller;
 
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
-import com.oan.management.repository.TaskRepository;
+import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,7 @@ public class TaskController {
     private UserService userService;
 
     @Autowired
-    private TaskRepository taskService;
+    private TaskService taskService;
 
     @GetMapping("/task-list")
     public String tasklist(HttpServletRequest req, Model model, Authentication authentication) {
@@ -79,7 +79,7 @@ public class TaskController {
 
     @GetMapping("/task-delete")
     public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
-        taskService.delete(id);
+        taskService.deleteTaskById(id);
         return "redirect:/task-list";
     }
 
@@ -105,12 +105,19 @@ public class TaskController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
         }
-
-        Long previous_id = task.getId();
-        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted()));
-        taskService.delete(taskService.findById(previous_id));
-
+        taskService.editById(task.getId(),task.getDescription(),task.getTargetDate(), task.isCompleted());
         return "redirect:task-list";
     }
 
+    @GetMapping("/task-complete")
+    public String completeTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        taskService.completeTaskById(id);
+        return "redirect:/task-list";
+    }
+
+    @GetMapping("/task-uncomplete")
+    public String uncompleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        taskService.uncompleteTaskById(id);
+        return "redirect:/task-list";
+    }
 }

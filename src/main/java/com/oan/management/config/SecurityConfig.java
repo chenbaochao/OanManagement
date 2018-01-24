@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/webjars/**").permitAll()
                     .antMatchers("/calendar", "/tasks", "/contacts","/","/task-list","/profile").hasAuthority("ROLE_USER")
                         .anyRequest().authenticated()
+                        // TODO - Fix this, users that are logged in shouldn't be allowed to access /registration
                     .antMatchers("/registration**").not().hasAuthority("ROLE_USER").anyRequest().permitAll()
                 .and()
                     .formLogin()
