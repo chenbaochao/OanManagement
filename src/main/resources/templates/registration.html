@@ -61,6 +61,9 @@
                 });
 
             })
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').focus()
+            })
         </script>
     </head>
 
@@ -171,7 +174,7 @@
                                        type="checkbox"
                                        th:field="*{terms}"/>  
                                 <label class="control-label" for="terms">
-                                    I agree with the <a href="#">terms and conditions</a> for Registration.
+                                    I agree with the <a href="#terms" data-toggle="modal" data-target="#myModal">terms and conditions</a> for Registration.
                                 </label>
                                 <p class="error-message"
                                    th:each="error : ${#fields.errors('terms')}"
@@ -183,6 +186,32 @@
                             <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
                         </div>
                     </form>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="myModalLabel">Terms and Conditions</h3>
+                            </div>
+                            <div class="modal-body">
+                                <p>Please read these Terms and Conditions carefully before using the http://www.oanmanagement.com website and the Oan Management App mobile application operated by Oan Stultjens.</p>
+                                <p>Your access to and use of Oan Management is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use Oan Management.</p>
+                                <p><strong>By accessing or using Oan Management you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access Oan Management.</strong></p>
+                                <h4><p><strong>Purchases</strong></p></h4>
+                                <p>If you wish to purchase any product or service made available through Oan Management ("Purchase"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your …</p>
+                                <h4><p><strong>Subscriptions</strong></p></h4>
+                                <p>Some parts of Oan Management are billed on a subscription basis ("Subscription(s)"). You will be billed in advance on a recurring ... </p>
+                                <h4><p><strong>Contact Us</strong></p></h4>
+                                <p>If you have any questions about these Terms, please contact us.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

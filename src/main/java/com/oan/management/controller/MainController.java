@@ -23,12 +23,12 @@ public class MainController {
     private UserService userService;
 
     @Autowired
-    private TaskRepository taskService;
+    private TaskRepository taskRepository;
 
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByEmail(authentication.getName());
-        List<Task> taskList = taskService.findByUser(userLogged);
+        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);

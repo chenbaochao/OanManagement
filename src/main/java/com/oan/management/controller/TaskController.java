@@ -2,6 +2,7 @@ package com.oan.management.controller;
 
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
+import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,25 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
+    public User getLoggedUser(Authentication authentication) {
+        return userService.findByEmail(authentication.getName());
+    }
+
     @GetMapping("/task-list")
     public String tasklist(HttpServletRequest req, Model model, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         model.addAttribute("task", new Task());
-        List<Task> taskList = taskService.findByUser(userLogged);
+        // Get completed and uncompleted tasks
+        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
+        List<Task> completedTasksList = taskRepository.findByUserAndCompletedIsTrue(userLogged);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
+            model.addAttribute("completedTasks", completedTasksList);
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
         }
         return "task-list";
@@ -49,7 +60,7 @@ public class TaskController {
     @PostMapping("/task-list")
     public String newTask(Model model, @Valid Task task, BindingResult result, @RequestParam("targetDate") String date, Authentication authentication) {
         // Get logged in user and his tasks
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -79,13 +90,15 @@ public class TaskController {
 
     @GetMapping("/task-delete")
     public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
-        taskService.deleteTaskById(id);
+        if (task.getUser()==getLoggedUser(authentication)) {
+            taskService.deleteTaskById(id);
+        }
         return "redirect:/task-list";
     }
 
     @GetMapping("/task-edit")
     public String editTaskOnScreen(Model model, Task task, @RequestParam Long id, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -98,7 +111,7 @@ public class TaskController {
 
     @PostMapping("/task-edit")
     public String editTask(Model model, Task task, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
 
         if (userLogged != null) {
