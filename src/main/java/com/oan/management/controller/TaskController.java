@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class TaskController {
     private TaskRepository taskService;
 
     @GetMapping("/task-list")
-    public String tasklist(Model model, Authentication authentication) {
+    public String tasklist(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByEmail(authentication.getName());
         model.addAttribute("task", new Task());
         List<Task> taskList = taskService.findByUser(userLogged);
@@ -40,6 +41,7 @@ public class TaskController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
+            req.getSession().setAttribute("tasksLeftSession", taskList.size());
         }
         return "task-list";
     }

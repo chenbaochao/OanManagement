@@ -19,7 +19,6 @@ import java.util.List;
 
 @Controller
 public class MainController {
-
     @Autowired
     private UserService userService;
 
@@ -33,10 +32,9 @@ public class MainController {
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
-            model.addAttribute("tasksLeft", taskList.size());
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
         }
-
+        // JSON to Object mapper
         ObjectMapper mapper = new ObjectMapper();
         try {
             Quote quote = mapper.readValue(new URL("https://talaikis.com/api/quotes/random/"), Quote.class);
@@ -46,12 +44,6 @@ public class MainController {
             Quote quote = new Quote("","","");
             model.addAttribute("quote", quote);
         }
-
         return "index";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model, User user) {
-        return "login";
     }
 }

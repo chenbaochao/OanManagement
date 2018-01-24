@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ProfileController {
-
     @Autowired
     private UserService userService;
 
@@ -21,7 +20,6 @@ public class ProfileController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
         }
-
         return "profile";
     }
 }

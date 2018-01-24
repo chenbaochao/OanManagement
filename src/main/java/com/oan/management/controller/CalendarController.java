@@ -14,18 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CalendarController {
-
     @Autowired
     private UserService userService;
 
     @GetMapping("/calendar")
     public String calendar(Model model, Authentication authentication) {
         User userLogged = userService.findByEmail(authentication.getName());
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
         }
-
         return "calendar";
     }
 }

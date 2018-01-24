@@ -13,7 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     private UserService userService;
 
@@ -22,12 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(
-                            "/registration**",
+                            //"/registration**",
                             "/js/**",
                             "/css/**",
                             "/img/**",
-                            "/webjars/**").permitAll().antMatchers("/calendar", "/tasks").hasAuthority("ROLE_USER")
-                    .anyRequest().authenticated()
+                            "/webjars/**").permitAll()
+                    .antMatchers("/calendar", "/tasks", "/contacts","/","/task-list","/profile").hasAuthority("ROLE_USER")
+                        .anyRequest().authenticated()
+                    .antMatchers("/registration**").not().hasAuthority("ROLE_USER").anyRequest().permitAll()
                 .and()
                     .formLogin()
                         .loginPage("/login")
@@ -39,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login?logout")
                 .permitAll();
-
     }
 
     @Bean
@@ -59,5 +59,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
 }
