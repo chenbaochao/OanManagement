@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -38,5 +39,22 @@ public class MessageController {
             model.addAttribute("messages", messages);
         }
         return "messages";
+    }
+
+    @GetMapping("/message")
+    public String openMessage(HttpServletRequest req, Model model, Authentication authentication, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        List<Message> messages = messageService.getMessagesByUser(userLogged);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("messages", messages);
+        }
+        if (id != null) {
+            model.addAttribute("message", messageService.getMessageById(id));
+            return "message";
+        }
+        else {
+            return "messages";
+        }
     }
 }

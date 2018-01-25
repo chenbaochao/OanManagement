@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+    <div class="container">
+
+        <h1><span class="glyphicon glyphicon-envelope"> </span> <span th:text="${message.subject}"></span></h1>
+        <div class="panel panel-login table-responsive">
+            <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
+            <p>To: <a href=""><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
+        </div>
+        <div class="panel panel-login table-responsive">
+            <p th:text="${message.message}"></p>
+        </div>
+    </div>
+</body>
+</html>

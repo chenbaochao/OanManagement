@@ -22,4 +22,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getMessagesByUser(User user) {
         return messageRepository.getAllByReceiver(user);
     }
+
+    @Override
+    public Message getMessageById(Long id) {
+        return messageRepository.getMessageById(id);
+    }
 }

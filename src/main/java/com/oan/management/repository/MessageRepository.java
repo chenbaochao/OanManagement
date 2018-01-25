@@ -14,4 +14,5 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> getAllByReceiver(User user);
+    Message getMessageById(Long id);
 }
