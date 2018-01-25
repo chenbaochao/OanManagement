@@ -32,6 +32,9 @@ public class User {
     @OneToMany
     private List<Contact> contacts;
 
+    @OneToMany
+    private List<Message> messages;
+
     public User() {
     }
 

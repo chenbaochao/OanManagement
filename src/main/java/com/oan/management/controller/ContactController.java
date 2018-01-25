@@ -3,6 +3,7 @@ package com.oan.management.controller;
 import com.oan.management.model.Contact;
 import com.oan.management.model.User;
 import com.oan.management.repository.ContactRepository;
+import com.oan.management.service.ContactService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,10 @@ public class ContactController {
     private UserService userService;
 
     @Autowired
-    private ContactRepository contactService;
+    private ContactRepository contactRepository;
+
+    @Autowired
+    private ContactService contactService;
 
     @GetMapping("/contacts")
     public String contactlist(Model model, Authentication authentication) {
@@ -59,7 +63,7 @@ public class ContactController {
 
     @GetMapping("/contacts-delete")
     public String deleteContact(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
-        contactService.delete(id);
+        contactService.deleteById(id);
         return "redirect:/contacts";
     }
 
@@ -85,10 +89,9 @@ public class ContactController {
             model.addAttribute("contacts", contactList);
         }
 
-        Long previous_id = contact.getId();
         contactService.save(new Contact(userLogged, contact.getFirstName(), contact.getLastName(), contact.getEmail(),
                 contact.getMobileNumber(), contact.getNotes(), contact.getAddress()));
-        contactService.delete(contactService.findById(previous_id));
+        contactService.deleteById(contact.getId());
 
         return "redirect:contacts";
     }
