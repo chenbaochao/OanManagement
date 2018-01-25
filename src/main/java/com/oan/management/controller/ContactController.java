@@ -31,9 +31,13 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
+    public User getLoggedUser(Authentication authentication) {
+        return userService.findByEmail(authentication.getName());
+    }
+
     @GetMapping("/contacts")
     public String contactlist(Model model, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         model.addAttribute("contact", new Contact());
         List<Contact> contactList = contactService.findByUser(userLogged);
 
@@ -47,7 +51,7 @@ public class ContactController {
 
     @PostMapping("/contacts")
     public String newcontact(Model model, Contact contact, BindingResult result, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
 
         if (userLogged != null) {
@@ -69,7 +73,7 @@ public class ContactController {
 
     @GetMapping("/contacts-edit")
     public String editContactOnScreen(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -82,7 +86,7 @@ public class ContactController {
 
     @PostMapping("/contacts-edit")
     public String editContact(Model model, Contact contact, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);

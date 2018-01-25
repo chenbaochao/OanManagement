@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    <div class="container">
+        <h1><span class="glyphicon glyphicon-ok"></span>Messages: </h1>
+        <div class="panel panel-login table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="thead-inverse">
+                     <tr>
+                        <th>Subject</th>
+                        <th>From</th>
+                         <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody th:each="message : ${messages}">
+                <tr>
+                    <td th:text="${message.subject}"></td>
+                    <td th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></td>
+                    <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
+                    <!--<td th:text="${message.date}"></td>-->
+                    <td>
+                        <a th:href="@{/task-edit(id=${message.id})}" data-toggle="tooltip" data-placement="left" title="Edit this task" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/task-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this task" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

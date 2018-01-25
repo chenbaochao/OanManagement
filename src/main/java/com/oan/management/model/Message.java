@@ -1,6 +1,7 @@
 package com.oan.management.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by Oan on 25/01/2018.
@@ -13,6 +14,7 @@ public class Message {
     private Long id;
     private String subject;
     private String message;
+    private Date date;
 
     @ManyToOne
     private User sender;
@@ -60,5 +62,13 @@ public class Message {
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
