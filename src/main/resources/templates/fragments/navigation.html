@@ -27,8 +27,12 @@
                     <li sec:authorize="isAuthenticated()" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></span> <span><b class="caret"></b></span></a>
                         <ul class="dropdown-menu">
+                            <!--<li><a href=""><span th:text="${loggedUser.username}"></span></a></li>-->
+                            <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> <span th:text="${loggedUser.username}"></span></a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="/messages"><span class="glyphicon glyphicon-inbox"></span> Messages</a></li>
-                            <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <!--<li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>-->
+
                             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                             <li class="divider"></li>
                             <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

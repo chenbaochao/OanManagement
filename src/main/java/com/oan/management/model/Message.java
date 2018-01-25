@@ -13,7 +13,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String subject;
-    private String message;
+    private String messageText;
     private Date date;
 
     @ManyToOne
@@ -22,6 +22,14 @@ public class Message {
     private User receiver;
 
     public Message() {
+    }
+
+    public Message(String subject, String messageText, Date date, User sender, User receiver) {
+        this.subject = subject;
+        this.messageText = messageText;
+        this.date = date;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
     public Long getId() {
@@ -40,12 +48,12 @@ public class Message {
         this.subject = subject;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public User getSender() {

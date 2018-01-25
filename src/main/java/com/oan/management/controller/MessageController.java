@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -27,7 +31,7 @@ public class MessageController {
     private MessageService messageService;
 
     public User getLoggedUser(Authentication authentication) {
-        return userService.findByEmail(authentication.getName());
+        return userService.findByUser(authentication.getName());
     }
 
     @GetMapping("/messages")
@@ -42,7 +46,7 @@ public class MessageController {
     }
 
     @GetMapping("/message")
-    public String openMessage(HttpServletRequest req, Model model, Authentication authentication, @RequestParam Long id) {
+    public String openMessage(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
         if (userLogged != null) {
@@ -54,7 +58,35 @@ public class MessageController {
             return "message";
         }
         else {
-            return "messages";
+            return "redirect:/messages";
         }
+    }
+
+    @GetMapping("/message-delete")
+    public String deleteMessage(Model model, Authentication authentication, @RequestParam Long id) {
+        messageService.deleteMessageById(id);
+        return "redirect:/messages";
+    }
+
+    @GetMapping("/message-new")
+    public String newMessage(Model model, Authentication authentication, Message message) {
+        User userLogged = getLoggedUser(authentication);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("message", new Message());
+        }
+        return "message-new";
+    }
+
+    @PostMapping("/message-new")
+    public String sendMessage(Model model, Message message, BindingResult bindingResult, Authentication authentication) {
+        User userLogged = getLoggedUser(authentication);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+        }
+        User receiver_username = userService.findByUser(message.getReceiver().getUsername());
+        System.out.println("recepient: "+receiver_username);
+        messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
+        return "redirect:/messages";
     }
 }

@@ -15,7 +15,7 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String root(Model model, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = userService.findByUser(authentication.getName());
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);

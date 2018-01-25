@@ -32,7 +32,7 @@ public class ContactController {
     private ContactService contactService;
 
     public User getLoggedUser(Authentication authentication) {
-        return userService.findByEmail(authentication.getName());
+        return userService.findByUser(authentication.getName());
     }
 
     @GetMapping("/contacts")

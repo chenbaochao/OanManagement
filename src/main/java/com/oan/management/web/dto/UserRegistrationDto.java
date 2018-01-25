@@ -3,6 +3,7 @@ package com.oan.management.web.dto;
 import com.oan.management.constraint.FieldMatch;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.constraints.AssertTrue;
 
 @FieldMatch.List({
@@ -10,6 +11,8 @@ import javax.validation.constraints.AssertTrue;
         @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")
 })
 public class UserRegistrationDto {
+    @NotEmpty
+    private String username;
 
     @NotEmpty
     private String firstName;
@@ -90,4 +93,11 @@ public class UserRegistrationDto {
         this.terms = terms;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

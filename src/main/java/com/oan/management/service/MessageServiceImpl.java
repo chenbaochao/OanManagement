@@ -27,4 +27,14 @@ public class MessageServiceImpl implements MessageService {
     public Message getMessageById(Long id) {
         return messageRepository.getMessageById(id);
     }
+
+    @Override
+    public void deleteMessageById(Long id) {
+        messageRepository.delete(messageRepository.getMessageById(id));
+    }
+
+    @Override
+    public Message save(Message message) {
+        return messageRepository.save(message);
+    }
 }

@@ -11,4 +11,6 @@ import java.util.List;
 public interface MessageService {
     List<Message> getMessagesByUser(User user);
     Message getMessageById(Long id);
+    void deleteMessageById(Long id);
+    Message save(Message message);
 }

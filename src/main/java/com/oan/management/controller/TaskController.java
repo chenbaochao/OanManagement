@@ -37,7 +37,7 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     public User getLoggedUser(Authentication authentication) {
-        return userService.findByEmail(authentication.getName());
+        return userService.findByUser(authentication.getName());
     }
 
     @GetMapping("/task-list")

@@ -12,7 +12,8 @@
     </script>
 
     <div class="container">
-        <h1><span class="glyphicon glyphicon-inbox"></span> Messages: </h1>
+        <h1><span class="glyphicon glyphicon-inbox"></span> Messages: <a href="/message-new" class="btn btn-default pull-right">New message</a><br/></h1>
+
         <div class="panel panel-login table-responsive">
             <table class="table table-hover table-striped">
                 <thead class="thead-inverse">
@@ -30,8 +31,7 @@
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
                     <td>
-                        <a th:href="@{/task-edit(id=${message.id})}" data-toggle="tooltip" data-placement="left" title="Edit this task" class="btn btn-warning">Edit</a>
-                        <a th:href="@{/task-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this task" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this message" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 </tbody>

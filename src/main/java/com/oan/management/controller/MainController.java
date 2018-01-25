@@ -27,7 +27,7 @@ public class MainController {
 
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
-        User userLogged = userService.findByEmail(authentication.getName());
+        User userLogged = userService.findByUser(authentication.getName());
         List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
 
         if (userLogged != null) {
