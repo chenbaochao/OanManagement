@@ -90,10 +90,13 @@ public class TaskController {
 
     @GetMapping("/task-delete")
     public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
-        if (task.getUser()==getLoggedUser(authentication)) {
+        // Check if it's user's task
+        if (taskService.findByUser(getLoggedUser(authentication)).contains(taskService.getOne(id))) {
             taskService.deleteTaskById(id);
+            return "redirect:/task-list?deleted";
+        } else {
+            return "redirect:/task-list?notfound";
         }
-        return "redirect:/task-list";
     }
 
     @GetMapping("/task-edit")
@@ -104,9 +107,13 @@ public class TaskController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
         }
-
-        model.addAttribute("task", taskService.getOne(id));
-        return "/task-edit";
+        // Check if it's user's task
+        if (taskService.findByUser(getLoggedUser(authentication)).contains(taskService.getOne(id))) {
+            model.addAttribute("task", taskService.getOne(id));
+            return "/task-edit";
+        } else {
+            return "redirect:task-list?notfound";
+        }
     }
 
     @PostMapping("/task-edit")
@@ -119,7 +126,7 @@ public class TaskController {
             model.addAttribute("tasks", taskList);
         }
         taskService.editById(task.getId(),task.getDescription(),task.getTargetDate(), task.isCompleted());
-        return "redirect:task-list";
+        return "redirect:task-list?updated";
     }
 
     @GetMapping("/task-complete")

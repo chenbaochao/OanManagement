@@ -15,6 +15,21 @@
         <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>
         <form th:action="@{/task-list}" th:object="${task}" method="post">
             <div class="panel panel-login">
+                <div th:if="${param.notfound}">
+                    <div class="alert alert-danger">
+                        Task not found
+                    </div>
+                </div>
+                <div th:if="${param.deleted}">
+                    <div class="alert alert-info">
+                        Task has been deleted
+                    </div>
+                </div>
+                <div th:if="${param.updated}">
+                    <div class="alert alert-success">
+                        Task has been updated
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="description" class="control-label col-sm-2">Description: </label>
                     <input id="description" type="text" th:field="*{description}"

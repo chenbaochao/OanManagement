@@ -6,12 +6,12 @@
         <div th:replace="fragments/navigation :: navigation"></div>
 
         <div class="container">
-            <h1><span th:text="${loggedUser.firstName} + ' ' +  ${loggedUser.lastName}"></span></h1>
+            <h1><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h1>
             ID: <p th:text="${id}"></p>
-            Email: <p th:text="${loggedUser.email}"></p>
+            Email: <p th:text="${paramUser.email}"></p>
             Role:
             <table>
-                <th:block th:each="role: ${loggedUser.roles}">
+                <th:block th:each="role: ${paramUser.roles}">
                     <tr>
                         <td th:text="${role.name}">.</td>
                     </tr>

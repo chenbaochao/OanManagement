@@ -67,8 +67,15 @@ public class ContactController {
 
     @GetMapping("/contacts-delete")
     public String deleteContact(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
-        contactService.deleteById(id);
-        return "redirect:/contacts";
+        User userLogged = getLoggedUser(authentication);
+        List<Contact> contactList = contactService.findByUser(userLogged);
+        if (contactList.contains(contactService.getOne(id))) {
+            contactService.deleteById(id);
+            return "redirect:/contacts?deleted";
+        } else {
+            return "redirect:/contacts?notfound";
+        }
+
     }
 
     @GetMapping("/contacts-edit")
@@ -79,9 +86,13 @@ public class ContactController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
         }
-
-        model.addAttribute("contact", contactService.getOne(id));
-        return "/contacts-edit";
+        // Check if its the user's contact
+       if (contactList.contains(contactService.getOne(id))) {
+           model.addAttribute("contact", contactService.getOne(id));
+           return "/contacts-edit";
+       } else {
+           return "redirect:/contacts?notfound";
+       }
     }
 
     @PostMapping("/contacts-edit")

@@ -46,6 +46,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null){

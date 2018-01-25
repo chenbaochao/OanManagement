@@ -59,6 +59,11 @@
         <form th:action="@{/contacts}" th:object="${contact}" method="post">
             <div class="panel panel-login">
                 <div class="form-group">
+                    <div th:if="${param.notfound}">
+                        <div class="alert alert-danger">
+                            Contact not found
+                        </div>
+                    </div>
                     <label for="firstName" class="control-label col-sm-2">First Name: </label>
                     <input id="firstName" type="text" th:field="*{firstName}"
                            class="form-control"
@@ -135,6 +140,7 @@
                         <th>Mobile number</th>
                         <th>Address</th>
                         <th>Notes</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
