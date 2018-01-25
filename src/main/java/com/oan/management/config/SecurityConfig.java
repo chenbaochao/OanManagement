@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/css/**",
                             "/img/**",
                             "/webjars/**").permitAll()
-                    .antMatchers("/calendar", "/tasks", "/contacts","/","/task-list","/profile").hasAuthority("ROLE_USER")
+                    .antMatchers("/calendar", "/tasks", "/contacts","/","/task-list","/profile").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()
                         // TODO - Fix this, users that are logged in shouldn't be allowed to access /registration
                     .antMatchers("/registration**").not().hasAuthority("ROLE_USER").anyRequest().permitAll()

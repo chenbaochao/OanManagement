@@ -7,6 +7,19 @@ h1 {
     color: #78ab46;
 }
 
+.glyphicon {
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.someSpace {
+    margin-right: 8px;
+}
+
+.badge {
+    margin-left: 5px;
+}
+
 .panel-login {
     margin-top: 20px;
     border-color: #ccc;
