@@ -85,8 +85,15 @@ public class MessageController {
             model.addAttribute("loggedUser", userLogged);
         }
         User receiver_username = userService.findByUser(message.getReceiver().getUsername());
-        System.out.println("recepient: "+receiver_username);
-        messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
-        return "redirect:/messages";
+
+        if (receiver_username != null) {
+            System.out.println("recepient: "+receiver_username);
+            messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
+            return "redirect:/messages?success";
+        } else {
+            bindingResult.rejectValue("receiver.username", null,"This user doesn't exist");
+            model.addAttribute("recepienterror", true);
+            return "redirect:/message-new?error";
+        }
     }
 }
