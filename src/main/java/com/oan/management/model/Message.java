@@ -19,6 +19,9 @@ public class Message {
     @ManyToOne
     private User receiver;
 
+    public Message() {
+    }
+
     public Long getId() {
         return id;
     }
