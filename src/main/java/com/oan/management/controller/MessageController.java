@@ -111,13 +111,17 @@ public class MessageController {
         User recepient = userService.findById(id);
 
         if (recepient != null) {
-            model.addAttribute("recepient",recepient);
-            if (userLogged != null) {
-                model.addAttribute("loggedUser", userLogged);
-                model.addAttribute("message", new Message());
+            if (userLogged.getId() != id) {
+                model.addAttribute("recepient",recepient);
+                if (userLogged != null) {
+                    model.addAttribute("loggedUser", userLogged);
+                    model.addAttribute("message", new Message());
+                }
+                message.setReceiver(recepient);
+                return "message-to";
+            } else {
+                return "redirect:messages?self";
             }
-            message.setReceiver(recepient);
-            return "message-to";
         } else {
             return "redirect:messages?erroruser";
         }

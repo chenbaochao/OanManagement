@@ -21,7 +21,11 @@
                             This recipient does not exist
                         </div>
                     </div>
-                <p th:text="${recepient.username}"></p>
+                <div class="container">
+                    <strong>To:</strong>
+                    <span style="font-size: 14px" th:text="${recepient.username}" class="label label-default">Primary</span>
+                </div>
+                <hr/>
                 <div class="form-group">
                     <label for="subject" class="control-label col-md-3">Subject: </label>
                     <input id="subject" type="text" th:field="*{subject}"

@@ -18,6 +18,11 @@
                 This message does not exist
             </div>
         </div>
+        <div th:if="${param.self}">
+            <div class="alert alert-danger">
+                You can't message yourself
+            </div>
+        </div>
         <div th:if="${param.erroruser}">
             <div class="alert alert-danger">
                 This user does not exist
