@@ -95,13 +95,17 @@ public class MessageController {
 
         // TODO Make user cannot PM himself
         User receiver_username = userService.findByUser(message.getReceiver().getUsername());
-        if (receiver_username != null) {
-            System.out.println("recepient: "+receiver_username);
-            messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
-            return "redirect:/messages?success";
+        if (message.getReceiver().getId() != userLogged.getId()) {
+            if (receiver_username != null) {
+                System.out.println("recepient: " + receiver_username);
+                messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
+                return "redirect:/messages?success";
+            } else {
+                model.addAttribute("recepienterror", true);
+                return "redirect:/message-new?error";
+            }
         } else {
-            model.addAttribute("recepienterror", true);
-            return "redirect:/message-new?error";
+            return "redirect:/messages?error";
         }
     }
 
@@ -126,7 +130,6 @@ public class MessageController {
         } else {
             return "redirect:messages?erroruser";
         }
-
     }
 
     @PostMapping("/message-to")
@@ -143,7 +146,5 @@ public class MessageController {
         } else {
             return "redirect:/message-to?error";
         }
-
-
     }
 }
