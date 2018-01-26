@@ -93,6 +93,7 @@ public class MessageController {
             model.addAttribute("loggedUser", userLogged);
         }
 
+        // TODO Make user cannot PM himself
         User receiver_username = userService.findByUser(message.getReceiver().getUsername());
         if (receiver_username != null) {
             System.out.println("recepient: "+receiver_username);
