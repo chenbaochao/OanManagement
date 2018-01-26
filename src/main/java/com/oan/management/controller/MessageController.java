@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,10 +48,12 @@ public class MessageController {
     public String openMessage(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
+        // Get username and messages
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
         }
+
         if (id != null) {
             model.addAttribute("message", messageService.getMessageById(id));
             return "message";
@@ -62,10 +63,18 @@ public class MessageController {
         }
     }
 
+    // TODO Add security to this function
     @GetMapping("/message-delete")
     public String deleteMessage(Model model, Authentication authentication, @RequestParam Long id) {
-        messageService.deleteMessageById(id);
-        return "redirect:/messages";
+        User userLogged = getLoggedUser(authentication);
+        List<Message> messages = messageService.getMessagesByUser(userLogged);
+
+        if (messages.contains(messageService.getMessageById(id))) {
+            messageService.deleteMessageById(id);
+            return "redirect:/messages";
+        } else {
+            return "redirect:/messages?error";
+        }
     }
 
     @GetMapping("/message-new")
@@ -79,19 +88,18 @@ public class MessageController {
     }
 
     @PostMapping("/message-new")
-    public String sendMessage(Model model, Message message, BindingResult bindingResult, Authentication authentication) {
+    public String sendMessage(Model model, Message message, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
         }
-        User receiver_username = userService.findByUser(message.getReceiver().getUsername());
 
+        User receiver_username = userService.findByUser(message.getReceiver().getUsername());
         if (receiver_username != null) {
             System.out.println("recepient: "+receiver_username);
             messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
             return "redirect:/messages?success";
         } else {
-            bindingResult.rejectValue("receiver.username", null,"This user doesn't exist");
             model.addAttribute("recepienterror", true);
             return "redirect:/message-new?error";
         }
