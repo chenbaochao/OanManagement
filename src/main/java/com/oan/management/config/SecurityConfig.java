@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/js/**",
                             "/css/**",
                             "/img/**",
+                            "/api/**",
                             "/webjars/**").permitAll()
                     .antMatchers("/calendar", "/tasks", "/contacts","/","/task-list","/profile", "/messages", "/message-new","/message-to").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()

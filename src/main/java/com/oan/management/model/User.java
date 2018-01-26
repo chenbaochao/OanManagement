@@ -36,6 +36,9 @@ public class User {
     @OneToMany
     private List<Message> messages;
 
+    @OneToMany
+    private List<Event> events;
+
     public User() {
     }
 
