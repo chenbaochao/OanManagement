@@ -63,7 +63,6 @@ public class MessageController {
         }
     }
 
-    // TODO Add security to this function
     @GetMapping("/message-delete")
     public String deleteMessage(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
@@ -103,5 +102,43 @@ public class MessageController {
             model.addAttribute("recepienterror", true);
             return "redirect:/message-new?error";
         }
+    }
+
+
+    @GetMapping("/message-to")
+    public String reply(Model model, Authentication authentication, Message message, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        User recepient = userService.findById(id);
+
+        if (recepient != null) {
+            model.addAttribute("recepient",recepient);
+            if (userLogged != null) {
+                model.addAttribute("loggedUser", userLogged);
+                model.addAttribute("message", new Message());
+            }
+            message.setReceiver(recepient);
+            return "message-to";
+        } else {
+            return "redirect:messages?erroruser";
+        }
+
+    }
+
+    @PostMapping("/message-to")
+    public String replyPost(Model model, Message message, Authentication authentication, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+        }
+
+        User target = userService.findById(id);
+        if (target != null) {
+            messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, target));
+            return "redirect:/messages?success";
+        } else {
+            return "redirect:/message-to?error";
+        }
+
+
     }
 }

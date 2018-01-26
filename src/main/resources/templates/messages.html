@@ -18,6 +18,16 @@
                 This message does not exist
             </div>
         </div>
+        <div th:if="${param.erroruser}">
+            <div class="alert alert-danger">
+                This user does not exist
+            </div>
+        </div>
+        <div th:if="${param.success}">
+            <div class="alert alert-success">
+                Your message has been sent!
+            </div>
+        </div>
         <div class="panel panel-login table-responsive">
             <table class="table table-hover table-striped">
                 <thead class="thead-inverse">

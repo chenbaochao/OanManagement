@@ -24,6 +24,10 @@ public class Message {
     public Message() {
     }
 
+    public Message(User receiver) {
+        this.receiver = receiver;
+    }
+
     public Message(String subject, String messageText, Date date, User sender, User receiver) {
         this.subject = subject;
         this.messageText = messageText;

@@ -17,7 +17,6 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     MessageRepository messageRepository;
 
-
     @Override
     public List<Message> getMessagesByUser(User user) {
         return messageRepository.getAllByReceiver(user);
@@ -37,4 +36,5 @@ public class MessageServiceImpl implements MessageService {
     public Message save(Message message) {
         return messageRepository.save(message);
     }
+
 }
