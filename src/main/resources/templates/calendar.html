@@ -18,10 +18,11 @@
         $(document).ready(function() {
             $('#calendar').fullCalendar({
                 aspectRatio: 2,
+                editable: true,
                 header: {
                     left: 'prev, next today',
                     center: 'title',
-                    right: 'listDay, listWeek, month'
+                    right: 'month, agendaWeek, basicDay listDay'
                 },
                 events: {
                     url : '/api/event/all'

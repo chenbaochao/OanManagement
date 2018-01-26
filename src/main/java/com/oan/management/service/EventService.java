@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface EventService {
     List<Event> findAllByUser(User user);
+    Event save(Event event);
 }
