@@ -39,7 +39,7 @@
                 },
                 select: function(start, end, jsEvent) {
                     endtime = $.fullCalendar.moment(end).format('h:mm');
-                    starttime = $.fullCalendar.moment(start).format('dddd, MMMM Do YYYY, h:mm');
+                    starttime = $.fullCalendar.moment(start).format('dddd, MMMM Do YYYY');
                     var mywhen = starttime + ' - ' + endtime;
                     start = moment(start).format();
                     end = moment(end).format();
@@ -151,7 +151,7 @@
         <div id="createEventModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
-                <!-- Modal content-->
+                <!-- Create new Event modal-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -161,13 +161,13 @@
                         <div class="control-group">
                             <label class="control-label" for="description">Title: </label>
                             <div class="field desc">
-                                <input class="form-control" th:field="*{title}" id="desc" name="title" placeholder="Event" type="text" value="" />
+                                <input class="form-control" th:field="*{title}" id="desc" name="title" placeholder="Title" type="text" value="" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="description">Description: </label>
                             <div class="field desc">
-                                <input class="form-control" th:field="*{description}" id="desc" name="title" placeholder="Event" type="text" value="" />
+                                <input class="form-control" th:field="*{description}" id="desc" name="title" placeholder="Description" type="text" value="" />
                             </div>
                         </div>
 
@@ -175,7 +175,7 @@
                         <input th:field="*{end}" type="hidden" id="endTime"/>
 
                         <div class="control-group">
-                            <label class="control-label" for="when">When:</label>
+                            <label class="control-label" for="when">When: </label>
                             <div class="controls controls-row" id="when" style="margin-top:5px;">
                             </div>
                         </div>
