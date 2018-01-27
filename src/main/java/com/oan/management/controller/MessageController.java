@@ -57,8 +57,7 @@ public class MessageController {
         if (id != null) {
             model.addAttribute("message", messageService.getMessageById(id));
             return "message";
-        }
-        else {
+        } else {
             return "redirect:/messages";
         }
     }
@@ -117,7 +116,7 @@ public class MessageController {
 
         if (recepient != null) {
             if (userLogged.getId() != id) {
-                model.addAttribute("recepient",recepient);
+                model.addAttribute("recepient", recepient);
                 if (userLogged != null) {
                     model.addAttribute("loggedUser", userLogged);
                     model.addAttribute("message", new Message());

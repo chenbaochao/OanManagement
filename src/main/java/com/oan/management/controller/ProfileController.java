@@ -18,7 +18,7 @@ public class ProfileController {
     public String root(Model model, Authentication authentication, @RequestParam(required = false) Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         User paramUser = userService.findById(id);
-        System.out.println("TEST: "+paramUser);
+        System.out.println("TEST: " + paramUser);
         // For navbar
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -30,7 +30,7 @@ public class ProfileController {
         } else {
             model.addAttribute("paramUser", userLogged);
             System.out.println("TEST");
-            return "redirect:/profile?id="+userLogged.getId();
+            return "redirect:/profile?id=" + userLogged.getId();
         }
         return "profile";
     }

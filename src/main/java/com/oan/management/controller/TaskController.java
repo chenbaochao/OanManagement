@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +56,7 @@ public class TaskController {
     }
 
     @PostMapping("/task-list")
-    public String newTask(Model model, @Valid Task task, BindingResult result, @RequestParam("targetDate") String date, Authentication authentication) {
+    public String newTask(Model model, @Valid Task task, @RequestParam("targetDate") String date, Authentication authentication) {
         // Get logged in user and his tasks
         User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
@@ -75,15 +73,6 @@ public class TaskController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        if (result.hasErrors() && task.getTargetDate()==null) {
-            for (ObjectError error : result.getAllErrors()) {
-                System.out.println(error.toString());
-                result.rejectValue("taskname", "Error");
-            }
-            return "task-list";
-        }
-
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted() ));
         return "redirect:/task-list";
     }
@@ -120,7 +109,6 @@ public class TaskController {
     public String editTask(Model model, Task task, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);

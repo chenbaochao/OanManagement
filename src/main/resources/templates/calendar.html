@@ -12,21 +12,30 @@
     <link rel='stylesheet' href='webjars/fullcalendar/3.5.1/dist/fullcalendar.css' />
     <script src='webjars/moment/2.19.1/min/moment.min.js'></script>
     <script src='webjars/fullcalendar/3.5.1/dist/fullcalendar.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/gcal.js'></script>
 
 
     <script>
         $(document).ready(function() {
             $('#calendar').fullCalendar({
                 aspectRatio: 2,
+                googleCalendarApiKey: 'AIzaSyA0cmdUda0AHEOu2sa-7L0YWmT-OcIYIwM',
                 editable: true,
                 header: {
                     left: 'prev, next today',
                     center: 'title',
-                    right: 'month, agendaWeek, basicDay listDay'
+                    right: 'month, agendaWeek, agendaDay, listDay'
                 },
-                events: {
-                    url : '/api/event/all'
-                }
+                /*events: {
+                    url : '/api/event/all',
+                    googleCalendarId: 'https://calendar.google.com/calendar?cid=MGVoYXR1ZGxuaTVkMjQ5dHE0cnVybXZiaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
+                }*/
+                eventSources: [
+                    '/api/event/all',
+                    {
+                        url: 'https://calendar.google.com/calendar?cid=MGVoYXR1ZGxuaTVkMjQ5dHE0cnVybXZiaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
+                    },
+                ]
             })
         });
     </script>
@@ -37,6 +46,10 @@
     <body>
     <div th:replace="fragments/navigation :: navigation"></div>
         <div class="container">
+            <!-- Show calendar -->
+            <div class="panel panel-login">
+                <div id='calendar'></div>
+            </div>
             <h1><span class="glyphicon glyphicon-envelope"></span>New event</h1>
             <form th:action="@{/calendar}" th:object="${event}" method="post">
                 <div class="panel panel-login">
@@ -89,11 +102,6 @@
                     </div>
                 </div>
             </form>
-
-            <!-- Show calendar -->
-            <div class="panel panel-login">
-                <div id='calendar'></div>
-            </div>
         </div>
     </body>
 </html>

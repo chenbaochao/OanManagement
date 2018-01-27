@@ -87,12 +87,12 @@ public class ContactController {
             model.addAttribute("contacts", contactList);
         }
         // Check if its the user's contact
-       if (contactList.contains(contactService.getOne(id))) {
-           model.addAttribute("contact", contactService.getOne(id));
-           return "/contacts-edit";
-       } else {
-           return "redirect:/contacts?notfound";
-       }
+        if (contactList.contains(contactService.getOne(id))) {
+            model.addAttribute("contact", contactService.getOne(id));
+            return "/contacts-edit";
+        } else {
+            return "redirect:/contacts?notfound";
+        }
     }
 
     @PostMapping("/contacts-edit")

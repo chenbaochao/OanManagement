@@ -10,10 +10,7 @@ import java.util.List;
  */
 public interface ContactService {
     List<Contact> findByUser(User user);
-
     Contact save(Contact contact);
-
     void deleteById(Long id);
-
     Contact getOne(Long id);
 }

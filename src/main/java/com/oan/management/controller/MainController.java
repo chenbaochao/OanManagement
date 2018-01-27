@@ -41,7 +41,7 @@ public class MainController {
             model.addAttribute("quote", quote);
         } catch (IOException e) {
             // This is just added so I could work offline in the train
-            Quote quote = new Quote("","","");
+            Quote quote = new Quote("", "", "");
             model.addAttribute("quote", quote);
         }
         return "index";
