@@ -86,7 +86,7 @@
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>fullcalendar</artifactId>
-            <version>3.5.1</version>
+            <version>3.8.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
