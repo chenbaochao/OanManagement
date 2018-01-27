@@ -66,6 +66,10 @@ footer p {
     padding: 20px;*/
 }
 
+.marginup {
+    margin-bottom: 5px;
+}
+
 .popover.primary {
     border-color:#337ab7;
 }

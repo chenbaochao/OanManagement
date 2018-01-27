@@ -13,4 +13,6 @@ public interface MessageService {
     Message getMessageById(Long id);
     void deleteMessageById(Long id);
     Message save(Message message);
+    List<Message> getAllByReceiverAndOpenedIsFalse(User user);
+    List<Message> findByReceiverAndOpenedIs(User user, int read);
 }

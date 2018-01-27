@@ -1,10 +1,12 @@
 package com.oan.management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.oan.management.model.Message;
 import com.oan.management.model.Quote;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.TaskRepository;
+import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,14 +27,20 @@ public class MainController {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private MessageService messageService;
+
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
+        // Get list of unread messages
+        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
+            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
         // JSON to Object mapper
         ObjectMapper mapper = new ObjectMapper();

@@ -1,8 +1,10 @@
 package com.oan.management.controller;
 
+import com.oan.management.model.Message;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.TaskRepository;
+import com.oan.management.service.MessageService;
 import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private MessageService messageService;
+
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
     }
@@ -45,12 +50,14 @@ public class TaskController {
         // Get completed and uncompleted tasks
         List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
         List<Task> completedTasksList = taskRepository.findByUserAndCompletedIsTrue(userLogged);
+        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
             model.addAttribute("completedTasks", completedTasksList);
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
+            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
         return "task-list";
     }

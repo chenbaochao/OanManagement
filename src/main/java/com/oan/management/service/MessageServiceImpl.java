@@ -37,4 +37,15 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(message);
     }
 
+    @Override
+    public List<Message> getAllByReceiverAndOpenedIsFalse(User user) {
+        return messageRepository.getAllByReceiverAndOpenedIsFalse(user);
+    }
+
+    @Override
+    public List<Message> findByReceiverAndOpenedIs(User user, int read) {
+        return messageRepository.findByReceiverAndOpenedIs(user, read);
+    }
+
+
 }

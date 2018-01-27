@@ -16,4 +16,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> getAllByReceiver(User user);
     Message getMessageById(Long id);
     void deleteById(Long id);
+    List<Message> getAllByReceiverAndOpenedIsFalse(User user);
+    List<Message> findByReceiverAndOpenedIs(User user, int read);
 }

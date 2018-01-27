@@ -15,6 +15,7 @@ public class Message {
     private String subject;
     private String messageText;
     private Date date;
+    private int opened;
 
     @ManyToOne
     private User sender;
@@ -34,6 +35,7 @@ public class Message {
         this.date = date;
         this.sender = sender;
         this.receiver = receiver;
+        this.opened = 0;
     }
 
     public Long getId() {
@@ -82,5 +84,13 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getOpened() {
+        return opened;
+    }
+
+    public void setOpened(int opened) {
+        this.opened = opened;
     }
 }

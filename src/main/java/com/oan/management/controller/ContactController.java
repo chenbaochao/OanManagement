@@ -1,9 +1,11 @@
 package com.oan.management.controller;
 
 import com.oan.management.model.Contact;
+import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.repository.ContactRepository;
 import com.oan.management.service.ContactService;
+import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,6 +32,9 @@ public class ContactController {
     private ContactRepository contactRepository;
 
     @Autowired
+    private MessageService messageService;
+
+    @Autowired
     private ContactService contactService;
 
     public User getLoggedUser(Authentication authentication) {
@@ -36,14 +42,16 @@ public class ContactController {
     }
 
     @GetMapping("/contacts")
-    public String contactlist(Model model, Authentication authentication) {
+    public String contactlist(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         model.addAttribute("contact", new Contact());
         List<Contact> contactList = contactService.findByUser(userLogged);
+        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
+            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
 
         return "contacts";

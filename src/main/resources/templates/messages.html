@@ -45,7 +45,8 @@
                 </thead>
                 <tbody th:each="message : ${messages}">
                 <tr>
-                    <td><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></td>
+                    <td th:if="${message.opened}==1"><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></td>
+                    <td th:if="${message.opened}==0"><strong><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></strong></td>
                     <td th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></td>
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
