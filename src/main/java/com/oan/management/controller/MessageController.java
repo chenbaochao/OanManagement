@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class MessageController {
     public String getInbox(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
+        // Sort by id, last id's last (newest messages on top)
+        messages.sort(Comparator.comparing(Message::getId).reversed());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
