@@ -2,8 +2,10 @@ package com.oan.management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oan.management.model.Event;
+import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.service.EventService;
+import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,9 @@ public class RestWebController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    TaskService taskService;
+
     @GetMapping("/all")
     public String getEvents(Authentication authentication) {
         String jsonMessage = null;
@@ -40,6 +45,11 @@ public class RestWebController {
 
             User userLogged = userService.findByUser(authentication.getName());
             List<Event> events = eventService.findAllByUser(userLogged);
+            List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
+
+            for (Task task : tasks) {
+                events.add(new Event(task.getDescription(), "Task", task.getTargetDate(), task.getTargetDate(), userLogged));
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             jsonMessage = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
