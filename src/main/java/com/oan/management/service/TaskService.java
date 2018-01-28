@@ -19,4 +19,6 @@ public interface TaskService {
     Task save(Task task);
     Task getOne(Long id);
     Task editById(Long id, String desc, Date date, boolean completed);
+    List<Task> findByUserAndCompletedIsFalse(User user);
+    List<Task> findByUserAndCompletedIsTrue(User user);
 }

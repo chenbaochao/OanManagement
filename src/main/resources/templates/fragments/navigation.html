@@ -22,6 +22,7 @@
                         th:text="${session.tasksLeftSession}" class="badge badge-notify"></span></a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/contacts">Contacts</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="#">File Manager</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/users">Users</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

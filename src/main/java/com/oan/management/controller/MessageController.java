@@ -38,11 +38,13 @@ public class MessageController {
     public String getInbox(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
+        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
         // Sort by id, last id's last (newest messages on top)
         messages.sort(Comparator.comparing(Message::getId).reversed());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
+            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
         return "messages";
     }

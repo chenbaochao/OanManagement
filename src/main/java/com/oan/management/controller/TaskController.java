@@ -3,7 +3,6 @@ package com.oan.management.controller;
 import com.oan.management.model.Message;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
-import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
@@ -34,9 +33,6 @@ public class TaskController {
     private TaskService taskService;
 
     @Autowired
-    private TaskRepository taskRepository;
-
-    @Autowired
     private MessageService messageService;
 
     public User getLoggedUser(Authentication authentication) {
@@ -48,8 +44,8 @@ public class TaskController {
         User userLogged = getLoggedUser(authentication);
         model.addAttribute("task", new Task());
         // Get completed and uncompleted tasks
-        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
-        List<Task> completedTasksList = taskRepository.findByUserAndCompletedIsTrue(userLogged);
+        List<Task> taskList = taskService.findByUserAndCompletedIsFalse(userLogged);
+        List<Task> completedTasksList = taskService.findByUserAndCompletedIsTrue(userLogged);
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {

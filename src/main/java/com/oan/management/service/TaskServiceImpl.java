@@ -64,6 +64,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> findByUserAndCompletedIsFalse(User user) {
+        return taskRepository.findByUserAndCompletedIsFalse(user);
+    }
+
+    @Override
+    public List<Task> findByUserAndCompletedIsTrue(User user) {
+        return taskRepository.findByUserAndCompletedIsTrue(user);
+    }
+
+    @Override
     public Task uncompleteTaskById(Long id) {
         Task task = taskRepository.findById(id);
         task.setCompleted(false);

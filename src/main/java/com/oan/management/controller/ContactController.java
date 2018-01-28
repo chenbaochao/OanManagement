@@ -44,7 +44,6 @@ public class ContactController {
     @GetMapping("/contacts")
     public String contactlist(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
-        model.addAttribute("contact", new Contact());
         List<Contact> contactList = contactService.findByUser(userLogged);
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
@@ -57,7 +56,17 @@ public class ContactController {
         return "contacts";
     }
 
-    @PostMapping("/contacts")
+    @GetMapping("/contact-new")
+    public String newContactPage(Model model, Contact contact, Authentication authentication) {
+        User userLogged = getLoggedUser(authentication);
+        model.addAttribute("contact", new Contact());
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+        }
+        return "contact-new";
+    }
+
+    @PostMapping("/contact-new")
     public String newcontact(Model model, Contact contact, BindingResult result, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
