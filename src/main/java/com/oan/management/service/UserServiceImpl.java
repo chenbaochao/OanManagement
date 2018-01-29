@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addBugReport(User userLogged) {
+        userLogged.setBugsReported(userLogged.getBugsReported()+1);
+        userRepository.save(userLogged);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {

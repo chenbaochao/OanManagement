@@ -39,7 +39,17 @@ public class BugController {
     @PostMapping("/report-bug")
     public String reportBugSubmit(Authentication authentication, Bug bug, Model model) {
         User userLogged = userService.findByUser(authentication.getName());
-        bugService.save(new Bug(userLogged.getUsername(), bug.getDescription(), new Date(Calendar.getInstance().getTime().getTime())));
-        return "redirect:/report-bug?reported";
+        if (userLogged.getRoles().contains("ROLE_USER")) {
+            if (userLogged.getBugsReported() < 10) {
+                bugService.save(new Bug(userLogged.getUsername(), bug.getDescription(), new Date(Calendar.getInstance().getTime().getTime())));
+                userService.addBugReport(userLogged);
+                return "redirect:/report-bug?reported";
+            } else {
+                return "redirect:/report-bug?failed";
+            }
+        } else {
+            bugService.save(new Bug(userLogged.getUsername(), bug.getDescription(), new Date(Calendar.getInstance().getTime().getTime())));
+            return "redirect:/report-bug?reported";
+        }
     }
 }

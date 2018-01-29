@@ -16,6 +16,11 @@
                         Thank you for reporting a bug. We appreciate your help!
                     </div>
                 </div>
+                <div th:if="${param.failed}">
+                    <div class="alert alert-danger">
+                        You have exceeded your bug report limit. Please contact the administrator
+                    </div>
+                </div>
                 <label for="bug" class="control-label col-sm-2">Bug description: </label>
                 <textarea id="bug" type="text" th:field="*{description}"
                        class="form-control"

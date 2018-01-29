@@ -17,6 +17,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private int bugsReported;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -60,6 +61,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public int getBugsReported() {
+        return bugsReported;
+    }
+
+    public void setBugsReported(int bugsReported) {
+        this.bugsReported = bugsReported;
     }
 
     public Long getId() {
