@@ -61,6 +61,16 @@
                         }
                     });
                 },
+                eventResize: function(event) {
+                    $.ajax({
+                        url: '/calendar-update',
+                        data: {title: event.title, start: moment(event.start).format(), end: moment(event.end).format(), id: event.id},
+                        type: "GET",
+                        success: function(json) {
+                            //alert(json);
+                        }
+                    });
+                },
                 header: {
                     left: 'prev, next today',
                     center: 'title',
