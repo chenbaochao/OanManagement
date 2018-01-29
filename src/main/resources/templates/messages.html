@@ -47,7 +47,9 @@
                 <tr>
                     <td th:if="${message.opened}==1"><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></td>
                     <td th:if="${message.opened}==0"><strong><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></strong></td>
-                    <td th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></td>
+                    <td>
+                        <a th:href="@{/profile(id=${message.sender.id})}" th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}" style="color: #333"></a>
+                    </td>
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
                     <td>
