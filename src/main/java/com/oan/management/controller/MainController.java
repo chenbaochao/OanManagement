@@ -42,6 +42,7 @@ public class MainController {
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
+
         // JSON to Object mapper
         ObjectMapper mapper = new ObjectMapper();
         try {

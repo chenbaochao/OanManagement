@@ -67,7 +67,11 @@ footer p {
 }
 
 .marginup {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+}
+
+.marginright {
+    margin-right: 5px;
 }
 
 .popover.primary {

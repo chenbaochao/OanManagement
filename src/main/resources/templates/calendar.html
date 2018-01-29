@@ -25,6 +25,9 @@
                 selectable: true,
                 themeSystem: 'bootstrap3',
                 navLinks: true,
+                events: {
+                    url : '/api/event/all'
+                },
                 navLinkDayClick: function(date, jsEvent) {
                     console.log('day', date.format()); // date is a moment
                 },
@@ -48,13 +51,20 @@
                     $('#createEventModal #when').text(mywhen);
                     $('#createEventModal').modal('toggle');
                 },
+                eventDrop: function(event, delta){
+                    $.ajax({
+                        url: '/calendar-update',
+                        data: {title: event.title, start: moment(event.start).format(), end: moment(event.end).format(), id: event.id},
+                        type: "GET",
+                        success: function(json) {
+                            //alert(json);
+                        }
+                    });
+                },
                 header: {
                     left: 'prev, next today',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay, listDay'
-                },
-                events: {
-                    url : '/api/event/all'
                 }
             /*    eventSources: [
                     '/api/event/all',
@@ -63,6 +73,28 @@
                     }
                 ],*/
             })
+            $('#deleteButton').on('click', function(e){
+                // We don't want this to act as a link so cancel the link action
+                e.preventDefault();
+                doDelete();
+            });
+
+            function doDelete(){
+                $("#calendarModal").modal('hide');
+                var eventID = $('#eventID').val();
+                $.ajax({
+                    url: 'calendar-delete',
+                    data: {id: eventID},
+                    type: "GET",
+                    success: function(json) {
+                        if(json == 1)
+                            $("#calendar").fullCalendar('removeEvents',eventID);
+                        else
+                            return false;
+                    }
+                });
+                location.reload();
+            }
         });
     </script>
 

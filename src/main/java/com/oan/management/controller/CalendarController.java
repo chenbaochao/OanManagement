@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -59,6 +60,20 @@ public class CalendarController {
             e.printStackTrace();
         }
         eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged));
+        return "redirect:/calendar";
+    }
+
+    @GetMapping("/calendar-delete")
+    public String deleteEvent(Authentication authentication, @RequestParam Long id) {
+        User userLogged = userService.findByUser(authentication.getName());
+        eventService.delete(eventService.findById(id));
+        return "redirect:/calendar";
+    }
+
+    @GetMapping("/calendar-update")
+    public String updateEvent(Authentication authentication, @RequestParam String title, @RequestParam Date start, @RequestParam Date end, @RequestParam Long id) {
+        User userLogged = userService.findByUser(authentication.getName());
+        eventService.editById(id, title, start, end);
         return "redirect:/calendar";
     }
 

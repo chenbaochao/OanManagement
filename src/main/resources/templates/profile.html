@@ -17,7 +17,7 @@
                             <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
                         </p>
                         <p><strong class="someSpace"># </strong><span th:text="${paramUser.id}"></span></p>
-                        <p><i class="glyphicon glyphicon-envelope"> </i> <a th:href="@{mailto:${paramUser.email}}" th:text="${paramUser.email}"></a></p>
+                        <p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>
 
                         <hr/>
                         <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>

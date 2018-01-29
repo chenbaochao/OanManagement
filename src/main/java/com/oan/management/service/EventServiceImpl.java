@@ -6,6 +6,7 @@ import com.oan.management.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,26 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) {
+        return eventRepository.save(event);
+    }
+
+    @Override
+    public void delete(Event event) {
+        eventRepository.delete(event);
+    }
+
+    @Override
+    public Event findById(Long id) {
+        return eventRepository.findById(id);
+    }
+
+    @Override
+    public Event editById(Long id, String title, Date start, Date end) {
+        Event event = eventRepository.findById(id);
+        event.setStart(start);
+        event.setEnd(end);
+        event.setTitle(title);
+        event.setDescription(event.getDescription());
         return eventRepository.save(event);
     }
 }

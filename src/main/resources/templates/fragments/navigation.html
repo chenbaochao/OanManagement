@@ -27,7 +27,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
                             th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></span> <span><b
                             class="caret"></b></span></a>
                     <ul class="dropdown-menu">
@@ -51,6 +51,11 @@
                 </li>
                 <li sec:authorize="!isAuthenticated()">
                     <a href="/login"> <span class="glyphicon glyphicon-log-in"> </span> Login</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/messages"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
                 </li>
             </ul>
         </div>

@@ -8,7 +8,7 @@
 
         <h1><span class="glyphicon glyphicon-envelope"> </span> <span th:text="${message.subject}"></span></h1>
         <div class="panel panel-login">
-            <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
+            <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a><span th:text="${#dates.format(message.date, 'EEEE, dd MMMM yyyy')}" class="pull-right"></span></p>
             <p>To: <a href=""><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
         </div>
         <div class="panel panel-login">
