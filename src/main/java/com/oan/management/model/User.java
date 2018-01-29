@@ -39,6 +39,9 @@ public class User {
     @OneToMany
     private List<Event> events;
 
+    @OneToMany
+    private List<Bug> bugs;
+
     public User() {
     }
 

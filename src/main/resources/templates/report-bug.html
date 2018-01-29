@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div class="container">
+    <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Report a bug</h1>
+    <form th:action="@{/report-bug}" th:object="${bug}" method="post">
+        <div class="panel panel-login">
+            <div class="form-group">
+                <div th:if="${param.reported}">
+                    <div class="alert alert-success">
+                        Thank you for reporting a bug. We appreciate your help!
+                    </div>
+                </div>
+                <label for="bug" class="control-label col-sm-2">Bug description: </label>
+                <textarea id="bug" type="text" th:field="*{description}"
+                       class="form-control"
+                       autofocus="autofocus"
+                       required="required"
+                       placeholder=""
+                        rows="5"/>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="bug-submit"
+                                   id="bug-submit"
+                                   class="form-control btn btn-info"
+                                   value="Report bug"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -7,6 +7,11 @@ h1 {
     color: #78ab46;
 }
 
+.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .glyphicon {
     margin-bottom: 5px;
     margin-right: 5px;
