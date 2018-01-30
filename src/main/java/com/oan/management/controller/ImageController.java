@@ -40,6 +40,6 @@ public class ImageController {
         } else {
             return "redirect:/upload-avatar?wrongtype";
         }
-        return "redirect:/profile?id="+userLogged.getId();
+        return "redirect:/upload-avatar?success";
     }
 }

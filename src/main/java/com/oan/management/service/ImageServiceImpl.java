@@ -39,7 +39,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image findByTitle(String title) {
-        return imageRepository.findByTitle(title);
+        return imageRepository.findFirstByTitle(title);
     }
 
     @Override

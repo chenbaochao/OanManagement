@@ -15,25 +15,30 @@
                             You can only upload .png files with a maximum size of 1MB!
                         </div>
                     </div>
-                    <label for="fileinput" class="control-label col-md-3">File: </label>
+                    <div th:if="${param.success}">
+                        <div class="alert alert-success">
+                            Your avatar has been updated! It might take a little while before you see changes.
+                        </div>
+                    </div>
                     <input id="fileinput" type="file" name="file"
                            class="btn btn-default btn-file"
                            required="required"/>
-                    <input type="submit" value="Submit" />
                 </div>
+
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-sm-6">
                             <input type="submit"
                                    name="avatar-submit"
                                    id="avatar-submit"
-                                   class="form-control btn btn-info"
+                                   class="btn btn-info"
                                    value="Upload avatar"/>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+        <a href="/profile" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
     </div>
 </body>
 </html>

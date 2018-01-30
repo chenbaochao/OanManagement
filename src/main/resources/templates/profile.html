@@ -9,7 +9,10 @@
             <div class="panel panel-login">
                 <div class="panel-body">
                     <div class="col-md-3">
-                        <img class="img-rounded" th:src="@{${avatar}}" width="180" height="180"/>
+                        <div class="profile-pic">
+                            <img class="img-rounded" th:src="@{${avatar}}" width="180" height="180"/>
+                            <div class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                        </div>
                         <!--<h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>-->
                         <h2><span th:text="${paramUser.username}"></span></h2>
                         <p th:each="role: ${paramUser.roles}">

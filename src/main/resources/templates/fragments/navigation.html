@@ -55,7 +55,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()">
-                    <a href="/messages"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
+                    <a th:if="${session.unreadMessages} > 0" href="/messages"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
                 </li>
             </ul>
         </div>
