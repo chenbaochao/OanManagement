@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <div th:fragment="navigation" class="container">
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
     <nav class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -55,7 +60,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()">
-                    <a th:if="${session.unreadMessages} > 0" href="/messages"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
+                    <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
                 </li>
             </ul>
         </div>
