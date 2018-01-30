@@ -46,7 +46,7 @@
                 <tbody th:each="message : ${messages}">
                 <tr>
                     <td th:if="${message.opened}==1"><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></td>
-                    <td th:if="${message.opened}==0"><strong><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></strong></td>
+                    <td th:if="${message.opened}==0"><span class="label label-default">New</span> <strong><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></strong></td>
                     <td>
                         <a th:href="@{/profile(id=${message.sender.id})}" th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}" style="color: #333"></a>
                     </td>

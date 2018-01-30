@@ -8,8 +8,20 @@
 
         <h1><span class="glyphicon glyphicon-envelope"> </span> <span th:text="${message.subject}"></span></h1>
         <div class="panel panel-login">
-            <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a><span th:text="${#dates.format(message.date, 'EEEE, dd MMMM yyyy')}" class="pull-right"></span></p>
-            <p>To: <a href=""><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img class="img-rounded" th:src="@{'http://localhost:8080/img/avatar/'+${message.sender.id}+'.png'}" width="64" height="64"/>
+                    </div>
+                    <div class="col-md-2">
+                        <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
+                        <p>To: <a href=""><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
+                    </div>
+                    <div class="col-md-2 col-md-offset-6">
+                        <span th:text="${#dates.format(message.date, 'EEEE, dd MMMM yyyy')}" class="pull-right"></span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel panel-login">
             <span th:text="${message.messageText}"></span>
@@ -23,7 +35,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a th:href="@{/message-to(id=${message.sender.id})}">Reply</a></li>
-                <li><a href="#">Mark as unread</a></li>
+                <li><a th:href="@{/message-unread(id=${message.id})}">Mark as unread</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a th:href="@{/message-delete(id=${message.id})}">Delete</a></li>
             </ul>

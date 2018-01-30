@@ -155,4 +155,12 @@ public class MessageController {
             return "redirect:/message-to?error";
         }
     }
+
+    @GetMapping("message-unread")
+    public String unreadMessage(@RequestParam Long id) {
+        Message msg = messageService.getMessageById(id);
+        msg.setOpened(0);
+        messageService.save(msg);
+        return "redirect:/messages";
+    }
 }
