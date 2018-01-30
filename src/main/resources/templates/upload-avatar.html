@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+    <div class="container">
+
+        <h1>Update profile picture </h1>
+        <form th:action="@{/upload-avatar}" method="post" enctype="multipart/form-data">
+            <div class="panel panel-login">
+                <div class="form-group">
+                    <div th:if="${param.wrongtype}">
+                        <div class="alert alert-danger">
+                            You can only upload .png files with a maximum size of 1MB!
+                        </div>
+                    </div>
+                    <label for="fileinput" class="control-label col-md-3">File: </label>
+                    <input id="fileinput" type="file" name="file"
+                           class="btn btn-default btn-file"
+                           required="required"/>
+                    <input type="submit" value="Submit" />
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="avatar-submit"
+                                   id="avatar-submit"
+                                   class="form-control btn btn-info"
+                                   value="Upload avatar"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

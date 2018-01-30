@@ -1,20 +1,23 @@
 package com.oan.management;
 
-import com.oan.management.model.Task;
-import com.oan.management.model.User;
-import com.oan.management.repository.TaskRepository;
-import com.oan.management.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import javax.persistence.EntityManagerFactory;
 
 @SpringBootApplication
 public class Run {
 
     public static void main(String[] args) {
         SpringApplication.run(Run.class, args);
+    }
+
+    @Bean
+    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory emf) {
+        HibernateJpaSessionFactoryBean fact = new HibernateJpaSessionFactoryBean();
+        fact.setEntityManagerFactory(emf);
+        return fact;
     }
 }

@@ -9,7 +9,7 @@
             <div class="panel panel-login">
                 <div class="panel-body">
                     <div class="col-md-3">
-                        <img class="img-rounded" src="http://clipart-library.com/images/ATbrxjpyc.jpg" width="180" height="180"/>
+                        <img class="img-rounded" th:src="@{${avatar}}" width="180" height="180"/>
                         <!--<h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>-->
                         <h2><span th:text="${paramUser.username}"></span></h2>
                         <p th:each="role: ${paramUser.roles}">
