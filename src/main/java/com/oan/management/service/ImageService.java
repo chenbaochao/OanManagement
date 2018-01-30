@@ -14,4 +14,5 @@ public interface ImageService {
     List<Image> findAll();
     Image findById(Long id);
     Image findByTitle(String title);
+    Image findFirstByTitle(String title);
 }

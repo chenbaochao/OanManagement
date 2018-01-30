@@ -43,6 +43,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public Image findFirstByTitle(String title) {
+        return imageRepository.findFirstByTitle(title);
+    }
+
+    @Override
     public Image uploadImage(MultipartFile file, String path, User user) {
         String folder = ROOT + path;
         Image image = new Image();

@@ -11,11 +11,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-1">
-                        <img class="img-rounded" th:src="@{'http://localhost:8080/img/avatar/'+${message.sender.id}+'.png'}" width="64" height="64"/>
+                        <img class="img-rounded" th:src="@{${avatar}}" width="64" height="64"/>
                     </div>
                     <div class="col-md-2">
-                        <p>From: <a href=""><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
-                        <p>To: <a href=""><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
+                        <p>From: <a th:href="@{/profile(id=${message.sender.id})}"><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
+                        <p>To: <a th:href="@{/profile(id=${message.receiver.id})}"><span th:text="${message.receiver.firstName} + ' ' + ${message.receiver.lastName}"></span></a></p>
                     </div>
                     <div class="col-md-2 col-md-offset-6">
                         <span th:text="${#dates.format(message.date, 'EEEE, dd MMMM yyyy')}" class="pull-right"></span>

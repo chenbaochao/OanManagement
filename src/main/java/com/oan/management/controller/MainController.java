@@ -41,6 +41,16 @@ public class MainController {
             model.addAttribute("loggedUser", userLogged);
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() == 0) {
+                model.addAttribute("taskMotivation", "Hmm... What about giving yourself some tasks?");
+            } else if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() > 0) {
+                model.addAttribute("taskMotivation", "Good job! You've completed all your tasks! Be proud about yourself.");
+            }
+            else if (taskList.size() == 1) {
+                model.addAttribute("taskMotivation", "What? Only 1 task? You should finish your work!");
+            } else if (taskList.size() > 1 && taskList.size() <= 5){
+                model.addAttribute("taskMotivation", "You only have "+taskList.size()+" tasks... That's not that much. Go complete them!");
+            }
         }
 
         // JSON to Object mapper

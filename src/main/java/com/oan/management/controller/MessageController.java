@@ -1,7 +1,9 @@
 package com.oan.management.controller;
 
+import com.oan.management.model.Image;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
+import com.oan.management.service.ImageService;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private MessageService messageService;
@@ -63,6 +68,12 @@ public class MessageController {
             Message msg = messageService.getMessageById(id);
             model.addAttribute("message", msg);
             msg.setOpened(1);
+            Image imageUrlOfSender = imageService.findFirstByTitle(msg.getSender().getId()+".png");
+            if (imageUrlOfSender != null) {
+                model.addAttribute("avatar", "/img"+imageUrlOfSender.getUrl());
+            } else {
+                model.addAttribute("avatar", "/img/avatar/0.png");
+            }
             messageService.save(msg);
             return "message";
         }
