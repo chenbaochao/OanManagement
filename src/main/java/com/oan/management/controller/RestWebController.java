@@ -49,7 +49,7 @@ public class RestWebController {
             List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
 
             for (Task task : tasks) {
-                events.add(new Event(task.getDescription(), "To-Do: "+task.getDescription(), task.getTargetDate(), new Date(task.getTargetDate().getTime() + (1000 * 60 * 60 * 24)), userLogged));
+                events.add(new Event(task.getDescription(), "To-Do: "+task.getDescription(), task.getTargetDate(), new Date(task.getTargetDate().getTime() + (1000 * 60 * 60 * 24)), userLogged, "#8c7ae6", "#8c7ae6", false));
             }
 
             ObjectMapper mapper = new ObjectMapper();

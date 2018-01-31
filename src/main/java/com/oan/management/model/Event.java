@@ -15,6 +15,9 @@ public class Event {
     private String description;
     private Date start;
     private Date end;
+    private String backgroundColor;
+    private String borderColor;
+    private boolean editable;
 
     @ManyToOne
     private User user;
@@ -22,12 +25,39 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, String description, Date start, Date end, User user) {
+    public Event(String title, String description, Date start, Date end, User user, String backgroundColor, String borderColor, boolean editable) {
         this.title = title;
         this.description = description;
         this.start = start;
         this.end = end;
         this.user = user;
+        this.backgroundColor = backgroundColor;
+        this.borderColor = borderColor;
+        this.editable = editable;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    public String getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(String borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     public String getTitle() {

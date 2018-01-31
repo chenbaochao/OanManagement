@@ -63,7 +63,7 @@ public class CalendarController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged));
+        eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, "#3A87AD", "rgb(58, 135, 173)", true));
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
         userRepository.save(userLogged);
         return "redirect:/calendar";
