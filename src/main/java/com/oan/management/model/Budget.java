@@ -5,6 +5,6 @@ package com.oan.management.model;
  */
 
 public class Budget {
-
+    private Long salary;
     private User user;
 }

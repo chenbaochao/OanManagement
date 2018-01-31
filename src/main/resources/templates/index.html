@@ -30,7 +30,8 @@
             <a class="link-unstyled" href="/messages">
                 <div class="panel panel-login">
                     <h3>Messages:</h3>
-                    <p>You have <span th:text="${session.unreadMessages}"></span> unread messages</p>
+                    <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
+                    <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
                 </div>
             </a>
             <div class="panel panel-login">

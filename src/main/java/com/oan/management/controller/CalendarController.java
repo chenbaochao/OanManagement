@@ -3,6 +3,7 @@ package com.oan.management.controller;
 import com.oan.management.model.Event;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
+import com.oan.management.repository.UserRepository;
 import com.oan.management.service.EventService;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
@@ -35,6 +36,9 @@ public class CalendarController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/calendar")
     public String calendar(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -60,6 +64,8 @@ public class CalendarController {
             e.printStackTrace();
         }
         eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged));
+        userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
+        userRepository.save(userLogged);
         return "redirect:/calendar";
     }
 

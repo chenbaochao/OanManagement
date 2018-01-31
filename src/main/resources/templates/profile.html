@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <div class="col-md-3">
                         <div class="profile-pic">
-                            <img class="img-rounded" th:src="@{${avatar}}" width="180" height="180"/>
+                            <img class="img-rounded" th:src="@{${avatar}}" width="180" height="200"/>
                             <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
                         </div>
                         <!--<h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>-->
@@ -28,7 +28,36 @@
                             <span class="glyphicon glyphicon-heart"></span> Follow
                         </button>
                     </div>
-                    Hello World
+                    <div class="col-md-3">
+                        Hey
+                    </div>
+                    <div class="col-md-3 col-sm-offset-6">
+                        <div class="panel panel-login" style="margin-top: -20px;">
+                            <h4><span class="glyphicon glyphicon-stats"></span> Statistics</h4>
+                            <strong><span class="glyphicon glyphicon-check"></span> Tasks</strong>
+                            <ul>
+                                <li>Created: <span th:text="${paramUser.tasksMade}"></span></li>
+                                <li>Completed: <span th:text="${paramUser.tasksCompleted}"></span></li>
+
+                            </ul>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=100/${paramUser.tasksMade}*${paramUser.tasksCompleted}" aria-valuemin="0" aria-valuemax="100"
+                                     th:style="'width:'+100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%;'">
+                                    <span th:text="100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%'"></span>
+                                </div>
+                            </div>
+                            <strong><span class="glyphicon glyphicon-envelope"></span> Messages</strong>
+                            <ul>
+                                <li>Received: <span th:text="${paramUser.messagesReceived}"></span></li>
+                                <li>Sent: <span th:text="${paramUser.messagesSent}"></span></li>
+                            </ul>
+                            <strong><span class="glyphicon glyphicon-calendar"></span> Calendar</strong>
+                            <ul>
+                                <li>Events created: <span th:text="${paramUser.eventsCreated}"></span></li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

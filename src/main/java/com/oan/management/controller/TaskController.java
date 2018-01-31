@@ -3,6 +3,7 @@ package com.oan.management.controller;
 import com.oan.management.model.Message;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
+import com.oan.management.repository.UserRepository;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.TaskService;
 import com.oan.management.service.UserService;
@@ -28,6 +29,9 @@ import java.util.List;
 public class TaskController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private TaskService taskService;
@@ -77,6 +81,8 @@ public class TaskController {
             e.printStackTrace();
         }
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted() ));
+        userLogged.setTasksMade(userLogged.getTasksMade()+1);
+        userRepository.save(userLogged);
         return "redirect:/task-list";
     }
 
@@ -123,12 +129,20 @@ public class TaskController {
     @GetMapping("/task-complete")
     public String completeTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
         taskService.completeTaskById(id);
+        User userLogged = getLoggedUser(authentication);
+        // Update statistics
+        userLogged.setTasksCompleted(userLogged.getTasksCompleted()+1);
+        userRepository.save(userLogged);
         return "redirect:/task-list";
     }
 
     @GetMapping("/task-uncomplete")
     public String uncompleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
         taskService.uncompleteTaskById(id);
+        User userLogged = getLoggedUser(authentication);
+        // Update statistics
+        userLogged.setTasksCompleted(userLogged.getTasksCompleted()-1);
+        userRepository.save(userLogged);
         return "redirect:/task-list";
     }
 }

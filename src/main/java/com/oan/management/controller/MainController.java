@@ -47,9 +47,13 @@ public class MainController {
                 model.addAttribute("taskMotivation", "Good job! You've completed all your tasks! Be proud about yourself.");
             }
             else if (taskList.size() == 1) {
-                model.addAttribute("taskMotivation", "What? Only 1 task? You should finish your work!");
+                model.addAttribute("taskMotivation", "What, only 1 task? You should finish your work!");
             } else if (taskList.size() > 1 && taskList.size() <= 5){
                 model.addAttribute("taskMotivation", "You only have "+taskList.size()+" tasks... That's not that much. Go complete them!");
+            } else if (taskList.size() > 5 && taskList.size() <= 10){
+                model.addAttribute("taskMotivation", "You've got some work there, "+taskList.size()+" tasks to complete. Try to complete as much as possible today.");
+            } else if (taskList.size() > 10 ){
+                model.addAttribute("taskMotivation", taskList.size()+" tasks! Let's see how many you could complete today! Proof yourself!");
             }
         }
 

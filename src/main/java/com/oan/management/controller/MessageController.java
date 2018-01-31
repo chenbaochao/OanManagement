@@ -3,6 +3,7 @@ package com.oan.management.controller;
 import com.oan.management.model.Image;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
+import com.oan.management.repository.UserRepository;
 import com.oan.management.service.ImageService;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
@@ -34,6 +35,9 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
@@ -118,6 +122,12 @@ public class MessageController {
             if (receiver_username != null) {
                 System.out.println("recepient: " + receiver_username);
                 messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
+                // Update statistics
+                userLogged.setMessagesSent(userLogged.getMessagesSent()+1);
+                User receiver_user = userService.findByUser(message.getReceiver().getUsername());
+                receiver_user.setMessagesReceived(receiver_user.getMessagesReceived()+1);
+                userRepository.save(userLogged);
+                userRepository.save(receiver_user);
                 return "redirect:/messages?success";
             } else {
                 model.addAttribute("recepienterror", true);
@@ -161,6 +171,11 @@ public class MessageController {
         User target = userService.findById(id);
         if (target != null) {
             messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, target));
+            // Update statistics
+            userLogged.setMessagesSent(userLogged.getMessagesSent()+1);
+            target.setMessagesReceived(target.getMessagesReceived()+1);
+            userRepository.save(target);
+            userRepository.save(userLogged);
             return "redirect:/messages?success";
         } else {
             return "redirect:/message-to?error";

@@ -18,6 +18,11 @@ public class User {
     private String email;
     private String password;
     private int bugsReported;
+    private int tasksMade;
+    private int tasksCompleted;
+    private int messagesReceived;
+    private int messagesSent;
+    private int eventsCreated;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -64,6 +69,46 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public int getEventsCreated() {
+        return eventsCreated;
+    }
+
+    public void setEventsCreated(int eventsCreated) {
+        this.eventsCreated = eventsCreated;
+    }
+
+    public int getMessagesReceived() {
+        return messagesReceived;
+    }
+
+    public void setMessagesReceived(int messagesReceived) {
+        this.messagesReceived = messagesReceived;
+    }
+
+    public int getMessagesSent() {
+        return messagesSent;
+    }
+
+    public void setMessagesSent(int messagesSent) {
+        this.messagesSent = messagesSent;
+    }
+
+    public int getTasksMade() {
+        return tasksMade;
+    }
+
+    public void setTasksMade(int tasksMade) {
+        this.tasksMade = tasksMade;
+    }
+
+    public int getTasksCompleted() {
+        return tasksCompleted;
+    }
+
+    public void setTasksCompleted(int tasksCompleted) {
+        this.tasksCompleted = tasksCompleted;
     }
 
     public int getBugsReported() {

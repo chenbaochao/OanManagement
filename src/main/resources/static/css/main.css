@@ -57,6 +57,7 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     padding: 20px;
+    word-wrap: break-word;
 }
 
 footer {
