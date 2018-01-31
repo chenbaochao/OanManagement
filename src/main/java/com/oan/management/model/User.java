@@ -1,6 +1,7 @@
 package com.oan.management.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class User {
     private int messagesReceived;
     private int messagesSent;
     private int eventsCreated;
+    private Date registrationDate;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -73,6 +75,14 @@ public class User {
 
     public int getEventsCreated() {
         return eventsCreated;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public void setEventsCreated(int eventsCreated) {

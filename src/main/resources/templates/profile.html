@@ -13,8 +13,8 @@
                             <img class="img-rounded" th:src="@{${avatar}}" width="180" height="200"/>
                             <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
                         </div>
-                        <!--<h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>-->
-                        <h2><span th:text="${paramUser.username}"></span></h2>
+                        <h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>
+                        <p>@<span th:text="${paramUser.username}"></span></p>
                         <p th:each="role: ${paramUser.roles}">
                             <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
                             <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
@@ -29,10 +29,13 @@
                         </button>
                     </div>
                     <div class="col-md-3">
-                        Hey
+                        <h3><span class="glyphicon glyphicon-user"></span> Information</h3>
+                        <p>Registration: <span th:text="${#dates.format(paramUser.registrationDate, 'dd.MM.yyyy')}"></span></p>
+
+
                     </div>
                     <div class="col-md-3 col-sm-offset-6">
-                        <div class="panel panel-login" style="margin-top: -20px;">
+                        <div class="panel panel-login" style="margin-top: -90px;">
                             <h4><span class="glyphicon glyphicon-stats"></span> Statistics</h4>
                             <strong><span class="glyphicon glyphicon-check"></span> Tasks</strong>
                             <ul>
@@ -40,10 +43,10 @@
                                 <li>Completed: <span th:text="${paramUser.tasksCompleted}"></span></li>
 
                             </ul>
-                            <div class="progress">
+                            <div th:if="${paramUser.tasksMade} > 0" class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=100/${paramUser.tasksMade}*${paramUser.tasksCompleted}" aria-valuemin="0" aria-valuemax="100"
                                      th:style="'width:'+100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%;'">
-                                    <span th:text="100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%'"></span>
+                                    <!--<span th:text="${T(Math).ceil((100/paramUser.tasksMade)*paramUser.tasksCompleted)}+'%'"></span>-->
                                 </div>
                             </div>
                             <strong><span class="glyphicon glyphicon-envelope"></span> Messages</strong>

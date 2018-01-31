@@ -73,7 +73,7 @@
                 </thead>
                 <tbody th:each="task : ${tasks}">
                     <tr>
-                        <td th:text="${task.description}"></td>
+                        <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger">Today</span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="!${task.completed}"><a th:href="@{/task-complete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Complete" class="btn btn-success">I did it!</a></td>
                         <td>
@@ -101,7 +101,7 @@
                 </thead>
                 <tbody th:each="task : ${completedTasks}">
                 <tr>
-                    <td th:text="${task.description}"></td>
+                    <td><span th:text="${task.description}"></span></td>
                     <!--<td th:text="${task.targetDate}"></td>-->
                     <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                     <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger">Incomplete</a></td>

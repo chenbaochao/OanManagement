@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.AssertTrue;
+import java.sql.Date;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
@@ -13,6 +14,8 @@ import javax.validation.constraints.AssertTrue;
 public class UserRegistrationDto {
     @NotEmpty
     private String username;
+
+    private Date registrationDate;
 
     @NotEmpty
     private String firstName;
@@ -36,6 +39,14 @@ public class UserRegistrationDto {
 
     @AssertTrue
     private Boolean terms;
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 
     public String getFirstName() {
         return firstName;

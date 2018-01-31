@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -59,6 +61,8 @@ public class TaskController {
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
+        String  today = new Date(Calendar.getInstance().getTime().getTime()).toString();
+        model.addAttribute("today", today);
         return "task-list";
     }
 

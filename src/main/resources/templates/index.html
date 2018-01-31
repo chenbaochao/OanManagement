@@ -4,6 +4,21 @@
 
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
+<link rel='stylesheet' href='webjars/fullcalendar/3.8.0/dist/fullcalendar.css'/>
+<script src='webjars/moment/2.19.1/min/moment.min.js'></script>
+<script src='webjars/fullcalendar/3.8.0/dist/fullcalendar.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/gcal.js'></script>
+<script>
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            firstDay: 1,
+            themeSystem: 'bootstrap3',
+            events: {
+                url : '/api/event/all',
+            }
+        });
+    })
+</script>
 
 <div class="container">
     <h1>Hello, <span th:text="${loggedUser.firstName}"></span></h1>
@@ -60,6 +75,9 @@
                     </p>
                 </div>
             </blockquote>
+            <div class="panel panel-login">
+                <div id='calendar'></div>
+            </div>
         </div>
     </div>
 

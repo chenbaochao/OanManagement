@@ -1,6 +1,7 @@
 package com.oan.management.controller;
 
 import com.oan.management.model.User;
+import com.oan.management.repository.UserRepository;
 import com.oan.management.service.UserService;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -48,7 +52,6 @@ public class UserRegistrationController {
         if (result.hasErrors()) {
             return "registration";
         }
-
         userService.save(userDto);
         return "redirect:/registration?success";
     }
