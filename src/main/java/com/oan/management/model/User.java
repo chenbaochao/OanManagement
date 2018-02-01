@@ -1,5 +1,7 @@
 package com.oan.management.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -16,6 +18,7 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+    @Email
     private String email;
     private String password;
     private int bugsReported;
@@ -25,6 +28,8 @@ public class User {
     private int messagesSent;
     private int eventsCreated;
     private Date registrationDate;
+    private String country;
+    private int age;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -71,6 +76,22 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getEventsCreated() {

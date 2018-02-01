@@ -30,9 +30,28 @@
                     </div>
                     <div class="col-md-3">
                         <h3><span class="glyphicon glyphicon-user"></span> Information</h3>
-                        <p>Registration: <span th:text="${#dates.format(paramUser.registrationDate, 'dd.MM.yyyy')}"></span></p>
-
-
+                        <div class="col-md-6">
+                            Registration:
+                        </div>
+                        <div class="col-md-40">
+                            <span th:text="${#dates.format(paramUser.registrationDate, 'dd.MM.yyyy')}"></span>
+                        </div>
+                        <div th:if="${paramUser.age > 0}">
+                            <div class="col-md-6">
+                                Age:
+                            </div>
+                            <div class="col-md-40">
+                                <span th:text="${paramUser.age}"></span>
+                            </div>
+                        </div>
+                        <div th:if="${paramUser.country}">
+                            <div class="col-md-6">
+                                Country:
+                            </div>
+                            <div class="col-md-40">
+                                <span class="bfh-countries" th:data-country="${paramUser.country}" data-flags="true"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3 col-sm-offset-6">
                         <div class="panel panel-login" style="margin-top: -90px;">

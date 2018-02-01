@@ -63,6 +63,7 @@ public class TaskController {
         }
         String  today = new Date(Calendar.getInstance().getTime().getTime()).toString();
         model.addAttribute("today", today);
+        System.out.println(taskService.getOne(8L).getTargetDate().toString());
         return "task-list";
     }
 

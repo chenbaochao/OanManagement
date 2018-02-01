@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ public class RestWebController {
             List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
 
             for (Task task : tasks) {
-                events.add(new Event(task.getDescription(), "To-Do: "+task.getDescription(), task.getTargetDate(), new Date(task.getTargetDate().getTime() + (1000 * 60 * 60 * 24)), userLogged, "#8c7ae6", "#8c7ae6", false));
+                events.add(new Event(task.getDescription(), "To-Do: "+task.getDescription(), task.getTargetDate(), task.getTargetDate(), userLogged, "#8c7ae6", "#8c7ae6", false));
             }
 
             ObjectMapper mapper = new ObjectMapper();

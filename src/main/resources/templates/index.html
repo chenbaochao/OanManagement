@@ -13,8 +13,10 @@
         $('#calendar').fullCalendar({
             firstDay: 1,
             themeSystem: 'bootstrap3',
+            editable: false,
+            dragable: false,
             events: {
-                url : '/api/event/all',
+                url : '/api/event/all'
             }
         });
     })
