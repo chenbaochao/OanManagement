@@ -1,9 +1,10 @@
 package com.oan.management;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -15,9 +16,7 @@ public class Run {
     }
 
     @Bean
-    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory emf) {
-        HibernateJpaSessionFactoryBean fact = new HibernateJpaSessionFactoryBean();
-        fact.setEntityManagerFactory(emf);
-        return fact;
+    public SessionFactory sessionFactory(@Qualifier("entityManagerFactory") EntityManagerFactory emf) {
+        return emf.unwrap(SessionFactory.class);
     }
 }
