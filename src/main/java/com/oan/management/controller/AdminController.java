@@ -40,7 +40,7 @@ public class AdminController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("bugs", bugs);
         }
-        return "bugreports";
+        return "/bugreports";
     }
 
 }

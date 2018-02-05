@@ -4,6 +4,7 @@
 
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
+    <script th:src="@{../js/searchtable.js}"></script>
     <div class="container">
         <h1>Administrator Panel </h1>
         <div class="container">
@@ -18,43 +19,41 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <form th:action="@{/admin}" method="post" th:object="${loggedUser}">
-                        <div class="panel panel-login">
-                            <div th:if="${param.success}">
-                                <div class="alert alert-success">
-                                    Board settings have been updated
-                                </div>
+                    <div class="panel panel-login">
+                        <div th:if="${param.success}">
+                            <div class="alert alert-success">
+                                Board settings have been updated
                             </div>
-                            <div th:if="${param.error}">
-                                <div class="alert alert-danger">
-                                    Please enter valid information
-                                </div>
-                            </div>
-                            <table class="table table-hover table-striped table-list-search">
-                                <div class="panel-body">
-                                    <input class="form-control" autocomplete="off" id="system-search" name="q" placeholder="Search bug"/>
-                                </div>
-                                <thead class="thead-inverse">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Reporter</th>
-                                        <th>Bug</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="bug : ${bugs}">
-                                        <td th:text="${bug.id}"></td>
-                                        <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
-                                        <td th:text="${bug.description}"></td>
-                                        <td>
-                                            <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fixed</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-                    </form>
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">
+                                Please enter valid information
+                            </div>
+                        </div>
+                        <table class="table table-hover table-striped table-list-search">
+                            <div class="panel-body">
+                                <input class="form-control" autocomplete="off" id="system-search" name="q" placeholder="Search bug"/>
+                            </div>
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Reporter</th>
+                                    <th>Bug</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="bug : ${bugs}">
+                                    <td th:text="${bug.id}"></td>
+                                    <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
+                                    <td th:text="${bug.description}"></td>
+                                    <td>
+                                        <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fixed</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
