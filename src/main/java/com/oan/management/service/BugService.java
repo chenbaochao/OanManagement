@@ -12,4 +12,5 @@ public interface BugService {
     Bug save(Bug bug);
     List<Bug> findByFixedIsFalse();
     Bug findById(Long id);
+    List<Bug> findByFixedIsTrue();
 }

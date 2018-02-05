@@ -20,16 +20,6 @@
                 </div>
                 <div class="col-md-8">
                     <div class="panel panel-login">
-                        <div th:if="${param.success}">
-                            <div class="alert alert-success">
-                                Board settings have been updated
-                            </div>
-                        </div>
-                        <div th:if="${param.error}">
-                            <div class="alert alert-danger">
-                                Please enter valid information
-                            </div>
-                        </div>
                         <table class="table table-hover table-striped table-list-search">
                             <div class="panel-body">
                                 <input class="form-control" autocomplete="off" id="system-search" name="q" placeholder="Search bug"/>
@@ -42,18 +32,30 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr th:each="bug : ${bugs}">
+                            <tbody th:if="!${param.view}">
+                                <tr th:if="!${param.view}" th:each="bug : ${bugs}">
                                     <td th:text="${bug.id}"></td>
                                     <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                     <td th:text="${bug.description}"></td>
                                     <td>
-                                        <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fixed</a>
+                                        <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fixed</a>
                                     </td>
                                 </tr>
                             </tbody>
+                            <tbody th:if="${param.view}">
+                            <tr th:if="${param.view}" th:each="bug : ${fixedBugs}">
+                                <td th:text="${bug.id}"></td>
+                                <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
+                                <td th:text="${bug.description}"></td>
+                                <td>
+                                    <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="glyphicon glyphicon-remove"></span> Not fixed</a>
+                                </td>
+                            </tr>
+                            </tbody>
                         </table>
                     </div>
+                    <a th:if="${param.view}" href="/admin/bugreports" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Show bugs</a>
+                    <a th:if="!${param.view}" href="/admin/bugreports?view=1" class="btn btn-default"><span class="glyphicon glyphicon-check"></span> Show fixed bugs</a>
                 </div>
             </div>
         </div>

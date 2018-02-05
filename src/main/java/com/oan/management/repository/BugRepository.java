@@ -11,4 +11,5 @@ import java.util.List;
 public interface BugRepository extends JpaRepository<Bug, Long> {
     List<Bug> findAll();
     List<Bug> findByFixedIsFalse();
+    List<Bug> findByFixedIsTrue();
 }

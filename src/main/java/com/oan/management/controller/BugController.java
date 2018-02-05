@@ -62,4 +62,13 @@ public class BugController {
         bugService.save(bug);
         return "redirect:admin/bugreports";
     }
+
+    @GetMapping("/bug-unfix")
+    public String unfixBug(Authentication authentication, Model model, @RequestParam("id") Long id) {
+        User userLogged = userService.findByUser(authentication.getName());
+        Bug bug = bugService.findById(id);
+        bug.setFixed(false);
+        bugService.save(bug);
+        return "redirect:admin/bugreports";
+    }
 }

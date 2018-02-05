@@ -35,4 +35,9 @@ public class BugServiceImpl implements BugService {
     public Bug findById(Long id) {
         return bugRepository.findOne(id);
     }
+
+    @Override
+    public List<Bug> findByFixedIsTrue() {
+        return bugRepository.findByFixedIsTrue();
+    }
 }
