@@ -30,6 +30,7 @@ public class User {
     private Date registrationDate;
     private String country;
     private int age;
+    private boolean motivationalTaskMessage = true;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -76,6 +77,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public boolean isMotivationalTaskMessage() {
+        return motivationalTaskMessage;
+    }
+
+    public void setMotivationalTaskMessage(boolean motivationalTaskMessage) {
+        this.motivationalTaskMessage = motivationalTaskMessage;
     }
 
     public String getCountry() {

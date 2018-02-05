@@ -133,7 +133,7 @@
             </div>
             <div class="form-group">
                 <label for="title" class="control-label col-md-3">Title: </label>
-                <input id="title" type="text" th:field="*{title}"
+                <input id="title" type="text" autocomplete="off" th:field="*{title}"
                        class="form-control"
                        required="required"
                        placeholder="Title"/>
@@ -207,13 +207,13 @@
                         <div class="control-group">
                             <label class="control-label" for="description">Title: </label>
                             <div class="field desc">
-                                <input class="form-control" th:field="*{title}" id="desc" name="title" placeholder="Title" type="text" value="" />
+                                <input class="form-control" autocomplete="off" th:field="*{title}" id="desc" name="title" placeholder="Title" type="text" value="" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="description">Description: </label>
                             <div class="field desc">
-                                <input class="form-control" th:field="*{description}" id="desc" name="title" placeholder="Description" type="text" value="" />
+                                <input class="form-control" autocomplete="off" th:field="*{description}" id="desc" name="title" placeholder="Description" type="text" value="" />
                             </div>
                         </div>
 

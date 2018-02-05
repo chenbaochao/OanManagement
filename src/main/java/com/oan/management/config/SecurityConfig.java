@@ -33,8 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/",
                             "/task-list",
                             "/profile",
-                            "/settings",
-                            "/changepassword",
+                            "/settings","/appsettings","/changepassword",
                             "/messages", "/message", "/message-new","/message-to",
                             "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()

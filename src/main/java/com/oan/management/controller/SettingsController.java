@@ -36,12 +36,15 @@ public class SettingsController {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             userLogged.setCountry(user.getCountry());
-
             if (user.getAge() <= 100 && user.getAge() >= 0) {
                 userLogged.setAge(user.getAge());
-                if (user.getFirstName().length() >= 2 && user.getFirstName().length() <= 20 && user.getLastName().length() >= 2 && user.getLastName().length() <= 20) {
-                    userLogged.setFirstName(user.getFirstName());
-                    userLogged.setLastName(user.getLastName());
+                if (user.getFirstName().chars().allMatch(Character::isLetter) && user.getLastName().chars().allMatch(Character::isLetter)) {
+                    if (user.getFirstName().trim().length() >= 2 && user.getFirstName().trim().length() <= 20 && user.getLastName().length() >= 2 && user.getLastName().length() <= 20) {
+                        userLogged.setFirstName(user.getFirstName());
+                        userLogged.setLastName(user.getLastName());
+                    } else {
+                        return "redirect:/settings?error";
+                    }
                 } else {
                     return "redirect:/settings?error";
                 }

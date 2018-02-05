@@ -10,7 +10,7 @@
         <form th:action="@{/task-edit(id=${task.id})}" th:object="${task}" method="post">
             <div class="form-group">
                 <label for="description" class="control-label col-sm-2">Task description: </label>
-                <input id="description" type="text" th:field="*{description}"
+                <input id="description" autocomplete="off" type="text" th:field="*{description}"
                        class="form-control"
                        autofocus="autofocus"
                        required="required"
