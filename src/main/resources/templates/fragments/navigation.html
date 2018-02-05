@@ -46,6 +46,7 @@
                         <!--<li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>-->
 
                         <li><a href="/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                        <li th:each="role: ${loggedUser.roles}" th:if="${role.name}=='ROLE_ADMIN'"><a href="/admin"><span class="glyphicon glyphicon-briefcase"></span> Admin</a></li>
                         <li class="divider"></li>
                         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
