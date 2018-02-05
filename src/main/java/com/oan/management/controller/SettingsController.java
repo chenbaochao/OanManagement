@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Oan on 1/02/2018.
  */
@@ -31,6 +34,17 @@ public class SettingsController {
         return "settings";
     }
 
+    // Thanks to:
+    // https://stackoverflow.com/questions/44421036/check-if-name-is-valid-with-proper-case-and-max-one-space
+    static boolean chkNamVldFnc(String namVar)
+    {
+        String namRegExpVar = "^[A-Z][a-z]{2,}(?: [A-Z][a-z]*)*$";
+
+        Pattern pVar = Pattern.compile(namRegExpVar);
+        Matcher mVar = pVar.matcher(namVar);
+        return mVar.matches();
+    }
+
     @PostMapping("/settings")
     public String setSettings(Model model, User user, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -38,7 +52,7 @@ public class SettingsController {
             userLogged.setCountry(user.getCountry());
             if (user.getAge() <= 100 && user.getAge() >= 0) {
                 userLogged.setAge(user.getAge());
-                if (user.getFirstName().chars().allMatch(Character::isLetter) && user.getLastName().chars().allMatch(Character::isLetter)) {
+                if (user.getFirstName().chars().allMatch(Character::isLetter) && user.getLastName().chars().allMatch(Character::isLetter) || chkNamVldFnc(user.getLastName())) {
                     if (user.getFirstName().trim().length() >= 2 && user.getFirstName().trim().length() <= 20 && user.getLastName().length() >= 2 && user.getLastName().length() <= 20) {
                         userLogged.setFirstName(user.getFirstName());
                         userLogged.setLastName(user.getLastName());

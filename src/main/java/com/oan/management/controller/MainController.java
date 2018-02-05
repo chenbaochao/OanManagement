@@ -34,9 +34,13 @@ public class MainController {
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
-        // Get list of unread messages
+        // Get list of unread messages and get last message
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
-
+        if (unreadMessages.size() > 0) {
+            Message lastMessage = unreadMessages.get(unreadMessages.size()-1);
+            model.addAttribute("lastMessage", lastMessage);
+        }
+        // loggedUser and motivational texts
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             req.getSession().setAttribute("tasksLeftSession", taskList.size());

@@ -42,15 +42,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-md-4">
-            <a class="link-unstyled" href="/messages">
-                <div class="panel panel-login">
-                    <h3>Messages:</h3>
-                    <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
-                    <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
-                </div>
-            </a>
             <div class="panel panel-login">
                 <h3>Test: </h3>
                 <p>How much I want to be completed near next week: </p>
@@ -60,6 +51,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6 col-md-4">
+            <a class="link-unstyled" href="/messages">
+                <div class="panel panel-login">
+                    <h3>Messages:</h3>
+                    <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
+                    <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
+                    <span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>
+                </div>
+            </a>
+            <div class="panel panel-login">
+                <div id='calendar'></div>
+            </div>
+
         </div>
         <div class="col-md-6 col-md-4">
             <blockquote class="quote-box" style="margin-left: 10px">
@@ -77,9 +82,6 @@
                     </p>
                 </div>
             </blockquote>
-            <div class="panel panel-login">
-                <div id='calendar'></div>
-            </div>
         </div>
     </div>
 
