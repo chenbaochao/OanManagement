@@ -38,7 +38,7 @@
                                     <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                     <td th:text="${bug.description}"></td>
                                     <td>
-                                        <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fixed</a>
+                                        <a th:href="@{/bug-fix(id=${bug.id})}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Mark as fixed"><span class="glyphicon glyphicon-ok"></span> Fix</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -48,7 +48,7 @@
                                 <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                 <td th:text="${bug.description}"></td>
                                 <td>
-                                    <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="glyphicon glyphicon-remove"></span> Not fixed</a>
+                                    <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="glyphicon glyphicon-remove"></span> Mark as unfixed</a>
                                 </td>
                             </tr>
                             </tbody>

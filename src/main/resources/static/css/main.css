@@ -249,3 +249,24 @@ blockquote{
     background: inherit;
     left: 20px;
 }
+
+.fc-today {
+    background: inherit;
+}
+
+.fc-today .fc-day-number {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+
+    background: #FFF;
+    border: 2px solid #EF5350;
+    color: #666;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fc-agendaWeek-button, .fc-month-button, .fc-agendaDay-button, .fc-today-button{
+    text-transform: capitalize;
+}

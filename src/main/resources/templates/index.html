@@ -4,10 +4,11 @@
 
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
+
 <link rel='stylesheet' href='webjars/fullcalendar/3.8.0/dist/fullcalendar.css'/>
 <script src='webjars/moment/2.19.1/min/moment.min.js'></script>
 <script src='webjars/fullcalendar/3.8.0/dist/fullcalendar.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/gcal.js'></script>
+
 <script>
     $(document).ready(function () {
         $('#calendar').fullCalendar({
@@ -15,6 +16,11 @@
             themeSystem: 'bootstrap3',
             editable: false,
             dragable: false,
+            header: {
+                left: '',
+                center: 'title',
+                right: ''
+            },
             views: {
                 month: {
                     eventLimit: 3

@@ -39,6 +39,7 @@ $(document).ready(function () {
             $('#createEventModal #endTime').val(end);
             $('#createEventModal #when').text(mywhen);
             $('#createEventModal').modal('toggle');
+            $(".fc-highlight").css("background", "#2196F3");
         },
         eventDrop: function(event, delta){
             $.ajax({

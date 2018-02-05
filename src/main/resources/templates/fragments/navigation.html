@@ -22,7 +22,7 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/calendar">Calendar</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/task-list">To-do's <span
                         th:text="${session.tasksLeftSession}" class="badge badge-notify"></span></a></li>
