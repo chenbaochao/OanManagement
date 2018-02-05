@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -54,16 +51,9 @@ public class CalendarController {
     @PostMapping("/calendar")
     public String addEvent(Model model, Event event, Authentication authentication, @RequestParam("start") String startdate, @RequestParam("end") String enddate) {
         User userLogged = userService.findByUser(authentication.getName());
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            java.sql.Date sqlStartDate = new java.sql.Date(format.parse(startdate).getTime());
-            java.sql.Date sqlEndDate = new java.sql.Date(format.parse(enddate).getTime());
-            event.setStart(sqlStartDate);
-            event.setEnd(sqlEndDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, "#3A87AD", "rgb(58, 135, 173)", true));
+
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
         userRepository.save(userLogged);
         return "redirect:/calendar";
@@ -77,7 +67,7 @@ public class CalendarController {
     }
 
     @GetMapping("/calendar-update")
-    public String updateEvent(Authentication authentication, @RequestParam String title, @RequestParam Date start, @RequestParam Date end, @RequestParam Long id) {
+    public String updateEvent(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         eventService.editById(id, title, start, end);
         return "redirect:/calendar";

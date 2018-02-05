@@ -6,7 +6,6 @@ import com.oan.management.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -39,7 +38,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event editById(Long id, String title, Date start, Date end) {
+    public Event editById(Long id, String title, String start, String end) {
         Event event = eventRepository.findById(id);
         event.setStart(start);
         event.setEnd(end);

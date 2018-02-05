@@ -1,7 +1,6 @@
 package com.oan.management.model;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 /**
  * Created by Oan on 26/01/2018.
@@ -13,8 +12,8 @@ public class Event {
     private Long id;
     private String title;
     private String description;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private String backgroundColor;
     private String borderColor;
     private boolean editable;
@@ -25,7 +24,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, String description, Date start, Date end, User user, String backgroundColor, String borderColor, boolean editable) {
+    public Event(String title, String description, String  start, String  end, User user, String backgroundColor, String borderColor, boolean editable) {
         this.title = title;
         this.description = description;
         this.start = start;
@@ -92,19 +91,19 @@ public class Event {
         this.id = id;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 }
