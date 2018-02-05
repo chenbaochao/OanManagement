@@ -1,13 +1,17 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-        aspectRatio: 1,
-        googleCalendarApiKey: 'AIzaSyA0cmdUda0AHEOu2sa-7L0YWmT-OcIYIwM',
+        aspectRatio: 1.2,
         editable: true,
         selectable: true,
         themeSystem: 'bootstrap3',
         handleWindowResize: true,
-        navLinks: true,
         eventLimit: true,
+        allDayText: 'Day',
+        views: {
+            month: {
+                eventLimit: 6
+            }
+        },
         firstDay: 1,
         events: {
             url : '/api/event/all'

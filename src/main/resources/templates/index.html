@@ -15,6 +15,11 @@
             themeSystem: 'bootstrap3',
             editable: false,
             dragable: false,
+            views: {
+                month: {
+                    eventLimit: 3
+                }
+            },
             events: {
                 url : '/api/event/all'
             }
