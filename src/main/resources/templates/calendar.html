@@ -6,129 +6,128 @@
     <script src='js/gcal/min.js'></script>
     <script src="js/calendar.js"></script>
 
-<body>
-    <div th:replace="fragments/navigation :: navigation"></div>
-    <div class="container">
-        <!-- Show calendar -->
-        <div class="panel panel-login">
-            <div id='calendar'></div>
-        </div>
-        <h1><span class="glyphicon glyphicon-calendar"></span> New event</h1>
-        <form th:action="@{/calendar}" th:object="${event}" method="post">
-
+    <body>
+        <div th:replace="fragments/navigation :: navigation"></div>
+        <div class="container">
+            <!-- Show calendar -->
             <div class="panel panel-login">
-                <!--<label for="reciepent" class="control-label col-sm-2">To (username): </label>-->
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">
-                        This recipient does not exist
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="title" class="control-label col-md-3">Title: </label>
-                    <input id="title" type="text" autocomplete="off" th:field="*{title}"
-                           class="form-control"
-                           required="required"
-                           placeholder="Title"/>
-                </div>
-                <div class="form-group">
-                    <label for="description" class="control-label col-md-3">Description: </label>
-                    <textarea id="description" type="text" th:field="*{description}"
-                              class="form-control textarea"
-                              rows="3"
-                              required="required"
-                              placeholder="Description"/>
-                </div>
-                <div class="form-group">
-                    <label for="startdate" class="control-label col-md-3">Start date: </label>
-                    <input id="startdate" type="date" name="date" th:field="*{start}"
-                           class="form-control"
-                           required="required"/>
-                </div>
-                <div class="form-group">
-                    <label for="enddate" class="control-label col-md-3">End date: </label>
-                    <input id="enddate" type="date" name="date" th:field="*{end}"
-                           class="form-control"
-                           required="required"/>
-                </div>
+                <div id='calendar'></div>
             </div>
+            <h1><span class="glyphicon glyphicon-calendar"></span> New event</h1>
+            <form th:action="@{/calendar}" th:object="${event}" method="post">
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit"
-                               name="message-submit"
-                               id="message-submit"
-                               class="form-control btn btn-info"
-                               value="New Task"/>
+                <div class="panel panel-login">
+                    <!--<label for="reciepent" class="control-label col-sm-2">To (username): </label>-->
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            This recipient does not exist
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="control-label col-md-3">Title: </label>
+                        <input id="title" type="text" autocomplete="off" th:field="*{title}"
+                               class="form-control"
+                               required="required"
+                               placeholder="Title"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label col-md-3">Description: </label>
+                        <textarea id="description" type="text" th:field="*{description}"
+                                  class="form-control textarea"
+                                  rows="3"
+                                  required="required"
+                                  placeholder="Description"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="startdate" class="control-label col-md-3">Start date: </label>
+                        <input id="startdate" type="date" name="date" th:field="*{start}"
+                               class="form-control"
+                               required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="enddate" class="control-label col-md-3">End date: </label>
+                        <input id="enddate" type="date" name="date" th:field="*{end}"
+                               class="form-control"
+                               required="required"/>
                     </div>
                 </div>
-            </div>
-        </form>
-        <div id="calendarModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 id="modalTitle" class="modal-title"></h4>
-                    </div>
-                    <div id="modalBody" class="modal-body">
-                        <h4 class="modal-title"></h4>
-                        <p id="modalDesc"></p>
-                        <div id="modalWhen" style="margin-top:5px;"></div>
-                    </div>
-                    <input type="hidden" id="eventID"/>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                        <button type="submit" class="btn btn-danger" id="deleteButton">Delete</button>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="message-submit"
+                                   id="message-submit"
+                                   class="form-control btn btn-info"
+                                   value="New Task"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <form th:action="@{/calendar}" th:object="${event}" method="post">
-            <div id="createEventModal" class="modal fade" role="dialog">
+            </form>
+            <div id="calendarModal" class="modal fade">
                 <div class="modal-dialog">
-
-                    <!-- Create new Event modal-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add Event</h4>
+                            <h4 id="modalTitle" class="modal-title"></h4>
                         </div>
-                        <div class="modal-body">
-                            <div class="control-group">
-                                <label class="control-label" for="description">Title: </label>
-                                <div class="field desc">
-                                    <input class="form-control" autocomplete="off" th:field="*{title}" id="desc" name="title" placeholder="Title" type="text" value="" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="description">Description: </label>
-                                <div class="field desc">
-                                    <input class="form-control" autocomplete="off" th:field="*{description}" id="desc" name="title" placeholder="Description" type="text" value="" />
-                                </div>
-                            </div>
-
-                            <input th:field="*{start}" type="hidden" id="startTime"/>
-                            <input th:field="*{end}" type="hidden" id="endTime"/>
-
-                            <div class="control-group">
-                                <label class="control-label" for="when">When: </label>
-                                <div class="controls controls-row" id="when" style="margin-top:5px;">
-                                </div>
-                            </div>
-
+                        <div id="modalBody" class="modal-body">
+                            <h4 class="modal-title"></h4>
+                            <p id="modalDesc"></p>
+                            <div id="modalWhen" style="margin-top:5px;"></div>
                         </div>
+                        <input type="hidden" id="eventID"/>
                         <div class="modal-footer">
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                            <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                            <button type="submit" class="btn btn-danger" id="deleteButton">Delete</button>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </form>
+            <!-- Modal -->
+            <form th:action="@{/calendar}" th:object="${event}" method="post">
+                <div id="createEventModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
 
-    </div>
-</body>
+                        <!-- Create new Event modal-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Add Event</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="control-group">
+                                    <label class="control-label" for="description">Title: </label>
+                                    <div class="field desc">
+                                        <input class="form-control" autocomplete="off" th:field="*{title}" id="desc" name="title" placeholder="Title" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="description">Description: </label>
+                                    <div class="field desc">
+                                        <input class="form-control" autocomplete="off" th:field="*{description}" id="desc" name="title" placeholder="Description" type="text" value="" />
+                                    </div>
+                                </div>
+
+                                <input th:field="*{start}" type="hidden" id="startTime"/>
+                                <input th:field="*{end}" type="hidden" id="endTime"/>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="when">When: </label>
+                                    <div class="controls controls-row" id="when" style="margin-top:5px;">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
