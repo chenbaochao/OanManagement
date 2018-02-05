@@ -1,10 +1,11 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-        aspectRatio: 2,
+        aspectRatio: 1,
         googleCalendarApiKey: 'AIzaSyA0cmdUda0AHEOu2sa-7L0YWmT-OcIYIwM',
         editable: true,
         selectable: true,
         themeSystem: 'bootstrap3',
+        handleWindowResize: true,
         navLinks: true,
         eventLimit: true,
         firstDay: 1,

@@ -11,6 +11,12 @@ h1 {
     display: inline-block;
 }
 
+@media only screen and (max-width: 500px) {
+    .mobilecalendar {
+        height: 500px;
+    }
+}
+
 .profile-pic:hover .edit {
     display: block;
 }

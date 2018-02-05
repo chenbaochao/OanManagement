@@ -11,59 +11,8 @@
         <div class="container">
             <!-- Show calendar -->
             <div class="panel panel-login">
-                <div id='calendar'></div>
+                <div id='calendar' style="height: auto; overflow: auto;"></div>
             </div>
-            <h1><span class="glyphicon glyphicon-calendar"></span> New event</h1>
-            <form th:action="@{/calendar}" th:object="${event}" method="post">
-
-                <div class="panel panel-login">
-                    <!--<label for="reciepent" class="control-label col-sm-2">To (username): </label>-->
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            This recipient does not exist
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="title" class="control-label col-md-3">Title: </label>
-                        <input id="title" type="text" autocomplete="off" th:field="*{title}"
-                               class="form-control"
-                               required="required"
-                               placeholder="Title"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="control-label col-md-3">Description: </label>
-                        <textarea id="description" type="text" th:field="*{description}"
-                                  class="form-control textarea"
-                                  rows="3"
-                                  required="required"
-                                  placeholder="Description"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="startdate" class="control-label col-md-3">Start date: </label>
-                        <input id="startdate" type="date" name="date" th:field="*{start}"
-                               class="form-control"
-                               required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="enddate" class="control-label col-md-3">End date: </label>
-                        <input id="enddate" type="date" name="date" th:field="*{end}"
-                               class="form-control"
-                               required="required"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit"
-                                   name="message-submit"
-                                   id="message-submit"
-                                   class="form-control btn btn-info"
-                                   value="New Task"/>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div id="calendarModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
