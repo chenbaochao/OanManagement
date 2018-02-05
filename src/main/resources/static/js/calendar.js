@@ -21,7 +21,9 @@ $(document).ready(function () {
         eventSources: [
             {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
-                className: 'gcal-event'
+                className: 'gcal-event',
+                color: '#69F0AE',
+                textColor: 'black'
             },
             {
                 url : '/api/event/all',
