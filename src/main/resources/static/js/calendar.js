@@ -13,9 +13,20 @@ $(document).ready(function () {
             }
         },
         firstDay: 1,
-        events: {
-            url : '/api/event/all'
-        },
+        googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
+        /*events: {
+            url : '/api/event/all',
+            googleCalendarId: 'https://calendar.google.com/calendar?cid=MGVoYXR1ZGxuaTVkMjQ5dHE0cnVybXZiaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
+        },*/
+        eventSources: [
+            {
+                googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
+                className: 'gcal-event'
+            },
+            {
+                url : '/api/event/all',
+            }
+        ],
         navLinkDayClick: function(date, jsEvent) {
             console.log('day', date.format()); // date is a moment
         },
@@ -64,7 +75,7 @@ $(document).ready(function () {
         header: {
             left: 'prev, next today',
             center: 'title',
-            right: 'month, agendaWeek, agendaDay'
+            right: 'month, agendaWeek, agendaDay, listWeek'
         }
         /*    eventSources: [
                 '/api/event/all',

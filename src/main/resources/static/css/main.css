@@ -6,6 +6,7 @@ body {
 h1 {
     color: #78ab46;
 }
+
 .profile-pic {
     position: relative;
     display: inline-block;
@@ -267,6 +268,6 @@ blockquote{
     font-weight: bold;
 }
 
-.fc-agendaWeek-button, .fc-month-button, .fc-agendaDay-button, .fc-today-button{
+.fc-agendaWeek-button, .fc-month-button, .fc-agendaDay-button, .fc-today-button, .fc-listWeek-button {
     text-transform: capitalize;
 }
