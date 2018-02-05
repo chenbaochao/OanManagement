@@ -3,6 +3,8 @@
     <head th:replace="fragments/header :: header"></head>
 
     <body>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
         <div th:replace="fragments/navigation :: navigation"></div>
 
         <div class="container">
@@ -49,8 +51,8 @@
                                 Country:
                             </div>
                             <div class="col-md-40">
-                                <span th:text="${paramUser.country}"></span>
-                                <span class="bfh-countries" th:attr="data-country=${paramUser.country}" th:value="${paramUser.country}" data-flags="true"></span>
+                                <!--<span th:text="${paramUser.country}"></span>-->
+                                <span class="bfh-countries" th:attr="data-country=${paramUser.country}" data-flags="true"></span>
                             </div>
                         </div>
                     </div>
