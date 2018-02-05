@@ -32,19 +32,27 @@ public class AppSettingsController {
     }
 
     @PostMapping("/appsettings")
-    public String saveSettings(Model model, Authentication authentication, @RequestParam(value = "motivationText", required = false) String checkbox) {
+    public String saveSettings(Model model, Authentication authentication, @RequestParam(value = "motivationText", required = false) String checkbox, @RequestParam(value = "smallCalendar", required = false) String smallCalendar) {
         System.out.println(checkbox);
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
+            if (checkbox == null) {
+                userLogged.setMotivationalTaskMessage(false);
+                userRepository.save(userLogged);
+            } else {
+                userLogged.setMotivationalTaskMessage(true);
+                userRepository.save(userLogged);
+            }
+            if (smallCalendar == null) {
+                userLogged.setSmallCalendar(false);
+                userRepository.save(userLogged);
+            } else {
+                userLogged.setSmallCalendar(true);
+                userRepository.save(userLogged);
+            }
+
         }
-        if (checkbox == null) {
-            userLogged.setMotivationalTaskMessage(false);
-            userRepository.save(userLogged);
-        } else {
-            userLogged.setMotivationalTaskMessage(true);
-            userRepository.save(userLogged);
-        }
-        return "redirect:/appsettings";
+        return "redirect:/appsettings?success";
     }
 }

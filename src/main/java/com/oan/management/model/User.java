@@ -31,6 +31,7 @@ public class User {
     private String country;
     private int age;
     private boolean motivationalTaskMessage = true;
+    private boolean smallCalendar = true;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -77,6 +78,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public boolean isSmallCalendar() {
+        return smallCalendar;
+    }
+
+    public void setSmallCalendar(boolean smallCalendar) {
+        this.smallCalendar = smallCalendar;
     }
 
     public boolean isMotivationalTaskMessage() {
