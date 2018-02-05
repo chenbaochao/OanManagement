@@ -6,6 +6,7 @@ $(document).ready(function () {
         themeSystem: 'bootstrap3',
         handleWindowResize: true,
         eventLimit: true,
+        nowIndicator: true,
         allDayText: 'Day',
         views: {
             month: {
@@ -22,8 +23,8 @@ $(document).ready(function () {
             {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
                 className: 'gcal-event',
-                color: '#69F0AE',
-                textColor: 'black'
+                color: '#00E676'
+
             },
             {
                 url : '/api/event/all',

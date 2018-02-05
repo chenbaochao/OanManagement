@@ -49,8 +49,8 @@
                 <h3>Completion: </h3>
                 <p>How far I'm done with this project: </p>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                        30%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                        60%
                     </div>
                 </div>
             </div>
@@ -58,8 +58,8 @@
                 <h3>Test: </h3>
                 <p>How much I want to be completed near next week: </p>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                        50%
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                        70%
                     </div>
                 </div>
             </div>
@@ -70,7 +70,10 @@
                     <h3>Messages:</h3>
                     <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
                     <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
-                    <span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>
+                    <div th:if="${lastMessage}">
+                        <small style="color: #666666">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></small>
+                    </div>
+                    <!--<span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>-->
                 </div>
             </a>
             <div th:if="${loggedUser.smallCalendar}" class="panel panel-login">

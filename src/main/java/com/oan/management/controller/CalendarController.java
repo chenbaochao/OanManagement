@@ -52,7 +52,9 @@ public class CalendarController {
     public String addEvent(Model model, Event event, Authentication authentication, @RequestParam("start") String startdate, @RequestParam("end") String enddate) {
         User userLogged = userService.findByUser(authentication.getName());
 
-        eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, "#5C6BC0", "#5C6BC0", true));
+        if (!event.getTitle().isEmpty()) {
+            eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, "#5C6BC0", "#5C6BC0", true));
+        }
 
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
         userRepository.save(userLogged);
