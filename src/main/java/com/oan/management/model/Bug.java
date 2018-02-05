@@ -1,9 +1,6 @@
 package com.oan.management.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
@@ -15,19 +12,38 @@ public class Bug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String user;
+    @ManyToOne
+    private User user;
 
     private String description;
 
     private Date date;
 
+    private boolean fixed = false;
+
     public Bug() {
     }
 
-    public Bug(String user, String description, Date date) {
+    public Bug(User user, String description, Date date) {
         this.user = user;
         this.description = description;
         this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 
     public Long getId() {
@@ -36,14 +52,6 @@ public class Bug {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getDescription() {

@@ -25,4 +25,14 @@ public class BugServiceImpl implements BugService {
     public Bug save(Bug bug) {
         return bugRepository.save(bug);
     }
+
+    @Override
+    public List<Bug> findByFixedIsFalse() {
+        return bugRepository.findByFixedIsFalse();
+    }
+
+    @Override
+    public Bug findById(Long id) {
+        return bugRepository.findOne(id);
+    }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface BugService {
     List<Bug> findAll();
     Bug save(Bug bug);
+    List<Bug> findByFixedIsFalse();
+    Bug findById(Long id);
 }
