@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <form th:action="@{/appsettings}" method="get" th:object="${loggedUser}">
+                <form th:action="@{/appsettings}" method="post" th:object="${loggedUser}">
                     <div class="panel panel-login">
                         <div th:if="${param.success}">
                             <div class="alert alert-success">
