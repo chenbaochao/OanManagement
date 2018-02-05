@@ -8,3 +8,4 @@ This project was intended for my graduation project at INTEC Brussels.
 - http://github.hubspot.com/pace/docs/welcome/ PACE for the page
 load animations
 - https://calendar.google.com Google API for holiday dates (using gcal.js)
+- http://www.thymeleaf.org/ - Thymeleaf template engine instead of JSP
