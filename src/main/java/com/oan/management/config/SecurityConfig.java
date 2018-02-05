@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/profile",
                             "/settings","/appsettings","/changepassword",
                             "/messages", "/message", "/message-new","/message-to",
-                            "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                            "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_TESTER")
                         .anyRequest().authenticated()
                         // TODO - Fix this, users that are logged in shouldn't be allowed to access /registration
                     .antMatchers("/registration**").not().hasAuthority("ROLE_USER").anyRequest().permitAll()

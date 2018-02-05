@@ -79,6 +79,7 @@
                         <td th:each="role : ${user.roles}">
                             <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
                             <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
+                            <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
                         </td>
                         <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
                         <td>
