@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;

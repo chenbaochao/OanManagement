@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.authentication;
 
 import com.oan.management.model.User;
 import org.springframework.stereotype.Controller;

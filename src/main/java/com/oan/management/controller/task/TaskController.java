@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.task;
 
 import com.oan.management.model.Message;
 import com.oan.management.model.Task;

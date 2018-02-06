@@ -1,9 +1,8 @@
-package com.oan.management.controller;
+package com.oan.management.controller.contact;
 
 import com.oan.management.model.Contact;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
-import com.oan.management.repository.ContactRepository;
 import com.oan.management.service.ContactService;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
@@ -27,9 +26,6 @@ import java.util.List;
 public class ContactController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ContactRepository contactRepository;
 
     @Autowired
     private MessageService messageService;
@@ -75,10 +71,7 @@ public class ContactController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
         }
-
         contactService.save(new Contact(userLogged, contact.getFirstName(), contact.getLastName(), contact.getEmail(), contact.getMobileNumber(), contact.getNotes(), contact.getAddress()));
-
-
         return "redirect:/contacts";
     }
 
@@ -92,7 +85,6 @@ public class ContactController {
         } else {
             return "redirect:/contacts?notfound";
         }
-
     }
 
     @GetMapping("/contacts-edit")

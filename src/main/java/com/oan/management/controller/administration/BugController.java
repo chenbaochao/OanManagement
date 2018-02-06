@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.administration;
 
 import com.oan.management.model.Bug;
 import com.oan.management.model.User;

@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.social;
 
 import com.oan.management.model.Image;
 import com.oan.management.model.User;

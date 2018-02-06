@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.calendar;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oan.management.model.Event;

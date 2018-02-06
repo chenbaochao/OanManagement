@@ -1,4 +1,4 @@
-package com.oan.management.controller;
+package com.oan.management.controller.calendar;
 
 import com.oan.management.model.Event;
 import com.oan.management.model.Message;
