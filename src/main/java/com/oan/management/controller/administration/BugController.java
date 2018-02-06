@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Oan on 29/01/2018.
@@ -70,5 +71,24 @@ public class BugController {
         bug.setFixed(false);
         bugService.save(bug);
         return "redirect:admin/bugreports";
+    }
+
+    @GetMapping("/admin/bugreports")
+    public String getBugReports(Model model, Authentication authentication, @RequestParam(value = "view", required = false) Long param) {
+        User userLogged = userService.findByUser(authentication.getName());
+        List<Bug> bugs = bugService.findByFixedIsFalse();
+        List<Bug> fixedBugs = bugService.findByFixedIsTrue();
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            if (param == null) {
+                model.addAttribute("bugs", bugs);
+
+            } else if (param == 1) {
+                model.addAttribute("fixedBugs", fixedBugs);
+            } else {
+                return "redirect:bugreports";
+            }
+        }
+        return "bugreports";
     }
 }
