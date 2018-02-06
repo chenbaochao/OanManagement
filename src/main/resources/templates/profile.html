@@ -26,8 +26,8 @@
                                 <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
                                 <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
                             </p>
-                            <p><strong class="someSpace"># </strong><span th:text="${paramUser.id}"></span></p>
-                            <p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>
+                            <p><strong class="someSpace">User ID: </strong><span th:text="${paramUser.id}"></span></p>
+                            <!--<p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>-->
                             <hr/>
                             <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
                             <button type="button" class="btn btn-success btn-sm">
@@ -64,38 +64,46 @@
                                 <span class="bfh-countries" th:attr="data-country=${paramUser.country}" data-flags="true"></span>
                             </div>
                         </div>
-                        <hr/>
+                        <br/>
                         <h3><span class="fa fa-envelope"></span> Contact</h3>
-                        <div th:if="${paramUser.skype}">
+                        <div th:if="${paramUser.showEmail}">
+                            <div class="col-md-6">
+                                E-mail:
+                            </div>
+                            <div class="col-md-40">
+                                <p><a th:href="@{mailto:} +${paramUser.email}" class="fa fa-envelope"></a> <span th:text="${paramUser.email}"></span></p>
+                            </div>
+                        </div>
+                        <div th:if="${paramUser.skype != '' and paramUser.skype != null }">
                             <div class="col-md-6">
                                 Skype:
                             </div>
                             <div class="col-md-40">
-                                <p><a href="skype:belgium.oan?add" class="fa fa-skype"></a> <span th:text="${paramUser.skype}"></span></p>
+                                <p><a th:href="@{skype:} +${paramUser.skype}" class="fa fa-skype"></a> <span th:text="${paramUser.skype}"></span></p>
                             </div>
                         </div>
-                        <div th:if="${paramUser.twitter}">
+                        <div th:if="${paramUser.twitter != '' and paramUser.twitter != null }">
                             <div class="col-md-6">
                                 Twitter:
                             </div>
                             <div class="col-md-40">
-                                <p><a href="https://twitter.com/oanstultjens" class="fa fa-twitter"></a> <span th:text="${paramUser.twitter}"></span></p>
+                                <p><a th:href="@{https://twitter.com/} + ${paramUser.twitter}" class="fa fa-twitter"></a> <span th:text="${paramUser.twitter}"></span></p>
                             </div>
                         </div>
-                        <div th:if="${paramUser.github}">
+                        <div th:if="${paramUser.github != '' and paramUser.github != null }">
                             <div class="col-md-6">
                                 GitHub:
                             </div>
                             <div class="col-md-40">
-                                <p><a href="https://github.com/topn0tch" class="fa fa-github"></a> <span th:text="${paramUser.github}"></span></p>
+                                <p><a th:href="@{https://github.com/} + ${paramUser.github}" class="fa fa-github"></a> <span th:text="${paramUser.github}"></span></p>
                             </div>
                         </div>
-                        <div th:if="${paramUser.facebook}">
+                        <div th:if="${paramUser.facebook != '' and paramUser.facebook != null }">
                             <div class="col-md-6">
                                 Facebook:
                             </div>
                             <div class="col-md-40">
-                                <a href="#" class="fa fa-facebook"></a> <span th:text="${paramUser.facebook}"></span>
+                                <a th:href="@{https://facebook.com/} + ${paramUser.facebook}" class="fa fa-facebook"></a> <span th:text="${paramUser.facebook}"></span>
                             </div>
                         </div>
                     </div>

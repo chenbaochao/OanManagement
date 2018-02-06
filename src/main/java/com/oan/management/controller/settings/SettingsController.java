@@ -55,6 +55,14 @@ public class SettingsController {
                     if (user.getFirstName().trim().chars().allMatch(Character::isLetter) && chkNamVldFnc(user.getLastName())) {
                         userLogged.setFirstName(user.getFirstName());
                         userLogged.setLastName(user.getLastName());
+                        if (user.getSkype().trim().length() <= 25 && user.getTwitter().trim().length() <= 25 && user.getFacebook().trim().length() <= 25 && user.getGithub().trim().length() <= 25) {
+                            userLogged.setFacebook(user.getFacebook());
+                            userLogged.setTwitter(user.getTwitter());
+                            userLogged.setSkype(user.getSkype());
+                            userLogged.setGithub(user.getGithub());
+                        } else {
+                            return "redirect:/settings?error";
+                        }
                     } else {
                         return "redirect:/settings?error";
                     }

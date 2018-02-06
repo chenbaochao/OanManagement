@@ -33,6 +33,7 @@ public class User {
     private boolean motivationalTaskMessage = true;
     private boolean smallCalendar = true;
     private boolean todoToCalendar = true;
+    private boolean showEmail = true;
     // Social
     private String skype;
     private String twitter;
@@ -84,6 +85,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public boolean isShowEmail() {
+        return showEmail;
+    }
+
+    public void setShowEmail(boolean showEmail) {
+        this.showEmail = showEmail;
     }
 
     public boolean isTodoToCalendar() {

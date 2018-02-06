@@ -32,7 +32,11 @@ public class AppSettingsController {
     }
 
     @PostMapping("/appsettings")
-    public String saveSettings(Model model, Authentication authentication, @RequestParam(value = "motivationText", required = false) String checkbox, @RequestParam(value = "smallCalendar", required = false) String smallCalendar, @RequestParam(value = "todoToCalendar", required = false) String todoToCalendar) {
+    public String saveSettings(Model model, Authentication authentication,
+                               @RequestParam(value = "motivationText", required = false) String checkbox,
+                               @RequestParam(value = "smallCalendar", required = false) String smallCalendar,
+                               @RequestParam(value = "todoToCalendar", required = false) String todoToCalendar,
+                               @RequestParam(value = "showEmail", required = false) String showEmail) {
         System.out.println(checkbox);
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
@@ -58,6 +62,14 @@ public class AppSettingsController {
                 userLogged.setTodoToCalendar(true);
                 userRepository.save(userLogged);
             }
+            if (showEmail == null) {
+                userLogged.setShowEmail(false);
+                userRepository.save(userLogged);
+            } else {
+                userLogged.setShowEmail(true);
+                userRepository.save(userLogged);
+            }
+
 
         }
         return "redirect:/appsettings?success";
