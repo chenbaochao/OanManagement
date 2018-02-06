@@ -5,40 +5,47 @@
     <body>
     <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
+    <!-- TODO: Replace with webjars -->
+
+
         <div th:replace="fragments/navigation :: navigation"></div>
 
         <div class="container">
-            <div class="panel panel-login">
-                <div class="panel-body">
-                    <div class="col-md-3">
-                        <div class="profile-pic">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-login">
+                        <div class="profile-pic" style="padding-left: 20px">
                             <img class="img-rounded" th:src="@{${avatar}}" width="180" height="200"/>
                             <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
                         </div>
-                        <h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>
-                        <p>@<span th:text="${paramUser.username}"></span></p>
-                        <p th:each="role: ${paramUser.roles}">
-                            <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
-                            <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
-                            <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
-                        </p>
-                        <p><strong class="someSpace"># </strong><span th:text="${paramUser.id}"></span></p>
-                        <p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>
-
-                        <hr/>
-                        <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
-                        <button type="button" class="btn btn-success btn-sm">
-                            <span class="glyphicon glyphicon-heart"></span> Follow
-                        </button>
+                        <div style="padding-left: 16px">
+                            <h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>
+                            <p>@<span th:text="${paramUser.username}"></span></p>
+                            <p th:each="role: ${paramUser.roles}">
+                                <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
+                                <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
+                                <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
+                            </p>
+                            <p><strong class="someSpace"># </strong><span th:text="${paramUser.id}"></span></p>
+                            <p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>
+                            <hr/>
+                            <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
+                            <button type="button" class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-heart"></span> Follow
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <h3><span class="glyphicon glyphicon-user"></span> Information</h3>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-login">
+                        <h3><span class="fa fa-address-card"></span> Information</h3>
                         <div class="col-md-6">
                             Registration:
                         </div>
                         <div class="col-md-40">
                             <span th:text="${#dates.format(paramUser.registrationDate, 'dd.MM.yyyy')}"></span>
                         </div>
+                        <p></p>
                         <div th:if="${paramUser.age > 0}">
                             <div class="col-md-6">
                                 Age:
@@ -47,6 +54,7 @@
                                 <span th:text="${paramUser.age}"></span>
                             </div>
                         </div>
+                        <p></p>
                         <div th:if="${paramUser.country}">
                             <div class="col-md-6">
                                 Country:
@@ -56,33 +64,66 @@
                                 <span class="bfh-countries" th:attr="data-country=${paramUser.country}" data-flags="true"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-offset-6">
-                        <div class="panel panel-login" style="margin-top: -90px;">
-                            <h4><span class="glyphicon glyphicon-stats"></span> Statistics</h4>
-                            <strong><span class="glyphicon glyphicon-check"></span> Tasks</strong>
-                            <ul>
-                                <li>Created: <span th:text="${paramUser.tasksMade}"></span></li>
-                                <li>Completed: <span th:text="${paramUser.tasksCompleted}"></span></li>
-
-                            </ul>
-                            <div th:if="${paramUser.tasksMade} > 0" class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=100/${paramUser.tasksMade}*${paramUser.tasksCompleted}" aria-valuemin="0" aria-valuemax="100"
-                                     th:style="'width:'+100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%;'">
-                                    <!--<span th:text="${T(Math).ceil((100/paramUser.tasksMade)*paramUser.tasksCompleted)}+'%'"></span>-->
-                                </div>
+                        <hr/>
+                        <h3><span class="fa fa-envelope"></span> Contact</h3>
+                        <div th:if="${paramUser.skype}">
+                            <div class="col-md-6">
+                                Skype:
                             </div>
-                            <strong><span class="glyphicon glyphicon-envelope"></span> Messages</strong>
-                            <ul>
-                                <li>Received: <span th:text="${paramUser.messagesReceived}"></span></li>
-                                <li>Sent: <span th:text="${paramUser.messagesSent}"></span></li>
-                            </ul>
-                            <strong><span class="glyphicon glyphicon-calendar"></span> Calendar</strong>
-                            <ul>
-                                <li>Events created: <span th:text="${paramUser.eventsCreated}"></span></li>
-                            </ul>
+                            <div class="col-md-40">
+                                <p><a href="skype:belgium.oan?add" class="fa fa-skype"></a> <span th:text="${paramUser.skype}"></span></p>
+                            </div>
                         </div>
+                        <div th:if="${paramUser.twitter}">
+                            <div class="col-md-6">
+                                Twitter:
+                            </div>
+                            <div class="col-md-40">
+                                <p><a href="https://twitter.com/oanstultjens" class="fa fa-twitter"></a> <span th:text="${paramUser.twitter}"></span></p>
+                            </div>
+                        </div>
+                        <div th:if="${paramUser.github}">
+                            <div class="col-md-6">
+                                GitHub:
+                            </div>
+                            <div class="col-md-40">
+                                <p><a href="https://github.com/topn0tch" class="fa fa-github"></a> <span th:text="${paramUser.github}"></span></p>
+                            </div>
+                        </div>
+                        <div th:if="${paramUser.facebook}">
+                            <div class="col-md-6">
+                                Facebook:
+                            </div>
+                            <div class="col-md-40">
+                                <a href="#" class="fa fa-facebook"></a> <span th:text="${paramUser.facebook}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-login">
+                        <h4><span class="glyphicon glyphicon-stats"></span> Statistics</h4>
+                        <strong><span class="glyphicon glyphicon-check"></span> Tasks</strong>
+                        <ul>
+                            <li>Created: <span th:text="${paramUser.tasksMade}"></span></li>
+                            <li>Completed: <span th:text="${paramUser.tasksCompleted}"></span></li>
 
+                        </ul>
+                        <div th:if="${paramUser.tasksMade} > 0" class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=100/${paramUser.tasksMade}*${paramUser.tasksCompleted}" aria-valuemin="0" aria-valuemax="100"
+                                 th:style="'width:'+100/${paramUser.tasksMade}*${paramUser.tasksCompleted}+'%;'">
+                                <!--<span th:text="${T(Math).ceil((100/paramUser.tasksMade)*paramUser.tasksCompleted)}+'%'"></span>-->
+                            </div>
+                        </div>
+                        <strong><span class="glyphicon glyphicon-envelope"></span> Messages</strong>
+                        <ul>
+                            <li>Received: <span th:text="${paramUser.messagesReceived}"></span></li>
+                            <li>Sent: <span th:text="${paramUser.messagesSent}"></span></li>
+                        </ul>
+                        <strong><span class="glyphicon glyphicon-calendar"></span> Calendar</strong>
+                        <ul>
+                            <li>Events created: <span th:text="${paramUser.eventsCreated}"></span></li>
+                        </ul>
                     </div>
                 </div>
             </div>

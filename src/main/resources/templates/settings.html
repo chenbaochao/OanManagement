@@ -69,6 +69,42 @@
                                         <select class="input-medium bfh-countries form-control" th:attr="data-country=${currentCountry}" th:field="*{country}"></select>
                                     </div>
                                 </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Skype:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${loggedUser.skype}" th:field="*{skype}"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Twitter:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${loggedUser.twitter}" th:field="*{twitter}"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Facebook:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${loggedUser.facebook}" th:field="*{facebook}"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        GitHub:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${loggedUser.github}" th:field="*{github}"></input>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

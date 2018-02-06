@@ -33,6 +33,11 @@ public class User {
     private boolean motivationalTaskMessage = true;
     private boolean smallCalendar = true;
     private boolean todoToCalendar = true;
+    // Social
+    private String skype;
+    private String twitter;
+    private String github;
+    private String facebook;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -83,6 +88,38 @@ public class User {
 
     public boolean isTodoToCalendar() {
         return todoToCalendar;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 
     public void setTodoToCalendar(boolean todoToCalendar) {

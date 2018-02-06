@@ -62,7 +62,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()">
-                    <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="glyphicon glyphicon-envelope margindown"> </span></a>
+                    <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown"> </span></a>
                 </li>
             </ul>
         </div>
