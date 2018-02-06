@@ -7,7 +7,7 @@ $(document).ready(function () {
         handleWindowResize: true,
         eventLimit: true,
         nowIndicator: true,
-        timeFormat: 'H(:mm)',
+        timeFormat: 'H:mm',
         allDayText: 'Day',
         views: {
             month: {

@@ -26,7 +26,7 @@
                                 <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
                                 <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
                             </p>
-                            <p><strong class="someSpace">User ID: </strong><span th:text="${paramUser.id}"></span></p>
+                            <p><str class="someSpace">User ID: </str><span th:text="${paramUser.id}"></span></p>
                             <!--<p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>-->
                             <hr/>
                             <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
@@ -71,7 +71,7 @@
                                 E-mail:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{mailto:} +${paramUser.email}" class="fa fa-envelope"></a> <span th:text="${paramUser.email}"></span></p>
+                                <p><a th:href="@{mailto:} +${paramUser.email}" class="fa fa-envelope fa-lg padding5"></a> <span th:text="${paramUser.email}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.skype != '' and paramUser.skype != null }">
@@ -79,7 +79,7 @@
                                 Skype:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{skype:} +${paramUser.skype}" class="fa fa-skype"></a> <span th:text="${paramUser.skype}"></span></p>
+                                <p><a th:href="@{skype:} +${paramUser.skype}" class="fa fa-skype fa-lg padding5"></a> <span th:text="${paramUser.skype}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.twitter != '' and paramUser.twitter != null }">
@@ -87,7 +87,7 @@
                                 Twitter:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{https://twitter.com/} + ${paramUser.twitter}" class="fa fa-twitter"></a> <span th:text="${paramUser.twitter}"></span></p>
+                                <p><a th:href="@{https://twitter.com/} + ${paramUser.twitter}" class="fa fa-twitter fa-lg padding5"></a> <span th:text="${paramUser.twitter}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.github != '' and paramUser.github != null }">
@@ -95,7 +95,7 @@
                                 GitHub:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{https://github.com/} + ${paramUser.github}" class="fa fa-github"></a> <span th:text="${paramUser.github}"></span></p>
+                                <p><a th:href="@{https://github.com/} + ${paramUser.github}" class="fa fa-github fa-lg padding5"></a> <span th:text="${paramUser.github}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.facebook != '' and paramUser.facebook != null }">
@@ -103,9 +103,15 @@
                                 Facebook:
                             </div>
                             <div class="col-md-40">
-                                <a th:href="@{https://facebook.com/} + ${paramUser.facebook}" class="fa fa-facebook"></a> <span th:text="${paramUser.facebook}"></span>
+                                <a th:href="@{https://facebook.com/} + ${paramUser.facebook}" class="fa fa-facebook-official fa-lg padding5"></a> <span th:text="${paramUser.facebook}"></span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-login">
+                        <h3><span class="fa fa-th-list"></span> Followers</h3>
+                        test
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -123,12 +129,12 @@
                                 <!--<span th:text="${T(Math).ceil((100/paramUser.tasksMade)*paramUser.tasksCompleted)}+'%'"></span>-->
                             </div>
                         </div>
-                        <strong><span class="glyphicon glyphicon-envelope"></span> Messages</strong>
+                        <strong><span class="fa fa-envelope"></span> Messages</strong>
                         <ul>
                             <li>Received: <span th:text="${paramUser.messagesReceived}"></span></li>
                             <li>Sent: <span th:text="${paramUser.messagesSent}"></span></li>
                         </ul>
-                        <strong><span class="glyphicon glyphicon-calendar"></span> Calendar</strong>
+                        <strong><span class="fa fa-calendar"></span> Calendar</strong>
                         <ul>
                             <li>Events created: <span th:text="${paramUser.eventsCreated}"></span></li>
                         </ul>
