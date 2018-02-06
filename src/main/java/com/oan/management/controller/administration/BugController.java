@@ -105,8 +105,8 @@ public class BugController {
         notifyMessage.setSender(userLogged);
         notifyMessage.setReceiver(bug.getUser());
         notifyMessage.setSubject("Your reported bug #"+bug.getId()+" has been fixed.");
-        notifyMessage.setMessageText("<p>Hello "+bug.getUser().getFirstName() + " " + bug.getUser().getLastName()+",</p>Thank you for reporting the following bug: <blockquote>"+bug.getDescription()+"<footer>"+bug.getUser().getUsername()+" on "+bug.getDate().toString()+"</footer>"+
-        "</blockquote><p>This bug has been fixed.</p><br/>Thank you for reporting the bug!");
+        notifyMessage.setMessageText("<p>Hello "+bug.getUser().getFirstName() + ",</p><br/>You have reported the following bug: <blockquote>"+bug.getDescription()+"<footer>"+bug.getUser().getUsername()+" on "+bug.getDate().toString()+"</footer>"+
+        "</blockquote><p>This bug has been fixed. We thank you for reporting it to us!</p><br/>Regards");
         notifyMessage.setOpened(0);
         notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
         messageService.save(notifyMessage);

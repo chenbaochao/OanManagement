@@ -8,30 +8,8 @@
 <link rel='stylesheet' href='webjars/fullcalendar/3.8.0/dist/fullcalendar.css'/>
 <script src='webjars/moment/2.19.1/min/moment.min.js'></script>
 <script src='webjars/fullcalendar/3.8.0/dist/fullcalendar.js'></script>
-
-<script>
-    $(document).ready(function () {
-        $('#calendar').fullCalendar({
-            firstDay: 1,
-            themeSystem: 'bootstrap3',
-            editable: false,
-            dragable: false,
-            header: {
-                left: '',
-                center: 'title',
-                right: ''
-            },
-            views: {
-                month: {
-                    eventLimit: 3
-                }
-            },
-            events: {
-                url : '/api/event/all'
-            }
-        });
-    })
-</script>
+<script src="js/gcal.min.js"></script>
+<script src="js/calendarWidget.js"></script>
 
 <div class="container">
     <h1><span class="fa fa-home"></span> Hello, <span th:text="${loggedUser.firstName}"></span></h1>

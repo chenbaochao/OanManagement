@@ -8,7 +8,7 @@ $(document).ready(function () {
         eventLimit: true,
         nowIndicator: true,
         timeFormat: 'H:mm',
-        allDayText: 'Day',
+        allDayText: 'Whole day',
         views: {
             month: {
                 eventLimit: 6
