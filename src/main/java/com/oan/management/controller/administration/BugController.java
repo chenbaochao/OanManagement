@@ -1,8 +1,10 @@
 package com.oan.management.controller.administration;
 
 import com.oan.management.model.Bug;
+import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.service.BugService;
+import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,9 @@ public class BugController {
 
     @Autowired
     public BugService bugService;
+
+    @Autowired
+    public MessageService messageService;
 
     @GetMapping("/report-bug")
     public String reportBugPage(Authentication authentication, Model model) {
@@ -90,5 +95,22 @@ public class BugController {
             }
         }
         return "bugreports";
+    }
+
+    @GetMapping("/admin/bug-notify")
+    public String notifyReporter(Authentication authentication, @RequestParam("id") Long id) {
+        User userLogged = userService.findByUser(authentication.getName());
+        Bug bug = bugService.findById(id);
+        Message notifyMessage = new Message();
+        notifyMessage.setSender(userLogged);
+        notifyMessage.setReceiver(bug.getUser());
+        notifyMessage.setSubject("Your reported bug #"+bug.getId()+" has been fixed.");
+        notifyMessage.setMessageText("Hello "+bug.getUser().getFirstName() + bug.getUser().getLastName()+", <br/>Thank you for reporting the following bug: <blockquote><p>"+bug.getDescription()+
+        "</p></blockquote><p>The bug has been fixed.<br/>Thank you!");
+        notifyMessage.setOpened(0);
+        notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+        messageService.save(notifyMessage);
+        return "redirect:/admin/bugreports?notified";
+
     }
 }

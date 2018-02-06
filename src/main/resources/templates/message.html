@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="panel panel-login">
-            <span th:text="${message.messageText}"></span>
+            <span th:utext="${message.messageText}"></span>
         </div>
         <a href="/messages" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
         <a th:href="@{/message-to(id=${message.sender.id})}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>

@@ -7,6 +7,7 @@ $(document).ready(function () {
         handleWindowResize: true,
         eventLimit: true,
         nowIndicator: true,
+        timeFormat: 'H(:mm)',
         allDayText: 'Day',
         views: {
             month: {
@@ -30,9 +31,6 @@ $(document).ready(function () {
                 url : '/api/event/all',
             }
         ],
-        navLinkDayClick: function(date, jsEvent) {
-            console.log('day', date.format()); // date is a moment
-        },
         eventClick:  function(event, jsEvent, view) {
             endtime = $.fullCalendar.moment(event.end).format('h:mm');
             starttime = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');

@@ -19,6 +19,11 @@
                     </div>
                 </div>
                 <div class="col-md-8">
+                    <div th:if="${param.notified}">
+                        <div class="alert alert-success">
+                            The reporter has been notified!
+                        </div>
+                    </div>
                     <div class="panel panel-login">
                         <table class="table table-hover table-striped table-list-search">
                             <div class="panel-body">
@@ -48,7 +53,8 @@
                                 <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                 <td th:text="${bug.description}"></td>
                                 <td>
-                                    <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="glyphicon glyphicon-remove"></span> Mark as unfixed</a>
+                                    <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="fa fa-bug"></span> Not fixed</a>
+                                    <a th:href="@{bug-notify(id=${bug.id})}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Automated notify">Notify</a>
                                 </td>
                             </tr>
                             </tbody>
