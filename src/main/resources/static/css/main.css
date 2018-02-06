@@ -67,18 +67,6 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
     word-wrap: break-word;
 }
 
-footer {
-    position: fixed;
-    height: 50px;
-    bottom: 0;
-    width: 100%;
-    background-color: #ccc
-}
-
-footer p {
-    padding: 15px;
-}
-
 .error-message {
     color: #a94442;
 }
@@ -168,8 +156,8 @@ footer p {
     border-color:#ebccd1;
 }
 
-blockquote{
-    border-left:none
+.blockquote-noborder {
+    border-left:none;
 }
 
 .quote-badge{
