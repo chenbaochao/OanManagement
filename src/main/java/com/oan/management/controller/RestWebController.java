@@ -47,8 +47,10 @@ public class RestWebController {
             List<Event> events = eventService.findAllByUser(userLogged);
             List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
 
-            for (Task task : tasks) {
-                events.add(new Event(task.getDescription(), "To-Do: "+task.getDescription(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, "#E57373", "#E57373", false));
+            if (userLogged.isTodoToCalendar()) {
+                for (Task task : tasks) {
+                    events.add(new Event(task.getDescription(), "To-Do: " + task.getDescription(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, "#E57373", "#E57373", false));
+                }
             }
 
             ObjectMapper mapper = new ObjectMapper();

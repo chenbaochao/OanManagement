@@ -49,6 +49,13 @@
                                     <label for="smallCalendar" class="label-info"></label>
                                 </div>
                             </li>
+                            <li class="list-group-item">
+                                Import To-Do's in your calendar
+                                <div class="material-switch pull-right">
+                                    <input id="todoToCalendar" name="todoToCalendar" type="checkbox" th:checked="${loggedUser.todoToCalendar}"/>
+                                    <label for="todoToCalendar" class="label-info"></label>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-sm-6 col-sm-offset-3">
