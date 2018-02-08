@@ -64,7 +64,12 @@ public class ImageServiceImpl implements ImageService {
                 stream.write(bytes);
                 stream.close();
 
-                image = new Image(createdFileName, "/avatar/" + createdFileName, user);
+                String completeUrl = "/avatar/"+createdFileName;
+                if (findByTitle(user.getId()+".png") == null) {
+                    image = new Image(createdFileName, completeUrl, user);
+                } else {
+                    image = findByTitle(user.getId()+".png");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 return new Image();

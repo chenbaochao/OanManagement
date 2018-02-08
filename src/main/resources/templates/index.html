@@ -49,7 +49,7 @@
                     <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
                     <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
                     <div th:if="${lastMessage}">
-                        <small style="color: #666666">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></small>
+                        <small style="color: #666666">Last unread message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></small>
                     </div>
                     <!--<span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>-->
                 </div>

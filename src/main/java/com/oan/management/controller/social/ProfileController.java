@@ -41,7 +41,7 @@ public class ProfileController {
                 model.addAttribute("paramUser", paramUser);
                 Image avatar_of_id = imageService.findByTitle(paramUser.getId()+".png");
                 if (avatar_of_id != null) {
-                    model.addAttribute("avatar", "/img/"+avatar_of_id.getUrl());
+                    model.addAttribute("avatar", "/img"+avatar_of_id.getUrl());
                 } else {
                     model.addAttribute("avatar", "/img/avatar/0.png");
                 }
