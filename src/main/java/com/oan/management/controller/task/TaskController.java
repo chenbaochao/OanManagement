@@ -21,6 +21,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -49,9 +50,12 @@ public class TaskController {
     public String tasklist(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         model.addAttribute("task", new Task());
-        // Get completed and uncompleted tasks
+        // Get uncompleted tasks and sort by date
         List<Task> taskList = taskService.findByUserAndCompletedIsFalse(userLogged);
+        taskList.sort(Comparator.comparing(Task::getTargetDate));
+        // get completed tasks and sort by date
         List<Task> completedTasksList = taskService.findByUserAndCompletedIsTrue(userLogged);
+        completedTasksList.sort(Comparator.comparing(Task::getTargetDate));
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -81,8 +82,12 @@ public class BugController {
     @GetMapping("/admin/bugreports")
     public String getBugReports(Model model, Authentication authentication, @RequestParam(value = "view", required = false) Long param) {
         User userLogged = userService.findByUser(authentication.getName());
+        // Get buglist
         List<Bug> bugs = bugService.findByFixedIsFalse();
         List<Bug> fixedBugs = bugService.findByFixedIsTrue();
+        // Sort
+        bugs.sort(Comparator.comparing(Bug::getId).reversed());
+        fixedBugs.sort(Comparator.comparing(Bug::getId).reversed());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             if (param == null) {

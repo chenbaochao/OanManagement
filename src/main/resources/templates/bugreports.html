@@ -32,6 +32,7 @@
                             <thead class="thead-inverse">
                                 <tr>
                                     <th>ID</th>
+                                    <th>Date</th>
                                     <th>Reporter</th>
                                     <th>Bug</th>
                                     <th>Action</th>
@@ -40,6 +41,7 @@
                             <tbody th:if="!${param.view}">
                                 <tr th:if="!${param.view}" th:each="bug : ${bugs}">
                                     <td th:text="${bug.id}"></td>
+                                    <td th:text="${#dates.format(bug.date, 'dd/MM/yyyy')}"></td>
                                     <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                     <td th:text="${bug.description}"></td>
                                     <td>
@@ -50,6 +52,7 @@
                             <tbody th:if="${param.view}">
                             <tr th:if="${param.view}" th:each="bug : ${fixedBugs}">
                                 <td th:text="${bug.id}"></td>
+                                <td th:text="${#dates.format(bug.date, 'dd/MM/yyyy')}"></td>
                                 <td><a th:href="@{/profile(id=${bug.user.id})}" th:text="${bug.user.username}"></a></td>
                                 <td th:text="${bug.description}"></td>
                                 <td>
