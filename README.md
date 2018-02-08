@@ -25,3 +25,4 @@ load animations
 - http://www.thymeleaf.org - Thymeleaf template engine instead of JSP
 - http://bootstrapformhelpers.com - Extends Bootstrap, used this for the country flags
 - https://bootsnipp.com/snippets/featured/a-better-blockquote - The cool quote CSS
+- https://datatables.net - Great table pagination, sorting, searching,...!
