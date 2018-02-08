@@ -32,15 +32,27 @@ $(document).ready(function () {
                 url : '/api/event/all',
             }
         ],
+
+
         eventClick:  function(event, jsEvent, view) {
             endtime = $.fullCalendar.moment(event.end).format('h:mm');
             starttime = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
+
+            start = moment(event.start).format();
+            end = moment(event.end).format();
+
             var mywhen = starttime + ' - ' + endtime;
-            $('#modalTitle').html(event.title);
-            $('#modalDesc').html(event.description)
-            $('#modalWhen').text(mywhen);
-            $('#eventID').val(event.id);
-            $('#calendarModal').modal();
+            $('#modalEditTitle').val(event.title);
+            $('#modalEditDesc').val(event.description)
+            $('#eventEditID').val(event.id);
+            $('#eventEditColour').val(event.backgroundColor);
+
+            $('#editEventModal #startEditTime').val(start);
+            $('#editEventModal #endEditTime').val(end);
+
+            $('#editEventModal').modal('toggle');
+
+            //$('#calendar').fullCalendar('updateEvent', event);
         },
         select: function(start, end, jsEvent) {
             endtime = $.fullCalendar.moment(end).format('h:mm');

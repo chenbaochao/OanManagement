@@ -75,4 +75,15 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
+    @PostMapping("calendar-update")
+    public String updateEventPost(Event event) {
+        Event updateEvent = eventService.findById(event.getId());
+        updateEvent.setTitle(event.getTitle());
+        updateEvent.setDescription(event.getDescription());
+        updateEvent.setBackgroundColor(event.getBackgroundColor());
+        updateEvent.setBorderColor(event.getBackgroundColor());
+        eventService.save(updateEvent);
+        return "redirect:/calendar";
+    }
+
 }

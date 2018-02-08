@@ -99,6 +99,66 @@
                     </div>
                 </div>
             </form>
+
+
+            <!--EDIT EVENT MODAL-->
+            <!-- Modal -->
+            <form th:action="@{/calendar-update}" th:object="${event}" method="post">
+                <div id="editEventModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Edit Event</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="control-group">
+                                    <label class="control-label" for="theTitle">Title: </label>
+                                    <div class="field desc">
+                                        <input class="form-control" autocomplete="off" th:field="*{title}" th:value="${title}" id="modalEditTitle" name="title" placeholder="Title" type="text" value="" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="control-group">
+                                    <label class="control-label" for="theDescription">Description: </label>
+                                    <div class="field desc">
+                                        <input class="form-control" autocomplete="off" th:value="${description}" th:field="*{description}" id="modalEditDesc" name="title" placeholder="Description" type="text" value="" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="control-group">
+                                    <label class="control-label" for="theColor">Colour: </label>
+                                    <div class="field desc">
+                                        <select th:field="*{backgroundColor}" th:value="${backgroundColor}" name="color" class="form-control" id="eventEditColour">
+                                            <option value="">Choose</option>
+                                            <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
+                                            <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
+                                            <option style="color:#008000;" value="#008000">&#9724; Green</option>
+                                            <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+                                            <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+                                            <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+                                            <option style="color:#000;" value="#000">&#9724; Black</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input th:field="*{id}" th:value="${id}" type="hidden" id="eventEditID"/>
+                                <input th:field="*{start}" th:value="${start}" type="hidden" id="startEditTime"/>
+                                <input th:field="*{end}" th:value="${end}" type="hidden" id="endEditTime"/>
+                                <br/>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="submitEditButton">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
 </html>
