@@ -13,27 +13,6 @@
             <div class="panel panel-login">
                 <div id='calendar' style="height: auto; overflow: auto;"></div>
             </div>
-            <!--Show Event Modal -->
-            <div id="calendarModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 id="modalTitle" class="modal-title"></h4>
-                        </div>
-                        <div id="modalBody" class="modal-body">
-                            <!--<h4 class="modal-title"></h4>-->
-                            <p id="modalDesc"></p>
-                            <div id="modalWhen" style="margin-top:5px;"></div>
-                        </div>
-                        <input type="hidden" id="eventID"/>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                            <button type="submit" class="btn btn-danger" id="deleteButton">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Modal -->
             <form th:action="@{/calendar}" th:object="${event}" method="post">
@@ -65,13 +44,13 @@
                                     <label class="control-label" for="theColor">Colour: </label>
                                     <div class="field desc">
                                         <select th:field="*{backgroundColor}" name="color" class="form-control" id="theColor">
-                                            <option value="">Choose</option>
+                                            <option value="#5C6BC0">Choose</option>
                                             <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
-                                            <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                            <option style="color:#008000;" value="#008000">&#9724; Green</option>
+                                            <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
+                                            <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
                                             <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
                                             <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                            <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+                                            <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
                                             <option style="color:#000;" value="#000">&#9724; Black</option>
 
                                         </select>
@@ -131,13 +110,13 @@
                                     <label class="control-label" for="theColor">Colour: </label>
                                     <div class="field desc">
                                         <select th:field="*{backgroundColor}" th:value="${backgroundColor}" name="color" class="form-control" id="eventEditColour">
-                                            <option value="">Choose</option>
+                                            <option value="#5C6BC0">Choose</option>
                                             <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
-                                            <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                            <option style="color:#008000;" value="#008000">&#9724; Green</option>
+                                            <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
+                                            <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
                                             <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
                                             <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                            <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+                                            <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
                                             <option style="color:#000;" value="#000">&#9724; Black</option>
 
                                         </select>
@@ -152,6 +131,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                <button type="submit" class="btn btn-danger pull-left" id="deleteButton">Delete</button>
                                 <button type="submit" class="btn btn-primary" id="submitEditButton">Save</button>
                             </div>
                         </div>

@@ -48,7 +48,6 @@ public class ContactController {
             model.addAttribute("contacts", contactList);
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
-
         return "contacts";
     }
 

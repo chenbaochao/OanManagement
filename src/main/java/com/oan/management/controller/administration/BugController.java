@@ -116,6 +116,5 @@ public class BugController {
         notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
         messageService.save(notifyMessage);
         return "redirect:/admin/bugreports?notified";
-
     }
 }

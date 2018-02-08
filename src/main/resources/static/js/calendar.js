@@ -1,6 +1,14 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-        aspectRatio: 1.2,
+        businessHours: {
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            dow: [ 1, 2, 3, 4, 5],
+
+            start: '9:00', // a start time
+            end: '18:00', // an end time
+        },
+        height: 800,
+        aspectRatio: 1,
         editable: true,
         selectable: true,
         themeSystem: 'bootstrap3',
@@ -8,6 +16,8 @@ $(document).ready(function () {
         eventLimit: true,
         nowIndicator: true,
         timeFormat: 'H:mm',
+        slotLabelFormat: 'H:mm',
+        columnHeaderFormat: 'dddd',
         allDayText: 'Whole day',
         views: {
             month: {
@@ -55,7 +65,7 @@ $(document).ready(function () {
             //$('#calendar').fullCalendar('updateEvent', event);
         },
         select: function(start, end, jsEvent) {
-            endtime = $.fullCalendar.moment(end).format('h:mm');
+            endtime = $.fullCalendar.moment(end).format('dddd, DD/MM/YYYY h:mm');
             starttime = $.fullCalendar.moment(start).format('dddd, DD/MM/YYYY h:mm'); // dddd, Do MMMM YYYY h:mm
             var mywhen = starttime + ' - ' + endtime;
             start = moment(start).format();
@@ -105,8 +115,8 @@ $(document).ready(function () {
     });
 
     function doDelete(){
-        $("#calendarModal").modal('hide');
-        var eventID = $('#eventID').val();
+        $("#editEventModal").modal('hide');
+        var eventID = $('#eventEditID').val();
         $.ajax({
             url: 'calendar-delete',
             data: {id: eventID},
