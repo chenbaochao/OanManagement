@@ -5,6 +5,11 @@
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
 
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+    <script src="js/loadSummernote.js"></script>
+
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
@@ -34,8 +39,8 @@
                            placeholder="Subject"/>
                 </div>
                 <div class="form-group">
-                    <label for="message" class="control-label col-md-3">Message: </label>
-                    <textarea id="message" type="text"  th:field="*{messageText}"
+                    <label for="summernote" class="control-label col-md-3">Message: </label>
+                    <textarea id="summernote" type="text"  th:field="*{messageText}"
                            class="form-control textarea"
                               rows="5"
                            required="required"
