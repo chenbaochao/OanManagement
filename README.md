@@ -4,6 +4,7 @@ This project was intended for my graduation project at INTEC Brussels.
 **Features:**
 - Register/Login with security and field checks
 - A responsive and Material calendar with jQuery and AJAX for smooth control. Also comes with Google Calendar (API) events.
+  Events can be added, edited, deleted and coloured!
 - To-Do's (tasks can also be seen in the calendar)
 - Contact list
 - User list
@@ -11,9 +12,11 @@ This project was intended for my graduation project at INTEC Brussels.
 - User Settings
 - Report bugs
 - Roles
-- Messaging between users
+- Messaging between users with a stunning _WYSIWYG_ editor
 - Admin Panel
-- Motivational quotes and messages
+- Random motivational quotes and messages
+- Statistics
+- Table search/pagination/order/...
 
 **3th party tools:**
 - https://talaikis.com - Quotes API
@@ -26,3 +29,4 @@ load animations
 - http://bootstrapformhelpers.com - Extends Bootstrap, used this for the country flags
 - https://bootsnipp.com/snippets/featured/a-better-blockquote - The cool quote CSS
 - https://datatables.net - Great table pagination, sorting, searching,...!
+- https://summernote.org/ - WYSIWYG Editor
