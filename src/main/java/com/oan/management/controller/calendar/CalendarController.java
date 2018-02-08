@@ -53,7 +53,7 @@ public class CalendarController {
         User userLogged = userService.findByUser(authentication.getName());
 
         if (!event.getTitle().isEmpty()) {
-            eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, "#5C6BC0", "#5C6BC0", true));
+            eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, event.getBackgroundColor(), event.getBackgroundColor(), true));
         }
 
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);

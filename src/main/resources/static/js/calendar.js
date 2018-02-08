@@ -14,6 +14,7 @@ $(document).ready(function () {
                 eventLimit: 6
             }
         },
+        eventColor: '#5C6BC0',
         firstDay: 1,
         googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
         /*events: {
@@ -43,7 +44,7 @@ $(document).ready(function () {
         },
         select: function(start, end, jsEvent) {
             endtime = $.fullCalendar.moment(end).format('h:mm');
-            starttime = $.fullCalendar.moment(start).format('dddd, MMMM Do YYYY');
+            starttime = $.fullCalendar.moment(start).format('dddd, DD/MM/YYYY h:mm'); // dddd, Do MMMM YYYY h:mm
             var mywhen = starttime + ' - ' + endtime;
             start = moment(start).format();
             end = moment(end).format();
