@@ -8,6 +8,11 @@ spring:
     multipart:
       max-file-size:10MB
       max-request-size:10MB
+  resources:
+    cache-period: 0
+  thymeleaf:
+    cache: false
+
 
 
 # = JPA configurations
@@ -26,6 +31,3 @@ logging:
     com.oan: DEBUG
     org.springframework.web: DEBUG
     org.springframework.security: INFO
-
-# = Thymeleaf configurations
-spring.thymeleaf.cache: false

@@ -6,7 +6,8 @@ $(document).ready(function() {
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['media', ['link', 'picture']]
+            ['media', ['link', 'picture']],
+            ['misc',['undo', 'redo', 'fullscreen']]
 
         ],
         disableDragAndDrop: true,
