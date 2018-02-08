@@ -11,7 +11,10 @@
 
     <script>
         $(document).ready(function() {
-            $('#bugstable').DataTable();
+            $('#bugstable').DataTable({
+                "order": [ 0, 'desc' ]
+                }
+            );
         } );
     </script>
 

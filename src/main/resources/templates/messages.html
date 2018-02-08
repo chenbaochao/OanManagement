@@ -12,7 +12,10 @@
     <script>
         $(document).ready(function() {
             $('#messagestable').DataTable( {
-                "order": [ 3, 'asc' ]
+                    "columnDefs": [
+                        { "type": "date", "targets": 2 }
+                    ],
+                    "order": [ 3, 'asc' ]
                 }
             );
         } );
@@ -48,10 +51,10 @@
             <table id="messagestable" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                      <tr>
-                        <th>Subject</th>
-                        <th>From</th>
+                         <th>Subject</th>
+                         <th>From</th>
                          <th>Date</th>
-                        <th>Action</th>
+                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

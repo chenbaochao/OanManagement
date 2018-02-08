@@ -5,7 +5,21 @@
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
 
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+
     <script>
+        $(document).ready(function() {
+            $('#completedTaskList').DataTable( {
+                    "columnDefs": [
+                        { "type": "date", "targets": 1 }
+                    ],
+                    "order": [ 1, 'desc' ]
+                }
+
+            );
+        } );
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
@@ -91,7 +105,7 @@
 
         <h1><span class="glyphicon glyphicon-ok"></span> Completed Tasks: </h1>
         <div class="panel panel-login">
-            <table class="table table-hover table-striped">
+            <table id="completedTaskList" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                      <tr>
                         <th>Description</th>
@@ -99,8 +113,8 @@
                         <th>Completed</th>
                     </tr>
                 </thead>
-                <tbody th:each="task : ${completedTasks}">
-                <tr>
+                <tbody>
+                <tr th:each="task : ${completedTasks}">
                     <td><span th:text="${task.description}"></span></td>
                     <!--<td th:text="${task.targetDate}"></td>-->
                     <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
