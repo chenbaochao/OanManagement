@@ -5,7 +5,17 @@
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
 
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+
     <script>
+        $(document).ready(function() {
+            $('#messagestable').DataTable( {
+                "order": [ 3, 'asc' ]
+                }
+            );
+        } );
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
@@ -33,8 +43,9 @@
                 Your message has been sent!
             </div>
         </div>
-        <div class="panel panel-login">
-            <table class="table table-hover table-striped">
+
+        <div class="panel panel-login table-responsive">
+            <table id="messagestable" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                      <tr>
                         <th>Subject</th>
@@ -43,8 +54,8 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody th:each="message : ${messages}">
-                <tr>
+                <tbody>
+                <tr th:each="message : ${messages}">
                     <td th:if="${message.opened}==1"><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></td>
                     <td th:if="${message.opened}==0"><span class="label label-default">New</span> <strong><a th:href="@{/message(id=${message.id})}" th:text="${message.subject}"></a></strong></td>
                     <td>

@@ -4,15 +4,21 @@
 
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
-    <script th:src="@{../js/searchtable.js}"></script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+
+    <script>
+        $(document).ready(function() {
+            $('#contactstable').DataTable();
+        } );
+    </script>
 
     <div class="container">
         <h1><span class="fa fa-address-book"></span> Contacts <a href="/contact-new" class="btn btn-success pull-right"><span class="fa fa-user-plus"></span> New contact</a></h1>
         <div class="panel panel-login table-responsive">
-            <table class="table table-hover table-striped table-list-search">
-                <div class="panel-body">
-                    <input class="form-control" autocomplete="off" id="system-search" name="q" placeholder="Search contact"/>
-                </div>
+            <table id="contactstable" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                     <tr>
                         <th>First name</th>
