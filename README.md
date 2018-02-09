@@ -30,3 +30,4 @@ load animations
 - https://bootsnipp.com/snippets/featured/a-better-blockquote - The cool quote CSS
 - https://datatables.net - Great table pagination, sorting, searching,...!
 - https://summernote.org/ - WYSIWYG Editor
+- http://l-lin.github.io/font-awesome-animation/ - Font Awesome Animations

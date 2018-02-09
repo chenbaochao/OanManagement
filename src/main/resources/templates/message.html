@@ -24,22 +24,21 @@
             </div>
         </div>
         <div class="panel panel-login">
+            <div class="btn-group pull-right">
+                <button type="button" class="btn pull-right btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a th:href="@{/message-to(id=${message.sender.id})}">Reply</a></li>
+                    <li><a th:href="@{/message-unread(id=${message.id})}">Mark as unread</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a th:href="@{/message-delete(id=${message.id})}">Delete</a></li>
+                </ul>
+            </div>
+            <a style="margin-right: 5px" th:href="@{/message-to(id=${message.sender.id})}" class="btn btn-default pull-right"><span class="fa fa-reply"></span> Reply</a>
             <span th:utext="${message.messageText}"></span>
         </div>
         <a href="/messages" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
-        <a th:href="@{/message-to(id=${message.sender.id})}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-
-        <div class="btn-group pull-right">
-            <button type="button" class="btn pull-right btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a th:href="@{/message-to(id=${message.sender.id})}">Reply</a></li>
-                <li><a th:href="@{/message-unread(id=${message.id})}">Mark as unread</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a th:href="@{/message-delete(id=${message.id})}">Delete</a></li>
-            </ul>
-        </div>
     </div>
 </body>
 </html>

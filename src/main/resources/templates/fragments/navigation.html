@@ -8,6 +8,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.1.0/font-awesome-animation.css"/>
     <nav class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -62,7 +63,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()">
-                    <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown"> </span></a>
+                    <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown fa-lg faa-horizontal animated"> </span><span
+                            th:text="${session.unreadMessages}" class="badge" style="margin-top: 1px"></span></a>
                 </li>
             </ul>
         </div>

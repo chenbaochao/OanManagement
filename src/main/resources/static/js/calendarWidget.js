@@ -13,6 +13,7 @@ $(document).ready(function () {
         timeFormat: 'H:mm',
         allDayText: 'Whole day',
         views: 'listWeek',
+        googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
         eventSources: [
             {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',

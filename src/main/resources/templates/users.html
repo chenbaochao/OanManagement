@@ -11,7 +11,11 @@
 
     <script>
         $(document).ready(function() {
-            $('#userstable').DataTable();
+            $('#userstable').DataTable({
+                language: {
+                    searchPlaceholder: "Search user"
+                }
+            });
         } );
     </script>
 
