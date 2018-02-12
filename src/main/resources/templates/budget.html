@@ -11,9 +11,9 @@
                 <div class="col-md-3">
                     <div class="panel panel-login">
                         <ul class="nav nav-pills nav-stacked">
-                            <li role="presentation" class="active"><a href="/budget-list"><span class="glyphicon glyphicon-stats"></span> Budgets</a></li>
-                            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-lock"></span> Bug Reports</a></li>
-                            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent Activity</a></li>
+                            <li role="presentation" class="active"><a href="/budget-list"><span class="glyphicon glyphicon-briefcase"></span> Budgets</a></li>
+                            <li role="presentation"><a href="/budget-new"><span class="glyphicon glyphicon-euro"></span> New budget</a></li>
+                            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
                         </ul>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                     <tbody>
                                         <tr th:each="income : ${incomeList}">
                                             <td th:text="${income.description}"></td>
-                                            <td>+ <span th:text="${income.amount}"></span></td>
+                                            <td class="greentext">+ <span th:text="${income.amount}"></span></td>
                                             <td>
                                                 <a th:href="@{/income-delete(id=${income.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default fa fa-trash"></a>
                                             </td>
@@ -113,7 +113,7 @@
                                     <tbody>
                                     <tr th:each="expense : ${expenseList}">
                                         <td th:text="${expense.description}"></td>
-                                        <td>- <span th:text="${expense.amount}"></span></td>
+                                        <td class="redtext">- <span th:text="${expense.amount}"></span></td>
                                         <td>
                                             <a th:href="@{/expense-delete(id=${expense.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default fa fa-trash"></a>
                                         </td>
@@ -146,8 +146,8 @@
                                             <button type="submit"
                                                    name="expense-submit"
                                                    id="expense-submit"
-                                                   class="btn btn-default">
-                                                 <span class="fa fa-plus"></span>
+                                                   class="form-control btn btn-danger">
+                                                 <span class="fa fa-plus-square-o"></span>
                                             </button>
                                         </div>
                                     </div>

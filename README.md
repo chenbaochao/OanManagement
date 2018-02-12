@@ -17,6 +17,7 @@ This project was intended for my graduation project at INTEC Brussels.
 - Random motivational quotes and messages
 - Statistics
 - Table search/pagination/order/...
+- Budget Manager
 
 **3th party tools:**
 - https://talaikis.com - Quotes API

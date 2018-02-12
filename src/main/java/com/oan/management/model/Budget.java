@@ -18,10 +18,10 @@ public class Budget {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Income> incomes;
 
-    @OneToMany
+    @OneToMany(orphanRemoval=true, cascade=CascadeType.ALL)
     private List<Expense> expenses;
 
     public Budget() {
