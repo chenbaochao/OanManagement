@@ -68,7 +68,7 @@
                                     </tbody>
                                 </table>
                                 <hr/>
-                                <form method="post" th:action="@{/budget(id=${paramBudget.id})}" th:object="${income}">
+                                <form method="post" th:action="@{/budget(id=${paramBudget.id},action=income)}" th:object="${income}">
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -76,6 +76,8 @@
                                                    autocomplete="off"
                                                    autofocus="autofocus"
                                                    required="required"
+                                                   id="incomeDesc"
+                                                   name="incomeDesc"
                                                    placeholder="Description" th:field="*{description}"/>
                                         </div>
                                         <div class="col-md-3">
@@ -83,6 +85,8 @@
                                                    autocomplete="off"
                                                    autofocus="autofocus"
                                                    required="required"
+                                                   id="incomeValue"
+                                                   name="incomeValue"
                                                    placeholder="0.01" step="0.01" th:field="*{amount}"/>
                                         </div>
                                         <div class="col-md-3">
@@ -117,7 +121,7 @@
                                     </tbody>
                                 </table>
                                 <hr/>
-                                <form method="post" th:action="@{/budget(id=${paramBudget.id})}" th:object="${expense}">
+                                <form method="post" th:action="@{/budget(id=${paramBudget.id},action=expense)}" th:object="${expense}">
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -125,6 +129,8 @@
                                                    autocomplete="off"
                                                    autofocus="autofocus"
                                                    required="required"
+                                                   id="expenseDesc"
+                                                   name="expenseDesc"
                                                    placeholder="Description" th:field="*{description}"/>
                                         </div>
                                         <div class="col-md-3">
@@ -132,6 +138,8 @@
                                                    autocomplete="off"
                                                    autofocus="autofocus"
                                                    required="required"
+                                                   id="expenseValue"
+                                                   name="expenseValue"
                                                    placeholder="0.01" step="0.01" th:field="*{amount}"/>
                                         </div>
                                         <div class="col-md-3">

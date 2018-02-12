@@ -164,19 +164,39 @@ public class BudgetController {
     }
 
     @PostMapping("/budget")
-    public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, Model model, Authentication authentication, Income income, Expense expense) {
+    public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, @RequestParam("action") String action, Model model, Authentication authentication, Income income, Expense expense) {
         User userLogged = userService.findByUser(authentication.getName());
+        System.out.println("mother:"+action);
 
-        if (income.getAmount() > 0 && income.getAmount() != null) {
-            incomeService.save(new Income(paramBudget, income.getDescription(), income.getAmount()));
-            System.out.println("test1: " + income.getAmount() + " : " + expense.getAmount());
-            return "redirect:/budget?id=" + paramBudget.getId();
-        } else if (expense.getAmount() > 0 ) {
-            expenseService.save(new Expense(paramBudget, expense.getDescription(), expense.getAmount()));
-            System.out.println("test3: "+income+" : "+expense);
-            return "redirect:/budget?id=" + paramBudget.getId();
+        if (action.contains("income")) {
+            if (income.getAmount() > 0) {
+                incomeService.save(new Income(paramBudget, income.getDescription(), income.getAmount()));
+                return "redirect:/budget?id=" + paramBudget.getId();
+            } else {
+                return "redirect:/budget-list?amount";
+            }
+        } else if (action.contains("expense")) {
+            if (expense.getAmount() > 0) {
+                expenseService.save(new Expense(paramBudget, expense.getDescription(), expense.getAmount()));
+                return "redirect:/budget?id=" + paramBudget.getId();
+            } else {
+                return "redirect:budget-list?amount";
+            }
         } else {
-            return "redirect:/budget?id="+paramBudget.getId()+"?error";
+            return "redirect:budget-list?actionerror";
         }
     }
+    /*if (income.getAmount() > 0 && income.getAmount() != null) {
+            incomeService.save(new Income(paramBudget, income.getDescription(), income.getAmount()));
+            System.out.println("test1: " + income.getAmount() + " : " + expense.getAmount());
+            if (expense.getAmount() > 0 && expense.getDescription() != income.getDescription()) {
+                expenseService.save(new Expense(paramBudget, expense.getDescription(), expense.getAmount()));
+                System.out.println("test3: " + income + " : " + expense);
+                return "redirect:/budget?id=" + paramBudget.getId();
+            } else {
+                return "redirect:/budget?id=" + paramBudget.getId();
+            }
+        } else {
+            return "redirect:/budget?id="+paramBudget.getId()+"?error";
+        }*/
 }
