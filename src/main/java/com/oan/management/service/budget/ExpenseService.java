@@ -12,4 +12,6 @@ public interface ExpenseService {
     Expense findById(Long id);
     List<Expense> findAllByBudget(Budget budget);
     Double getTotalIncome(List<Expense> expenseList);
+    void deleteById(Long id);
+    Expense save(Expense expense);
 }

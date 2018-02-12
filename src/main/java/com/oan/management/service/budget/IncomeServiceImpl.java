@@ -36,4 +36,14 @@ public class IncomeServiceImpl implements IncomeService {
         }
         return total;
     }
+
+    @Override
+    public void deleteById(Long id) {
+        incomeRepository.delete(incomeRepository.findById(id));
+    }
+
+    @Override
+    public Income save(Income income) {
+        return incomeRepository.save(income);
+    }
 }

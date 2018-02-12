@@ -45,6 +45,7 @@
                             <hr/>
                             <!--<p>Start budget: &euro; <span th:text="${paramBudget.budgetAmount}"></span></p>-->
                         </div>
+                        <!-- Tables -->
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="greentext">INCOME</h4>
@@ -53,15 +54,47 @@
                                     <tr>
                                         <th>Description</th>
                                         <th>Amount</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="income : ${incomeList}">
                                             <td th:text="${income.description}"></td>
                                             <td>+ <span th:text="${income.amount}"></span></td>
+                                            <td>
+                                                <a th:href="@{/income-delete(id=${income.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default fa fa-trash"></a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <hr/>
+                                <form method="post" th:action="@{/budget(id=${paramBudget.id})}" th:object="${income}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <input type="text" class="form-control"
+                                                   autocomplete="off"
+                                                   autofocus="autofocus"
+                                                   required="required"
+                                                   placeholder="Description" th:field="*{description}"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="number" class="form-control"
+                                                   autocomplete="off"
+                                                   autofocus="autofocus"
+                                                   required="required"
+                                                   placeholder="0.01" step="0.01" th:field="*{amount}"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit"
+                                                    name="income-submit"
+                                                    id="income-submit"
+                                                    class="btn btn-default">
+                                                <span class="fa fa-plus"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-md-6">
                                 <h4 class="redtext">EXPENSES</h4>
@@ -70,15 +103,47 @@
                                     <tr>
                                         <th>Description</th>
                                         <th>Amount</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="expense : ${expenseList}">
                                         <td th:text="${expense.description}"></td>
                                         <td>- <span th:text="${expense.amount}"></span></td>
+                                        <td>
+                                            <a th:href="@{/expense-delete(id=${expense.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default fa fa-trash"></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <hr/>
+                                <form method="post" th:action="@{/budget(id=${paramBudget.id})}" th:object="${expense}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <input type="text" class="form-control"
+                                                   autocomplete="off"
+                                                   autofocus="autofocus"
+                                                   required="required"
+                                                   placeholder="Description" th:field="*{description}"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="number" class="form-control"
+                                                   autocomplete="off"
+                                                   autofocus="autofocus"
+                                                   required="required"
+                                                   placeholder="0.01" step="0.01" th:field="*{amount}"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit"
+                                                   name="expense-submit"
+                                                   id="expense-submit"
+                                                   class="btn btn-default">
+                                                 <span class="fa fa-plus"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

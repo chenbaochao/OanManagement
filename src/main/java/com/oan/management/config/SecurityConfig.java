@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/calendar-delete",
                             "/contacts",
                             "/",
+                            "/budget", "/budget-new", "/budget-list",
                             "/task-list",
                             "/profile",
                             "/settings","/appsettings","/changepassword",
