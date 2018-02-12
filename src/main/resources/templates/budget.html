@@ -25,20 +25,27 @@
                             </div>
                         </div>
                         <div>
-                            <h3 th:text="${paramBudget.title}"></h3>
-                            <h1 class="text-center">&euro; <span th:text="${paramBudget.budgetAmount}"></span></h1>
-                            <p>Income: <span th:text="${totalIncome}"></span></p>
-                            <p>Expenses: <span th:text="${totalExpense}"></span></p>
-                            <hr/>
+                            <h3 class="text-center">Budget: <span th:text="${paramBudget.title}"></span></h3>
+                            <div th:if="${leftOver} > 0.01">
+                                <h1 class="text-center">&euro; <span th:text="${leftOver}"></span></h1>
+                            </div>
+                            <div th:if="${leftOver} &lt; 0">
+                                <h1 class="text-center redtext">&euro; <span th:text="${leftOver}"></span></h1>
+                            </div>
+
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" style="width:60%">
-                                Budget <span>&euro; 1 200.00</span>
+                                    Budget <span>&euro; <span th:text="${leftOver}"></span></span>
                                 </div>
 
                                 <div class="progress-bar progress-bar-danger" role="progressbar" style="width:30%">
-                                Spendings <span>&euro; 600.00</span>
+                                    Spendings <span>&euro; <span th:text="${totalExpense}"></span></span>
                                 </div>
                             </div>
+                            <hr/>
+                            <p>Start budget: &euro; <span th:text="${paramBudget.budgetAmount}"></span></p>
+                            <p>Income: &euro; <span th:text="${totalIncome}"></span></p>
+                            <p>Expenses: &euro; <span th:text="${totalExpense}"></span></p>
                         </div>
                     </div>
                     <a href="/budget-list" class="btn btn-default pull-left"><span class="fa fa-arrow-left"></span> Back</a>

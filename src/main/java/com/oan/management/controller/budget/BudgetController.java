@@ -90,9 +90,14 @@ public class BudgetController {
                 Double totalIncome = incomeService.getTotalIncome(incomeList);
                 Double totalExpense = expenseService.getTotalIncome(expenseList);
 
+                // Calculations
+                Double leftOver = (paramBudget.getBudgetAmount() + (totalIncome - totalExpense));
+
+                // Settings attributes
                 model.addAttribute("paramBudget", paramBudget);
                 model.addAttribute("totalIncome", totalIncome);
                 model.addAttribute("totalExpense", totalExpense);
+                model.addAttribute("leftOver", leftOver);
             } else {
                 return "budget-list?notfound";
             }
