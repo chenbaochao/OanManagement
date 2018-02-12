@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+    <div class="container">
+        <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
+
+        <h1>Administrator Panel </h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-login">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation"><a href="/admin"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                            <li role="presentation"><a href="/admin/bugreports"><span class="glyphicon glyphicon-lock"></span> Bug Reports</a></li>
+                            <li role="presentation" class="active"><a href="/admin/manageusers"><span class="glyphicon glyphicon-user"></span> Manage users</a></li>
+                            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent Activity</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <form th:action="@{/admin/manageusers/}+${paramUser.id}" method="post" th:object="${paramUser}">
+                        <div class="panel panel-login">
+                            <div th:if="${param.success}">
+                                <div class="alert alert-success">
+                                    Your profile settings have been updated
+                                </div>
+                            </div>
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">
+                                    Please enter valid information
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        First name:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.firstName}" th:field="*{firstName}"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        Last name:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.lastName}" th:field="*{lastName}"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Age:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.age}" th:field="*{age}" type="number" min="0" max="100"></input>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <h4>Crucial data: </h4>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Country:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <!--<div class="bfh-selectbox bfh-countries" th:field="*{country}" th:attr="data-country=${currentCountry}" data-flags="true">-->
+                                        <!--</div>-->
+                                        <select class="input-medium bfh-countries form-control" th:attr="data-country=${currentCountry}" th:field="*{country}"></select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="fa fa-warning"></span> E-mail:
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" th:value="${paramUser.email}" th:field="*{email}" type="text"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="fa fa-skype"></span> Skype:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.skype}" th:field="*{skype}"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="fa fa-warning"></span> Username:
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" th:value="${paramUser.username}" th:field="*{username}" type="text"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="fa fa-twitter"></span> Twitter:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.twitter}" th:field="*{twitter}"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="fa fa-certificate"></span> Role:
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span th:each="role : ${paramUser.roles}">
+                                            <select class="form-control" type="text" th:field="*{roles}">
+                                                <option value="ROLE_USER">ROLE_USER</option>
+                                                <option value="ROLE_TESTER">ROLE_TESTER</option>
+                                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="fa fa-facebook-official"></span> Facebook:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.facebook}" th:field="*{facebook}"></input>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <span class="fa fa-github"></span> GitHub:
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control" th:value="${paramUser.github}" th:field="*{github}"></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="alert alert-danger">
+                                <span class="fa fa-warning"></span> Warning: As an administrator you should be aware of filling in <strong>correct</strong> data.
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="task-submit"
+                                   id="task-submit"
+                                   class="form-control btn btn-info"
+                                   value="Update Settings"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+</body>
+</html>
