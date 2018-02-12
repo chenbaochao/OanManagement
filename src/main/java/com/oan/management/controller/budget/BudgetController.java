@@ -64,7 +64,7 @@ public class BudgetController {
     public String saveNewBudget(Model model, Budget budget, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         if (budget.getTitle().length() >= 3 ) {
-            if (budget.getBudgetAmount() >= 0) {
+            if (budget.getBudgetAmount() >= 1) {
                 Budget userBudget = new Budget(budget.getTitle(), budget.getBudgetAmount(), userLogged);
                 budgetService.save(userBudget);
                 return "redirect:/budget-list?success";
