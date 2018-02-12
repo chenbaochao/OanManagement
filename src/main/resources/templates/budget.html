@@ -34,12 +34,12 @@
                             </div>
 
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:60%">
+                                <div class="progress-bar progress-bar-success" role="progressbar" th:style="'width:'+ ${incomesPercent} +'%'">
                                     Budget <span>&euro; <span th:text="${leftOver}"></span></span>
                                 </div>
 
-                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:30%">
-                                    Spendings <span>&euro; <span th:text="${totalExpense}"></span></span>
+                                <div class="progress-bar progress-bar-danger" role="progressbar" th:style="'width:'+ ${expensesPercent} +'%'">
+                                    Expenses <span>&euro; <span th:text="${totalExpense}"></span></span>
                                 </div>
                             </div>
                             <hr/>

@@ -92,12 +92,17 @@ public class BudgetController {
 
                 // Calculations
                 Double leftOver = (paramBudget.getBudgetAmount() + (totalIncome - totalExpense));
+                Double expensesPercent = totalExpense / (totalIncome+paramBudget.getBudgetAmount()) * 100;
+                Double incomesPercent = 100 - expensesPercent;
 
                 // Settings attributes
                 model.addAttribute("paramBudget", paramBudget);
                 model.addAttribute("totalIncome", totalIncome);
                 model.addAttribute("totalExpense", totalExpense);
                 model.addAttribute("leftOver", leftOver);
+                // Percentages for progress bar
+                model.addAttribute("expensesPercent", expensesPercent);
+                model.addAttribute("incomesPercent", incomesPercent);
             } else {
                 return "budget-list?notfound";
             }
