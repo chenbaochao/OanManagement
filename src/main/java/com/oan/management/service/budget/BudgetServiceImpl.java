@@ -1,8 +1,8 @@
-package com.oan.management.service;
+package com.oan.management.service.budget;
 
 import com.oan.management.model.Budget;
 import com.oan.management.model.User;
-import com.oan.management.repository.BudgetRepository;
+import com.oan.management.repository.budget.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,9 @@ import java.util.List;
 public class BudgetServiceImpl implements BudgetService{
     @Autowired
     BudgetRepository budgetRepository;
+
+    @Autowired
+    ExpenseService expenseService;
 
     @Override
     public List<Budget> findAll() {
@@ -35,5 +38,10 @@ public class BudgetServiceImpl implements BudgetService{
     @Override
     public Budget findById(Long id) {
         return budgetRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        budgetRepository.delete(budgetRepository.findById(id));
     }
 }

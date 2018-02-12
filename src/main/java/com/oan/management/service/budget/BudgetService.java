@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.budget;
 
 import com.oan.management.model.Budget;
 import com.oan.management.model.User;
@@ -13,4 +13,5 @@ public interface BudgetService {
     List<Budget> findAllByUser(User user);
     Budget save(Budget budget);
     Budget findById(Long id);
+    void deleteById(Long id);
 }

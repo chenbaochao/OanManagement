@@ -1,6 +1,7 @@
 package com.oan.management.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Oan on 30/01/2018.
@@ -16,6 +17,12 @@ public class Budget {
 
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private List<Income> incomes;
+
+    @OneToMany
+    private List<Expense> expenses;
 
     public Budget() {
     }

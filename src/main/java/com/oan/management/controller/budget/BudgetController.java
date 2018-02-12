@@ -1,9 +1,13 @@
 package com.oan.management.controller.budget;
 
 import com.oan.management.model.Budget;
+import com.oan.management.model.Expense;
+import com.oan.management.model.Income;
 import com.oan.management.model.User;
-import com.oan.management.service.BudgetService;
 import com.oan.management.service.UserService;
+import com.oan.management.service.budget.BudgetService;
+import com.oan.management.service.budget.ExpenseService;
+import com.oan.management.service.budget.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,12 @@ public class BudgetController {
 
     @Autowired
     BudgetService budgetService;
+
+    @Autowired
+    IncomeService incomeService;
+
+    @Autowired
+    ExpenseService expenseService;
 
     @GetMapping("/budget-list")
     public String getBudgetManager(Model model, Authentication authentication) {
@@ -73,7 +83,16 @@ public class BudgetController {
             model.addAttribute("loggedUser", userLogged);
             if (id != null) {
                 Budget paramBudget = budgetService.findById(id);
+                // Get incomes and expenses
+                List<Income> incomeList = incomeService.findAllByBudget(paramBudget);
+                List<Expense> expenseList = expenseService.findAllByBudget(paramBudget);
+                // Get the total of incomes and expenses
+                Double totalIncome = incomeService.getTotalIncome(incomeList);
+                Double totalExpense = expenseService.getTotalIncome(expenseList);
+
                 model.addAttribute("paramBudget", paramBudget);
+                model.addAttribute("totalIncome", totalIncome);
+                model.addAttribute("totalExpense", totalExpense);
             } else {
                 return "budget-list?notfound";
             }
@@ -81,4 +100,16 @@ public class BudgetController {
         return "budget";
     }
 
+    @GetMapping("budget-delete")
+    public String deleteBudget(Authentication authentication, @RequestParam Long id) {
+        User userLogged = userService.findByUser(authentication.getName());
+
+        Budget paramBudget = budgetService.findById(id);
+        if (paramBudget.getUser() == userLogged) {
+            budgetService.deleteById(id);
+            return "redirect:budget-list?deleted";
+        } else {
+            return "redirect:budget-list?notfound";
+        }
+    }
 }

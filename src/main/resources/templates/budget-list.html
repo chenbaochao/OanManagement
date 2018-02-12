@@ -24,19 +24,16 @@
                                 Your budget has been added
                             </div>
                         </div>
-                        <!--<h1 class="text-center">&euro; 2 000.00</h1>-->
-                        <!--<hr/>-->
-                        <!--<div class="progress">-->
-                            <!--<div class="progress-bar progress-bar-success" role="progressbar" style="width:60%">-->
-                                <!--Budget <span>&euro; 1 200.00</span>-->
-                            <!--</div>-->
-                            <!--<div class="progress-bar progress-bar-warning" role="progressbar" style="width:10%">-->
-                                <!--Savings <span>&euro; 200.00</span>-->
-                            <!--</div>-->
-                            <!--<div class="progress-bar progress-bar-danger" role="progressbar" style="width:30%">-->
-                                <!--Spendings <span>&euro; 600.00</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                        <div th:if="${param.deleted}">
+                            <div class="alert alert-info">
+                                The budget has been deleted
+                            </div>
+                        </div>
+                        <div th:if="${param.notfound}">
+                            <div class="alert alert-danger">
+                                An error has occured
+                            </div>
+                        </div>
                         <table id="budgetstable" class="table table-hover table-striped">
                             <thead class="thead-inverse">
                             <tr>

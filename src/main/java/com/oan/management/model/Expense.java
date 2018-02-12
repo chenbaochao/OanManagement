@@ -13,12 +13,15 @@ public class Expense {
     private Long id;
 
     private String description;
-    private Long amount;
+    private Double amount;
 
     @ManyToOne
     private Budget budget;
 
-    public Expense(Budget budget, String description, Long amount) {
+    public Expense() {
+    }
+
+    public Expense(Budget budget, String description, Double amount) {
         this.budget = budget;
         this.description = description;
         this.amount = amount;
@@ -40,11 +43,11 @@ public class Expense {
         this.description = description;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

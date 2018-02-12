@@ -1,4 +1,4 @@
-package com.oan.management.repository;
+package com.oan.management.repository.budget;
 
 import com.oan.management.model.Budget;
 import com.oan.management.model.User;

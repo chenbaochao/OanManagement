@@ -12,12 +12,15 @@ public class Income {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private Long amount;
+    private Double amount;
 
     @ManyToOne
     private Budget budget;
 
-    public Income(Budget budget, String description, Long amount) {
+    public Income() {
+    }
+
+    public Income(Budget budget, String description, Double amount) {
         this.budget = budget;
         this.description = description;
         this.amount = amount;
@@ -39,11 +42,11 @@ public class Income {
         this.description = description;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }
