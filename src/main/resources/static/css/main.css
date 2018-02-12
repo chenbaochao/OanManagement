@@ -279,5 +279,9 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
 }
 
 .redtext {
-    color: #EF5350;
+    color: #d9534f;
+}
+
+.greentext {
+    color: #78ab46;
 }

@@ -63,7 +63,7 @@ public class BudgetController {
     public String saveNewBudget(Model model, Budget budget, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         if (budget.getTitle().length() >= 3 ) {
-            if (budget.getBudgetAmount() >= 0.01) {
+            if (budget.getBudgetAmount() >= 0) {
                 Budget userBudget = new Budget(budget.getTitle(), budget.getBudgetAmount(), userLogged);
                 budgetService.save(userBudget);
                 return "redirect:/budget-list?success";
@@ -103,6 +103,9 @@ public class BudgetController {
                 // Percentages for progress bar
                 model.addAttribute("expensesPercent", expensesPercent);
                 model.addAttribute("incomesPercent", incomesPercent);
+                // Lists
+                model.addAttribute("incomeList", incomeList);
+                model.addAttribute("expenseList", expenseList);
             } else {
                 return "budget-list?notfound";
             }

@@ -35,7 +35,7 @@
 
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" th:style="'width:'+ ${incomesPercent} +'%'">
-                                    Budget <span>&euro; <span th:text="${leftOver}"></span></span>
+                                    Budget <span>&euro; <span th:text="${leftOver} - ${totalExpense}"></span></span>
                                 </div>
 
                                 <div class="progress-bar progress-bar-danger" role="progressbar" th:style="'width:'+ ${expensesPercent} +'%'">
@@ -43,9 +43,43 @@
                                 </div>
                             </div>
                             <hr/>
-                            <p>Start budget: &euro; <span th:text="${paramBudget.budgetAmount}"></span></p>
-                            <p>Income: &euro; <span th:text="${totalIncome}"></span></p>
-                            <p>Expenses: &euro; <span th:text="${totalExpense}"></span></p>
+                            <!--<p>Start budget: &euro; <span th:text="${paramBudget.budgetAmount}"></span></p>-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="greentext">INCOME</h4>
+                                <table id="incomeTable" class="table table-hover table-striped">
+                                    <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="income : ${incomeList}">
+                                            <td th:text="${income.description}"></td>
+                                            <td>+ <span th:text="${income.amount}"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="redtext">EXPENSES</h4>
+                                <table id="expenseTable" class="table table-hover table-striped">
+                                    <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="expense : ${expenseList}">
+                                        <td th:text="${expense.description}"></td>
+                                        <td>- <span th:text="${expense.amount}"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <a href="/budget-list" class="btn btn-default pull-left"><span class="fa fa-arrow-left"></span> Back</a>
