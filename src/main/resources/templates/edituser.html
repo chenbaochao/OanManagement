@@ -25,12 +25,14 @@
                     <form th:action="@{/admin/manageusers/}+${paramUser.id}" method="post" th:object="${paramUser}">
                         <div class="panel panel-login">
                             <div th:if="${param.success}">
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Your profile settings have been updated
                                 </div>
                             </div>
                             <div th:if="${param.error}">
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Please enter valid information
                                 </div>
                             </div>
@@ -106,14 +108,11 @@
                                         <span class="fa fa-certificate"></span> Role:
                                     </div>
                                     <div class="col-md-4">
-                                        <span th:each="role : ${paramUser.roles}">
-                                            <select class="form-control" type="text" th:field="*{roles}">
-                                                <option value="ROLE_USER">ROLE_USER</option>
-                                                <option value="ROLE_TESTER">ROLE_TESTER</option>
-                                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-
-                                            </select>
-                                        </span>
+                                        <p th:each="role: ${paramUser.roles}">
+                                            <span th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
+                                            <span th:if="${role.name}=='ROLE_USER'">User</span>
+                                            <span th:if="${role.name}=='ROLE_TESTER'">Tester</span>
+                                        </p>
                                     </div>
                                 </div>
                                 <br/>

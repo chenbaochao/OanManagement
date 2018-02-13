@@ -20,12 +20,14 @@
                 <div class="col-md-8">
                     <div class="panel panel-login">
                         <div th:if="${param.success}">
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 Your budget has been added
                             </div>
                         </div>
                         <div th:if="${param.deleted}">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 The budget has been deleted
                             </div>
                         </div>

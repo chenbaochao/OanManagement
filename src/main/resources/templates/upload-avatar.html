@@ -11,12 +11,14 @@
             <div class="panel panel-login">
                 <div class="form-group">
                     <div th:if="${param.wrongtype}">
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             You can only upload .png files with a maximum size of 1MB!
                         </div>
                     </div>
                     <div th:if="${param.success}">
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             Your avatar has been updated! It might take a little while before you see changes.
                         </div>
                     </div>

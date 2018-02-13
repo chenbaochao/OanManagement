@@ -114,9 +114,12 @@ $(document).ready(function () {
         doDelete();
     });
 
-    function doDelete(){
+    function doDelete(view){
         $("#editEventModal").modal('hide');
         var eventID = $('#eventEditID').val();
+        $.ajaxSetup ({
+            cache: false
+        });
         $.ajax({
             url: 'calendar-delete',
             data: {id: eventID},

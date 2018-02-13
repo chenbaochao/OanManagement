@@ -33,17 +33,20 @@
         <form th:action="@{/task-list}" th:object="${task}" method="post">
             <div class="panel panel-login">
                 <div th:if="${param.notfound}">
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Task not found
                     </div>
                 </div>
                 <div th:if="${param.deleted}">
-                    <div class="alert alert-info">
+                    <div class="alert alert-info alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Task has been deleted
                     </div>
                 </div>
                 <div th:if="${param.updated}">
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Task has been updated
                     </div>
                 </div>

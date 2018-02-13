@@ -80,7 +80,6 @@ public class AdminController {
         // Unique
         paramUser.setEmail(user.getEmail());
         paramUser.setUsername(user.getUsername());
-        paramUser.setRoles(user.getRoles());
 
         userRepository.save(paramUser);
         return "redirect:/admin/manageusers/"+paramUser.getId();

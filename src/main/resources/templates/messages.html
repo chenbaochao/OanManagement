@@ -30,12 +30,14 @@
     <div class="container">
         <h1><span class="fa fa-inbox"></span> Messages: <a href="/message-new" class="btn btn-success pull-right"><span class="fa fa-plus"></span> New message</a><br/></h1>
         <div th:if="${param.error}">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 This message does not exist
             </div>
         </div>
         <div th:if="${param.self}">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 You can't message yourself
             </div>
         </div>
@@ -70,7 +72,8 @@
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
                     <td>
-                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this message" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this message" class="btn btn-danger fa fa-trash"></a>
+                        <a class="btn btn-default fa fa-reply" th:href="@{/message-to(id=${message.sender.id})}"></a>
                     </td>
                 </tr>
                 </tbody>

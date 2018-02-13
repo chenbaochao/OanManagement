@@ -12,7 +12,8 @@
         <div class="panel panel-login">
             <div class="form-group">
                 <div th:if="${param.reported}">
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Thank you for reporting a bug. We appreciate your help!
                     </div>
                 </div>

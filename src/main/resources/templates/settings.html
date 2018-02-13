@@ -25,12 +25,14 @@
                     <form th:action="@{/settings}" method="post" th:object="${loggedUser}">
                         <div class="panel panel-login">
                             <div th:if="${param.success}">
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Your profile settings have been updated
                                 </div>
                             </div>
                             <div th:if="${param.error}">
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Please enter valid information
                                 </div>
                             </div>
