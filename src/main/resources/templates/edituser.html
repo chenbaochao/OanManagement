@@ -109,9 +109,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <p th:each="role: ${paramUser.roles}">
-                                            <span th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
-                                            <span th:if="${role.name}=='ROLE_USER'">User</span>
-                                            <span th:if="${role.name}=='ROLE_TESTER'">Tester</span>
+                                            <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
+                                            <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
+                                            <span class="label label-info" th:if="${role.name}=='ROLE_TESTER'">Tester</span>
                                         </p>
                                     </div>
                                 </div>
@@ -140,13 +140,22 @@
                             </div>
 
                         </div>
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit"
-                                   name="task-submit"
-                                   id="task-submit"
-                                   class="form-control btn btn-info"
-                                   value="Update Settings"/>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="/admin/manageusers" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="submit"
+                                       name="task-submit"
+                                       id="task-submit"
+                                       class="form-control btn btn-info"
+                                       value="Update Settings"/>
+                            </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>

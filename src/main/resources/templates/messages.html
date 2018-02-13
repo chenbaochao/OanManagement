@@ -72,8 +72,8 @@
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
                     <td>
-                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="right" title="Delete this message" class="btn btn-danger btn-sm fa fa-trash"></a>
-                        <a class="btn btn-default btn-sm fa fa-reply" th:href="@{/message-to(id=${message.sender.id})}"></a>
+                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="left" title="Delete this message" class="btn btn-danger btn-sm fa fa-trash"></a>
+                        <a class="btn btn-default btn-sm fa fa-reply" th:href="@{/message-to(id=${message.sender.id})}" data-toggle="tooltip" data-placement="right" title="Reply"></a>
                     </td>
                 </tr>
                 </tbody>

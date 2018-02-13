@@ -28,6 +28,7 @@ public class AdminController {
     @Autowired
     UserRepository userRepository;
 
+
     @GetMapping("/admin")
     public String getAdminPanel(Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
