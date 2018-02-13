@@ -124,7 +124,7 @@
                     <td><span th:text="${task.description}"></span></td>
                     <!--<td th:text="${task.targetDate}"></td>-->
                     <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
-                    <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger">Incomplete</a></td>
+                    <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger btn-sm">Incomplete</a></td>
                 </tr>
                 </tbody>
             </table>

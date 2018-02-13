@@ -36,7 +36,7 @@
                         <td th:text="${contact.lastName}"></td>
                         <td th:text="${contact.email}"></td>
                         <td th:text="${contact.mobileNumber}"></td>
-                        <td><a th:text="${contact.address}" th:href="@{https://www.google.com/maps/search/} + ${#strings.replace(contact.address,' ','+')}"></a></td>
+                        <td><a th:text="${contact.address}" target="_blank" th:href="@{https://www.google.com/maps/search/} + ${#strings.replace(contact.address,' ','+')}"></a></td>
                         <td th:text="${contact.notes}"></td>
                         <td>
                             <a th:href="@{/contacts-edit(id=${contact.id})}" class="btn btn-warning" data-toggle="tooltip" data-placement="up" title="Edit this contact">Edit</a>

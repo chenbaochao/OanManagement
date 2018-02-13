@@ -1,11 +1,9 @@
 package com.oan.management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oan.management.model.Message;
-import com.oan.management.model.Quote;
-import com.oan.management.model.Task;
-import com.oan.management.model.User;
+import com.oan.management.model.*;
 import com.oan.management.repository.TaskRepository;
+import com.oan.management.service.ImageService;
 import com.oan.management.service.MessageService;
 import com.oan.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,9 @@ public class MainController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
@@ -70,6 +71,14 @@ public class MainController {
             // This is just added so I could work offline in the train
             Quote quote = new Quote("", "", "");
             model.addAttribute("quote", quote);
+        }
+
+        // Save profile picture
+        Image avatar_of_id = imageService.findByTitle(userLogged.getId()+".png");
+        if (avatar_of_id != null) {
+            req.getSession().setAttribute("myAvatar", "/img"+avatar_of_id.getUrl());
+        } else {
+            req.getSession().setAttribute("myAvatar", "/img/avatar/0.png");
         }
         return "index";
     }

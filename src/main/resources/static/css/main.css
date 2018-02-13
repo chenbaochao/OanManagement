@@ -117,6 +117,12 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
     margin-left: 5px;
 }
 
+@media (max-width: 1199px) {
+    .navbarAvatarAndMessage {
+        display: none;
+    }
+}
+
 .popover.primary {
     border-color:#337ab7;
 }
