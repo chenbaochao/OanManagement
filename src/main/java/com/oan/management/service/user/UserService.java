@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.user;
 
 import com.oan.management.model.User;
 import com.oan.management.web.dto.UserRegistrationDto;

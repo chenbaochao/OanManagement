@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.message;
 
 import com.oan.management.model.Message;
 import com.oan.management.model.User;

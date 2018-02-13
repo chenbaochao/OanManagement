@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.contact;
 
 import com.oan.management.model.Contact;
 import com.oan.management.model.User;

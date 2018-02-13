@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.image;
 
 import com.oan.management.model.Image;
 import com.oan.management.model.User;

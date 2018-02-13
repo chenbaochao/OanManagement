@@ -2,7 +2,7 @@ package com.oan.management.controller.authentication;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.UserService;
+import com.oan.management.service.user.UserService;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

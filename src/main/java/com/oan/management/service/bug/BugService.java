@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.bug;
 
 import com.oan.management.model.Bug;
 

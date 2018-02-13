@@ -2,7 +2,7 @@ package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.UserService;
+import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

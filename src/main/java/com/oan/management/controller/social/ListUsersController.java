@@ -2,8 +2,8 @@ package com.oan.management.controller.social;
 
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
-import com.oan.management.service.MessageService;
-import com.oan.management.service.UserService;
+import com.oan.management.service.message.MessageService;
+import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

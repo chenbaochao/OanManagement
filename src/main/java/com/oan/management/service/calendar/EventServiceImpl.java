@@ -1,4 +1,4 @@
-package com.oan.management.service;
+package com.oan.management.service.calendar;
 
 import com.oan.management.model.Event;
 import com.oan.management.model.User;

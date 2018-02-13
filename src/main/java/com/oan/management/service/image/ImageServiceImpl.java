@@ -1,8 +1,9 @@
-package com.oan.management.service;
+package com.oan.management.service.image;
 
 import com.oan.management.model.Image;
 import com.oan.management.model.User;
 import com.oan.management.repository.ImageRepository;
+import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
