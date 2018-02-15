@@ -14,4 +14,5 @@ public interface ExpenseService {
     Double getTotalIncome(List<Expense> expenseList);
     void deleteById(Long id);
     Expense save(Expense expense);
+    Expense editById(Long id, String description, Double amount);
 }

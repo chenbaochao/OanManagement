@@ -182,6 +182,41 @@ public class BudgetController {
         }
     }
 
+    @GetMapping("expense-edit")
+    public String getEditExpense(Model model, Authentication authentication, @RequestParam Long id, Expense expense) {
+        User userLogged = userService.findByUser(authentication.getName());
+        List<Budget> budgetList = budgetService.findAllByUser(userLogged);
+        Expense paramExpense = expenseService.findById(id);
+
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("previousBudget", paramExpense.getBudget().getId());
+            // Check of income is from the user
+            if (budgetList.contains(paramExpense.getBudget())) {
+                model.addAttribute("expense", paramExpense);
+                return "expense-edit";
+            } else {
+                return "redirect:budget-list";
+            }
+        } else {
+            return "index";
+        }
+    }
+
+    @PostMapping("expense-edit")
+    public String editExpense(Authentication authentication, Expense expense, @RequestParam Long id) {
+        if (expense.getDescription().length() > 0 && expense.getDescription().length() <= 50) {
+            if (expense.getAmount() > 0 && expense.getAmount() < 90000000) {
+                expenseService.editById(id, expense.getDescription(), expense.getAmount());
+                return "redirect:/budget?id="+expenseService.findById(id).getBudget().getId();
+            } else {
+                return "redirect:/budget?error";
+            }
+        } else {
+            return "redirect:/budget?error";
+        }
+    }
+
 
     @GetMapping("expense-delete")
     public String deleteExpense(Authentication authentication, @RequestParam Long id) {
