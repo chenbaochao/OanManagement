@@ -147,6 +147,42 @@ public class BudgetController {
         }
     }
 
+    @GetMapping("income-edit")
+    public String getEditIncome(Model model, Authentication authentication, @RequestParam Long id, Income income) {
+        User userLogged = userService.findByUser(authentication.getName());
+        List<Budget> budgetList = budgetService.findAllByUser(userLogged);
+        Income paramIncome = incomeService.findById(id);
+
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+            model.addAttribute("previousBudget", paramIncome.getBudget().getId());
+            // Check of income is from the user
+            if (budgetList.contains(paramIncome.getBudget())) {
+                model.addAttribute("income", paramIncome);
+                return "income-edit";
+            } else {
+                return "redirect:budget-list";
+            }
+        } else {
+            return "index";
+        }
+    }
+
+    @PostMapping("income-edit")
+    public String editIncome(Authentication authentication, Income income, @RequestParam Long id) {
+        if (income.getDescription().length() > 0 && income.getDescription().length() <= 50) {
+            if (income.getAmount() > 0 && income.getAmount() < 90000000) {
+                incomeService.editById(id, income.getDescription(), income.getAmount());
+                return "redirect:/budget?id="+incomeService.findById(id).getBudget().getId();
+            } else {
+                return "redirect:/budget?error";
+            }
+        } else {
+            return "redirect:/budget?error";
+        }
+    }
+
+
     @GetMapping("expense-delete")
     public String deleteExpense(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());

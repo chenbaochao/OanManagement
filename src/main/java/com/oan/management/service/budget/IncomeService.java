@@ -14,4 +14,5 @@ public interface IncomeService {
     Double getTotalIncome(List<Income> incomeList);
     void deleteById(Long id);
     Income save(Income income);
+    Income editById(Long id, String description, Double amount);
 }

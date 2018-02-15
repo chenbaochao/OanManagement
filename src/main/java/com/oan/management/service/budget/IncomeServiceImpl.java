@@ -46,4 +46,12 @@ public class IncomeServiceImpl implements IncomeService {
     public Income save(Income income) {
         return incomeRepository.save(income);
     }
+
+    @Override
+    public Income editById(Long id, String description, Double amount) {
+        Income income = incomeRepository.findById(id);
+        income.setDescription(description);
+        income.setAmount(amount);
+        return incomeRepository.save(income);
+    }
 }
