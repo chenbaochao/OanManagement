@@ -62,7 +62,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbarAvatarAndMessage">
-                <a href="/profile"><img sec:authorize="isAuthenticated()" style="margin-top: 10px" class="img-circle" th:src="@{${session.myAvatar}}" width="32" height="32"/></a>
+                <a href="/profile"><img th:if="${session.myAvatar} != null" sec:authorize="isAuthenticated()" style="margin-top: 10px" class="img-circle" th:src="@{${session.myAvatar}}" width="32" height="32"/></a>
                 <li sec:authorize="isAuthenticated()">
                     <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown fa-lg faa-horizontal animated"> </span><span
                             th:text="${session.unreadMessages}" class="badge" style="margin-top: 1px"></span></a>

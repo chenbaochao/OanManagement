@@ -32,3 +32,11 @@ load animations
 - https://datatables.net - Great table pagination, sorting, searching,...!
 - https://summernote.org/ - WYSIWYG Editor
 - http://l-lin.github.io/font-awesome-animation/ - Font Awesome Animations
+
+**Screenshots:**
+
+- [Homepage](https://i.imgur.com/pxyt9lS.png)
+- [Editing a calendar event](https://i.imgur.com/GONgR0Y.png)
+- [Example budget](https://i.imgur.com/c1ZdUHB.png)
+- [Profile](https://i.imgur.com/sxXLfY9.png)
+- Just clone it if you want to see more
