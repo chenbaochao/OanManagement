@@ -11,6 +11,7 @@ $(document).ready(function () {
         aspectRatio: 1,
         editable: true,
         selectable: true,
+        resizable: true,
         themeSystem: 'bootstrap3',
         handleWindowResize: true,
         eventLimit: true,

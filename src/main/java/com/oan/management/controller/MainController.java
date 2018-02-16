@@ -69,7 +69,7 @@ public class MainController {
             model.addAttribute("quote", quote);
         } catch (IOException e) {
             // This is just added so I could work offline in the train
-            Quote quote = new Quote("", "", "");
+            Quote quote = new Quote("A late start with motivation is better than an earlier start without any motivation", "Oan Stultjens", "motivation");
             model.addAttribute("quote", quote);
         }
 

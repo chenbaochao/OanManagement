@@ -34,7 +34,9 @@
                     <tr th:each="contact : ${contacts}">
                         <td th:text="${contact.firstName}"></td>
                         <td th:text="${contact.lastName}"></td>
-                        <td th:text="${contact.email}"></td>
+                        <td>
+                            <a th:href = "'mailto:' + ${contact.email}" th:text="${contact.email}"></a>
+                        </td>
                         <td th:text="${contact.mobileNumber}"></td>
                         <td><a th:text="${contact.address}" target="_blank" th:href="@{https://www.google.com/maps/search/} + ${#strings.replace(contact.address,' ','+')}"></a></td>
                         <td th:text="${contact.notes}"></td>

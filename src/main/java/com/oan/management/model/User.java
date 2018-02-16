@@ -1,5 +1,6 @@
 package com.oan.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class User {
     private String lastName;
     @Email
     private String email;
+    @JsonIgnore
     private String password;
     private int bugsReported;
     private int tasksMade;
