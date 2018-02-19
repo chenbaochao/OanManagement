@@ -80,10 +80,10 @@
 
                             </div>
                         </div>
-                        Progress: <span th:text="${loggedUser.tasksCompleted}"></span>/<span th:text="${userRank.nextRankScore}"></span>
+                        Progress: <span th:text="${loggedUser.tasksCompleted}"></span>/<span th:if="${userRank.rankNumber} &lt; 11" th:text="${userRank.nextRankScore}"></span><span th:if="${userRank.rankNumber} == 11"> -</span>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <img th:if="${userRank.rankNumber} &lt; 11" th:src="${userRank.nextRankUrl}" width="64" height="64"/>
                         <span th:if="${userRank.rankNumber} == 11">Max</span>
                     </div>
