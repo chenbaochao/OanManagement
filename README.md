@@ -39,7 +39,7 @@ load animations
 
 **Screenshots:**
 
-- [Homepage](https://i.imgur.com/pxyt9lS.png)
+- [Homepage](https://i.imgur.com/vke7sql.png)
 - [Editing a calendar event](https://i.imgur.com/GONgR0Y.png)
 - [Example budget](https://i.imgur.com/c1ZdUHB.png)
 - [Profile](https://i.imgur.com/sxXLfY9.png)
