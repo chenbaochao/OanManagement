@@ -54,6 +54,9 @@ public class CalendarController {
 
         if (!event.getTitle().isEmpty()) {
             eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, event.getBackgroundColor(), event.getBackgroundColor(), true));
+        } else {
+            System.out.println("test: "+event.getTitle());
+            return "redirect:/calendar?notitle";
         }
 
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);

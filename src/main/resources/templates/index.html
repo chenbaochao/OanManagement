@@ -18,7 +18,7 @@
         <div class="col-md-6 col-md-4">
             <a class="link-unstyled" href="/task-list">
                 <div class="panel panel-login">
-                    <h3>Tasks: </h3>
+                    <h3>Tasks</h3>
                     <p th:if="${loggedUser.MotivationalTaskMessage}" th:text="${taskMotivation}"></p>
                     <p th:if="!${loggedUser.MotivationalTaskMessage}">You have <span th:text="${session.tasksLeftSession}"></span>  tasks.</p>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="panel panel-login">
-                <h3>Test: </h3>
+                <h3>Test</h3>
                 <p>How much I want to be completed near next week: </p>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
@@ -45,7 +45,7 @@
         <div class="col-md-6 col-md-4">
             <a class="link-unstyled" href="/messages">
                 <div class="panel panel-login">
-                    <h3>Messages:</h3>
+                    <h3>Messages</h3>
                     <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
                     <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
                     <div th:if="${lastMessage}">
@@ -58,6 +58,13 @@
                 <div id='calendar'></div>
             </div>
 
+        </div>
+        <div th:if="${userRank}" class="col-md-4">
+            <div class="panel panel-login">
+                <h3>Your rank</h3>
+                <p th:text="${userRank.title}"></p>
+                <img th:src="${userRank.imageUrl}" width="64" height="64"/>
+            </div>
         </div>
         <div class="col-md-6 col-md-4">
             <blockquote class="quote-box blockquote-noborder" style="margin-left: 10px">
@@ -77,10 +84,10 @@
             </blockquote>
         </div>
 
+
     </div>
 
     <div class="row">
-
 
     </div>
 

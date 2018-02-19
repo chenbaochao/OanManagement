@@ -6,6 +6,7 @@ import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.task.TaskService;
+import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -41,6 +42,9 @@ public class TaskController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private RankService rankService;
 
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
@@ -141,6 +145,13 @@ public class TaskController {
         User userLogged = getLoggedUser(authentication);
         // Update statistics
         userLogged.setTasksCompleted(userLogged.getTasksCompleted()+1);
+        // Update rank
+        if (rankService.findByUser(userLogged)==null) {
+            rankService.setRank(userLogged, "Newbie", 1);
+        } else {
+            rankService.checkRank(userLogged);
+        }
+        // Save user
         userRepository.save(userLogged);
         return "redirect:/task-list";
     }

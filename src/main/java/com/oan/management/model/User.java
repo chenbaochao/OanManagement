@@ -69,6 +69,9 @@ public class User {
     @OneToMany
     private List<Image> images;
 
+    @OneToOne
+    private Rank rank;
+
     public User() {
     }
 
@@ -87,6 +90,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
     }
 
     public boolean isShowEmail() {

@@ -5,6 +5,7 @@ import com.oan.management.model.*;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,9 @@ public class MainController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private RankService rankService;
 
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
@@ -79,6 +83,15 @@ public class MainController {
             req.getSession().setAttribute("myAvatar", "/img"+avatar_of_id.getUrl());
         } else {
             req.getSession().setAttribute("myAvatar", "/img/avatar/0.png");
+        }
+
+        // Update user rank
+        if (rankService.findByUser(userLogged) != null) {
+            // Update rank if changes were made
+            rankService.checkRank(userLogged);
+            // Save rank to model
+            Rank userRank = rankService.findByUser(userLogged);
+            model.addAttribute("userRank", userRank);
         }
         return "index";
     }

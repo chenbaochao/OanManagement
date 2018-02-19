@@ -9,6 +9,12 @@
     <body>
         <div th:replace="fragments/navigation :: navigation"></div>
         <div class="container">
+            <div th:if="${param.notitle}">
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Title cannot be empty
+                </div>
+            </div>
             <!-- Show calendar -->
             <div class="panel panel-login">
                 <div id='calendar' style="height: auto; overflow: auto;"></div>
