@@ -7,6 +7,9 @@ import com.oan.management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Oan on 19/02/2018.
  */
@@ -18,6 +21,9 @@ public class RankServiceImpl implements RankService {
     @Autowired
     RankRepository rankRepository;
 
+    @Autowired
+    RankService rankService;
+
     @Override
     public Rank setRank(User user, String title, int rankNumber) {
         Rank rank = new Rank();
@@ -25,6 +31,7 @@ public class RankServiceImpl implements RankService {
         rank.setTitle(title);
         rank.setRankNumber(rankNumber);
         rank.setImageUrl("/img/ranks/rank"+rankNumber+".png");
+        rank.setNextRankUrl("/img/ranks/rank"+rankNumber+1+".png");
         return rankRepository.save(rank);
     }
 
@@ -40,66 +47,54 @@ public class RankServiceImpl implements RankService {
         rank.setTitle(title);
         rank.setRankNumber(rankNumber);
         rank.setImageUrl("/img/ranks/rank"+rankNumber+".png");
+        if (rank.getRankNumber() < 11) {
+            rank.setNextRankUrl("/img/ranks/rank"+(rankNumber+1)+".png");
+            rank.setNextRankScore(nextRankList.get(rank.getRankNumber()-1));
+        }
         return rankRepository.save(rank);
 
     }
 
+    /*public static final int RANK_TWO = 10;
+    public static final int RANK_THREE = 21;
+    public static final int RANK_FOUR = 31;
+    public static final int RANK_FIVE = 51;
+    public static final int RANK_SIX = 71;
+    public static final int RANK_SEVEN = 91;
+    public static final int RANK_EIGHT = 121;
+    public static final int RANK_NINE = 301;
+    public static final int RANK_TEN = 501;
+    public static final int RANK_ELEVEN = 701;*/
+
+    public static List<Integer> nextRankList = Arrays.asList(10,21,31,51,71,91,121,301,501,701);
+
     @Override
     public Rank checkRank(User user) {
         Rank rank = rankRepository.findByUser(user);
-        if (user.getTasksCompleted() >= 10 && user.getTasksCompleted() <= 20) {
+        if (user.getTasksCompleted() >= 0 && user.getTasksCompleted() < 10) {
+            updateRankByUser(user, "Noob", 1);
+        } else if (user.getTasksCompleted() >= nextRankList.get(0) && user.getTasksCompleted() <= 20) {
             updateRankByUser(user, "Junior", 2);
-        } else if (user.getTasksCompleted() >= 21 && user.getTasksCompleted() <= 30){
+        } else if (user.getTasksCompleted() >= nextRankList.get(1) && user.getTasksCompleted() <= 30){
             updateRankByUser(user, "Apprentice", 3);
-        } else if (user.getTasksCompleted() >= 31 && user.getTasksCompleted() <= 50) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(2) && user.getTasksCompleted() <= 50) {
             updateRankByUser(user, "Motivated", 4);
-        } else if (user.getTasksCompleted() >= 51 && user.getTasksCompleted() <= 70) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(3) && user.getTasksCompleted() <= 70) {
             updateRankByUser(user, "Notable", 5);
-        } else if (user.getTasksCompleted() >= 71 && user.getTasksCompleted() <= 90) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(4) && user.getTasksCompleted() <= 90) {
             updateRankByUser(user, "Veteran", 6);
-        } else if (user.getTasksCompleted() >= 91 && user.getTasksCompleted() <= 120) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(5) && user.getTasksCompleted() <= 120) {
             updateRankByUser(user, "Senior", 7);
-        } else if (user.getTasksCompleted() >= 121 && user.getTasksCompleted() <= 300) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(6) && user.getTasksCompleted() <= 300) {
             updateRankByUser(user, "Elite", 8);
-        } else if (user.getTasksCompleted() >= 301 && user.getTasksCompleted() <= 500) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(7) && user.getTasksCompleted() <= 500) {
             updateRankByUser(user, "Master", 9);
-        } else if (user.getTasksCompleted() >= 501 && user.getTasksCompleted() <= 700) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(8) && user.getTasksCompleted() <= 700) {
             updateRankByUser(user, "Grand Master", 10);
-        } else if (user.getTasksCompleted() >= 701 && user.getTasksCompleted() <= 900) {
+        } else if (user.getTasksCompleted() >= nextRankList.get(9) && user.getTasksCompleted() <= 900) {
             updateRankByUser(user, "Legend Planner", 11);
         }
         return rank;
     }
 
-
-
-
-
-
-
-
-
-    /*@Override
-    public User setRank(User user, int rank) {
-        if (rank > 0 && rank <= 11) {
-            user.setRank("/img/ranks/rank"+rank+".png");
-            return userRepository.save(user);
-        } else {
-            user.setRank("/img/ranks/rank0.png");
-            return userRepository.save(user);
-        }
-
-    }
-
-    @Override
-    public String automateSetRank(User user) {
-        if (user.getTasksCompleted() >= 10 && user.getTasksCompleted() <= 20) {
-            setRank(user, 1);
-        } else if (user.getTasksCompleted() >= 21 && user.getTasksCompleted() <= 30){
-            setRank(user, 2);
-        } else if (user.getTasksCompleted() >= 31 && user.getTasksCompleted() <= 40) {
-            setRank(user, 3);
-        }
-        return "success";
-    }*/
 }

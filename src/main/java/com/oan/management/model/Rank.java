@@ -17,6 +17,8 @@ public class Rank {
     private int rankNumber;
     private String title;
     private String imageUrl;
+    private String nextRankUrl;
+    private int nextRankScore;
 
     public Rank() {
     }
@@ -25,6 +27,22 @@ public class Rank {
         this.user = user;
         this.title = title;
         this.rankNumber = rankNumber;
+    }
+
+    public int getNextRankScore() {
+        return nextRankScore;
+    }
+
+    public void setNextRankScore(int nextRankScore) {
+        this.nextRankScore = nextRankScore;
+    }
+
+    public String getNextRankUrl() {
+        return nextRankUrl;
+    }
+
+    public void setNextRankUrl(String nextRankUrl) {
+        this.nextRankUrl = nextRankUrl;
     }
 
     public int getRankNumber() {

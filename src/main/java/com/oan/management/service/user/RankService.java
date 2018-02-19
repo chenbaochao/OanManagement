@@ -11,6 +11,4 @@ public interface RankService {
     Rank findByUser(User user);
     Rank updateRankByUser(User user, String title, int rankNumber);
     Rank checkRank(User user);
-//    User setRank(User user, int rank);
-//    String automateSetRank(User user);
 }

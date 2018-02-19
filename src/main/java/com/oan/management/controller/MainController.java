@@ -92,6 +92,10 @@ public class MainController {
             // Save rank to model
             Rank userRank = rankService.findByUser(userLogged);
             model.addAttribute("userRank", userRank);
+        } else {
+            Rank userRank = rankService.setRank(userLogged, "Noob", 1);
+            rankService.checkRank(userLogged);
+            model.addAttribute("userRank", userRank);
         }
         return "index";
     }

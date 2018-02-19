@@ -28,10 +28,14 @@ load animations
 - https://calendar.google.com Google API for holiday dates (using gcal.js)
 - http://www.thymeleaf.org - Thymeleaf template engine instead of JSP
 - http://bootstrapformhelpers.com - Extends Bootstrap, used this for the country flags
-- https://bootsnipp.com/snippets/featured/a-better-blockquote - The cool quote CSS
 - https://datatables.net - Great table pagination, sorting, searching,...!
 - https://summernote.org/ - WYSIWYG Editor
 - http://l-lin.github.io/font-awesome-animation/ - Font Awesome Animations
+
+**Graphics**
+- https://www.flaticon.com/authors/dimitry-miroliubov for the user ranks GFX
+- https://bootsnipp.com/snippets/featured/a-better-blockquote - The cool blockquote CSS
+
 
 **Screenshots:**
 
