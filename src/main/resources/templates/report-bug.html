@@ -4,52 +4,59 @@
 </head>
 
 <body>
-<div th:replace="fragments/navigation :: navigation"></div>
-
-<div class="container">
-    <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Report a bug</h1>
-    <form th:action="@{/report-bug}" th:object="${bug}" method="post">
-        <div class="panel panel-login">
-            <div class="form-group">
-                <div th:if="${param.reported}">
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        Thank you for reporting a bug. We appreciate your help!
-                    </div>
+    <div th:replace="fragments/navigation :: navigation"></div>
+    <div class="container">
+        <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Report a bug</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-login">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="/settings"><span class="glyphicon glyphicon-user"></span> Edit Account</a></li>
+                        <li role="presentation"><a href="/changepassword"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                        <li role="presentation"><a href="/appsettings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent Activity</a></li>
+                        <li role="presentation" class="active"><a href="/report-bug"><span class="fa fa-bug"></span> Report bug</a></li>
+                    </ul>
                 </div>
-                <div th:if="${param.failed}">
-                    <div class="alert alert-danger">
-                        You have exceeded your bug report limit. Please contact the administrator
-                    </div>
-                </div>
-                <label for="bug" class="control-label col-sm-2">Bug description: </label>
-                <textarea id="bug" type="text" th:field="*{description}"
-                       class="form-control"
-                       autofocus="autofocus"
-                       required="required"
-                       placeholder=""
-                        rows="5"/>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit"
-                                   name="bug-submit"
-                                   id="bug-submit"
-                                   class="form-control btn btn-info"
-                                   value="Report bug"/>
+            <div class="col-md-9">
+                <form th:action="@{/report-bug}" th:object="${bug}" method="post">
+                    <div class="panel panel-login">
+                        <div class="form-group">
+                            <div th:if="${param.reported}">
+                                <div class="alert alert-success alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    Thank you for reporting a bug. We appreciate your help!
+                                </div>
+                            </div>
+                            <div th:if="${param.failed}">
+                                <div class="alert alert-danger">
+                                    You have exceeded your bug report limit. Please contact the administrator
+                                </div>
+                            </div>
+                            <label for="bug" class="control-label col-sm-2">Bug description: </label>
+                            <textarea id="bug" type="text" th:field="*{description}"
+                                      class="form-control"
+                                      autofocus="autofocus"
+                                      required="required"
+                                      placeholder=""
+                                      rows="5"/>
                         </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit"
+                                       name="bug-submit"
+                                       id="bug-submit"
+                                       class="form-control btn btn-info"
+                                       value="Report bug"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
-</div>
+    </div>
 </body>
 </html>
