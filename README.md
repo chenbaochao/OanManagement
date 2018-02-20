@@ -1,5 +1,6 @@
 # Oan Management
 This project was intended for my graduation project at INTEC Brussels.
+<br/>Fully responsive for mobile views.
 
 **Features:**
 - Register/Login with security and field checks
