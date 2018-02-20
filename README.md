@@ -39,9 +39,9 @@ load animations
 
 
 **Screenshots:**
-<br/><img src="https://i.imgur.com/1hcZhIq.png"/>
+<br/><img src="https://i.imgur.com/tt2ATvD.png"/>
 
-- [Homepage](https://i.imgur.com/1hcZhIq.png)
+- [Homepage](https://i.imgur.com/tt2ATvD.png)
 - [Editing a calendar event](https://i.imgur.com/GONgR0Y.png)
 - [Example budget](https://i.imgur.com/c1ZdUHB.png)
 - [Profile](https://i.imgur.com/sxXLfY9.png)
