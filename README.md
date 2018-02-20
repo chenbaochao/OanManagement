@@ -49,4 +49,7 @@ load animations
 - [User Profile](https://i.imgur.com/SHi87UY.png)
 - [User Settings](https://i.imgur.com/hKxx2CM.png)
 - [Administration - Bug reports](https://i.imgur.com/nbaaXEA.png)
+- [To-Do](https://i.imgur.com/U4u2EJE.png)
+- [New Message](https://i.imgur.com/F4xagHZ.png)
+- [Inbox](https://i.imgur.com/41D9scU.png)
 - Just clone it if you want to see more
