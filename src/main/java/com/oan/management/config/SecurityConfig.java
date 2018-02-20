@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/budget", "/budget-new", "/budget-list",
                             "/task-list",
                             "/profile",
+                            "/users",
                             "/settings","/appsettings","/changepassword",
                             "/messages", "/message", "/message-new","/message-to",
                             "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_TESTER")
