@@ -64,6 +64,7 @@
                 <h3><span class="fa fa-trophy"></span> My rank</h3>
                 <div class="row">
                     <div class="col-md-5">
+                        Rank <span th:text="${userRank.rankNumber}"></span>:
                         <strong><p th:text="${userRank.title}"></p></strong>
                     </div>
                 </div>
@@ -77,7 +78,7 @@
 
                             </div>
                         </div>
-                        Progress: <span th:text="${loggedUser.tasksCompleted}"></span>/<span th:if="${userRank.rankNumber} &lt; 11" th:text="${userRank.nextRankScore}"></span><span th:if="${userRank.rankNumber} == 11"> -</span>
+                        <p class="text-center">Progress: <span th:text="${loggedUser.tasksCompleted}"></span>/<span th:if="${userRank.rankNumber} &lt; 11" th:text="${userRank.nextRankScore}"></span><span th:if="${userRank.rankNumber} == 11"> -</span></p>
                     </div>
 
                     <div class="col-md-3">
