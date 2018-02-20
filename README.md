@@ -18,6 +18,7 @@ This project was intended for my graduation project at INTEC Brussels.
 - Statistics
 - Table search/pagination/order/...
 - Budget Manager
+- Ranks achievements
 
 **3th party tools:**
 - https://talaikis.com - Quotes API
