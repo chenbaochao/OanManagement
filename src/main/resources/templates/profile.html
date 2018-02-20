@@ -115,8 +115,9 @@
                             <div class="col-md-4">
                                 <img th:src="${paramUserRank.imageUrl}" width="64" height="64"/>
                             </div>
-                            <div class="col-md-5">
-                                <p th:text="${paramUserRank.title}"></p>
+                            <div class="col-md-6">
+                                Rank <span th:text="${paramUserRank.rankNumber}"></span>:
+                                <strong><p th:text="${paramUserRank.title}"></p></strong>
                             </div>
                         </div>
 

@@ -7,6 +7,7 @@ import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
+import com.oan.management.utility.CustomTimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -48,8 +49,13 @@ public class MainController {
         // loggedUser and motivational texts
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
+            // Get the custom greeting by time
+            CustomTimeMessage customTimeMessage = new CustomTimeMessage();
+            model.addAttribute("timeGreeting", customTimeMessage.getMessage());
+            // Tasks and unread messages
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            // Motivational messages
             if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() == 0) {
                 model.addAttribute("taskMotivation", "Hmm... What about giving yourself some tasks?");
             } else if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() > 0) {
