@@ -5,6 +5,7 @@ This project was intended for my graduation project at INTEC Brussels.
 - Register/Login with security and field checks
 - A responsive and Material calendar with jQuery and AJAX for smooth control. Also comes with Google Calendar (API) events.
   Events can be added, edited, deleted and coloured!
+- Resize & drag 'n drop calendar events
 - To-Do's (tasks can also be seen in the calendar)
 - Contact list
 - User list
