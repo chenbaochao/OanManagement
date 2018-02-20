@@ -39,10 +39,13 @@ load animations
 
 
 **Screenshots:**
-<br/><img src="https://i.imgur.com/tt2ATvD.png"/>
+<br/><img src="https://i.imgur.com/Hqo6fCn.png"/>
 
-- [Homepage](https://i.imgur.com/tt2ATvD.png)
+- [Homepage](https://i.imgur.com/Hqo6fCn.png)
+- [Calendar Week View](https://i.imgur.com/8G7Ukfq.png)
 - [Editing a calendar event](https://i.imgur.com/GONgR0Y.png)
 - [Example budget](https://i.imgur.com/c1ZdUHB.png)
-- [Profile](https://i.imgur.com/sxXLfY9.png)
+- [User Profile](https://i.imgur.com/SHi87UY.png)
+- [User Settings](https://i.imgur.com/hKxx2CM.png)
+- [Administration - Bug reports](https://i.imgur.com/nbaaXEA.png)
 - Just clone it if you want to see more

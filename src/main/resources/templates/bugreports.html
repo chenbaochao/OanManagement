@@ -54,6 +54,7 @@
                                     <th>Reporter</th>
                                     <th>Bug</th>
                                     <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody th:if="!${param.view}">
@@ -75,6 +76,8 @@
                                 <td th:text="${bug.description}"></td>
                                 <td>
                                     <a th:href="@{/bug-unfix(id=${bug.id})}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Mark as unfixed"><span class="fa fa-bug"></span> Not fixed</a>
+                                </td>
+                                <td>
                                     <a th:href="@{bug-notify(id=${bug.id})}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Automated notify"><span class="fa fa-bell"></span> Notify</a>
                                 </td>
                             </tr>
