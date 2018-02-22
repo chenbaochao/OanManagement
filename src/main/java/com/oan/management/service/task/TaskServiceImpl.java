@@ -74,6 +74,26 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public String getMotivationalMessage(List<Task> taskList, User user) {
+
+        if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(user).size() == 0) {
+           return "Hmm... What about giving yourself some tasks?";
+        } else if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(user).size() > 0) {
+            return "Good job! You've completed all your tasks! Be proud about yourself.";
+        } else if (taskList.size() == 1) {
+            return "What, only 1 task? You should finish your work!";
+        } else if (taskList.size() > 1 && taskList.size() <= 5){
+            return "You only have "+taskList.size()+" tasks... That's not that much. Go complete them!";
+        } else if (taskList.size() > 5 && taskList.size() <= 10){
+            return "You've got some work there, "+taskList.size()+" tasks to complete. Try to complete as much as possible today.";
+        } else if (taskList.size() > 10 ){
+            return taskList.size()+" tasks! Let's see how many you could complete today! Proof yourself!";
+        } else {
+            return "Error";
+        }
+    }
+
+    @Override
     public Task uncompleteTaskById(Long id) {
         Task task = taskRepository.findById(id);
         task.setCompleted(false);

@@ -5,6 +5,7 @@ import com.oan.management.model.*;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.CustomTimeMessage;
@@ -26,6 +27,9 @@ public class MainController {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private TaskService taskService;
 
     @Autowired
     private MessageService messageService;
@@ -56,20 +60,8 @@ public class MainController {
             req.getSession().setAttribute("tasksLeftSession", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
             // Motivational messages
-            if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() == 0) {
-                model.addAttribute("taskMotivation", "Hmm... What about giving yourself some tasks?");
-            } else if (taskList.size() == 0 && taskRepository.findByUserAndCompletedIsTrue(userLogged).size() > 0) {
-                model.addAttribute("taskMotivation", "Good job! You've completed all your tasks! Be proud about yourself.");
-            }
-            else if (taskList.size() == 1) {
-                model.addAttribute("taskMotivation", "What, only 1 task? You should finish your work!");
-            } else if (taskList.size() > 1 && taskList.size() <= 5){
-                model.addAttribute("taskMotivation", "You only have "+taskList.size()+" tasks... That's not that much. Go complete them!");
-            } else if (taskList.size() > 5 && taskList.size() <= 10){
-                model.addAttribute("taskMotivation", "You've got some work there, "+taskList.size()+" tasks to complete. Try to complete as much as possible today.");
-            } else if (taskList.size() > 10 ){
-                model.addAttribute("taskMotivation", taskList.size()+" tasks! Let's see how many you could complete today! Proof yourself!");
-            }
+            String motivationMessage = taskService.getMotivationalMessage(taskList, userLogged);
+            model.addAttribute("taskMotivation", motivationMessage);
         }
 
         // JSON to Object mapper

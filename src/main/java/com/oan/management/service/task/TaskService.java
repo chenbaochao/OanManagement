@@ -21,4 +21,5 @@ public interface TaskService {
     Task editById(Long id, String desc, Date date, boolean completed);
     List<Task> findByUserAndCompletedIsFalse(User user);
     List<Task> findByUserAndCompletedIsTrue(User user);
+    String getMotivationalMessage(List<Task> taskList, User user);
 }
