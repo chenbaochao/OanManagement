@@ -47,7 +47,7 @@
             <a class="link-unstyled" href="/messages">
                 <div class="panel panel-login">
                     <h3>Messages</h3>
-                    <p th:if="${session.unreadMessages} > 0">You have <span th:text="${session.unreadMessages}"></span> unread message(s)</p>
+                    <p th:if="${session.unreadMessages} > 0">You have <strong><span th:text="${session.unreadMessages}"></span></strong> unread message(s)</p>
                     <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
                     <div th:if="${lastMessage}">
                         <small style="color: #666666">Last unread message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></small>
