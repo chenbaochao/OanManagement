@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
+<title>Application settings</title>
 
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
@@ -8,16 +9,16 @@
     <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
 
-    <h1>Settings: </h1>
     <div class="container">
+        <h1><span class="glyphicon glyphicon-cog"></span>Application settings </h1>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-login">
                     <ul class="nav nav-pills nav-stacked">
-                        <li role="presentation"><a href="/settings"><span class="glyphicon glyphicon-user"></span> Edit Account</a></li>
-                        <li role="presentation"><a href="/changepassword"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                        <li role="presentation"><a href="/settings"><span class="glyphicon glyphicon-user"></span> Edit profile</a></li>
+                        <li role="presentation"><a href="/changepassword"><span class="glyphicon glyphicon-lock"></span> Change password</a></li>
                         <li role="presentation" class="active"><a href="/appsettings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent Activity</a></li>
+                        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent activity</a></li>
                         <li role="presentation"><a href="/report-bug"><span class="fa fa-bug"></span> Report bug</a></li>
                     </ul>
                 </div>

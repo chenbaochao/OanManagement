@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
+<title>New Message</title>
 
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
@@ -10,17 +11,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <script src="js/loadSummernote.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
-        $('#reciepent').autocomplete({
-            url: "/api/users/",
-            getValue: "username",
-
-        });
     </script>
 
     <div class="container">

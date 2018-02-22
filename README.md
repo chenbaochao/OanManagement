@@ -41,9 +41,8 @@ load animations
 
 
 **Screenshots:**
-<br/><img src="https://i.imgur.com/Ss1BsBj.png"/>
+<br/><img src="https://i.imgur.com/p6P4JGm.png"/>
 
-- [Homepage](https://i.imgur.com/Ss1BsBj.png)
 - [Calendar Week View](https://i.imgur.com/8G7Ukfq.png)
 - [Editing a calendar event](https://i.imgur.com/GONgR0Y.png)
 - [Example budget](https://i.imgur.com/c1ZdUHB.png)

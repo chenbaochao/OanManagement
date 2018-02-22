@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
+<title>Upload avatar</title>
 
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
     <div class="container">
 
-        <h1>Update profile picture </h1>
+        <h1>Upload avatar </h1>
         <form th:action="@{/upload-avatar}" method="post" enctype="multipart/form-data">
             <div class="panel panel-login">
                 <div class="form-group">

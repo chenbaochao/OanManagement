@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments/header :: header"></head>
+    <title th:text="'Profile - '+${paramUser.username}"></title>
 
     <body>
     <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen"/>
@@ -28,11 +29,21 @@
                             </p>
                             <p><str class="someSpace">User ID: </str><span th:text="${paramUser.id}"></span></p>
                             <!--<p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>-->
-                            <hr/>
-                            <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
-                            <button type="button" class="btn btn-success btn-sm">
-                                <span class="glyphicon glyphicon-heart"></span> Follow
-                            </button>
+
+                            <!-- Message and follow for other users-->
+                            <div th:if="${paramUser.id} != ${loggedUser.id}" class="profileActions">
+                                <hr/>
+                                <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
+                                <button type="button" class="btn btn-success btn-sm">
+                                    <span class="glyphicon glyphicon-heart"></span> Follow
+                                </button>
+                            </div>
+                            <!--If user is visiting his profile, other options-->
+                            <div th:if="${paramUser.id} == ${loggedUser.id}" class="profileActions">
+                                <hr/>
+                                <a th:href="@{/settings}" class="btn btn-default btn-sm center-block"><span class="glyphicon glyphicon-cog"></span>Edit Profile</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
