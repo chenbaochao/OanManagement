@@ -26,7 +26,8 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-center">Budget: <span th:text="${paramBudget.title}"> </span> <span style="font-size: 13px" th:text="'(Start budget: €'+${paramBudget.budgetAmount}+')'"></span></h3>
+                            <h3 class="text-center"><span th:text="${paramBudget.title}"> </span></h3>
+                                <p class="text-center"><span style="font-size: 13px" th:text="'(Start budget: €'+${paramBudget.budgetAmount}+')'"></span></p>
                             <div th:if="${leftOver} > 0.01">
                                 <h1 class="text-center">&euro; <span th:text="${leftOver}"></span></h1>
                             </div>
