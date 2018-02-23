@@ -49,6 +49,16 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public Image getUserImage(User user) {
+        Image image = imageRepository.findByTitle(user.getId()+".png");
+        if (image != null) {
+            return image;
+        } else {
+            return new Image("Default Avatar", "avatar/0.png", user);
+        }
+    }
+
+    @Override
     public Image uploadImage(MultipartFile file, String path, User user) {
         String folder = ROOT + path;
         Image image = new Image();

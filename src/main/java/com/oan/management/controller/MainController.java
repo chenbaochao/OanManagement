@@ -67,12 +67,14 @@ public class MainController {
         model.addAttribute("quote", randomQuote.getQuote(randomQuote.getUrl()));
 
         // Save profile picture for navigation bar
-        Image avatar_of_id = imageService.findByTitle(userLogged.getId()+".png");
+        /*Image avatar_of_id = imageService.findByTitle(userLogged.getId()+".png");
         if (avatar_of_id != null) {
             req.getSession().setAttribute("myAvatar", "/img"+avatar_of_id.getUrl());
         } else {
             req.getSession().setAttribute("myAvatar", "/img/avatar/0.png");
-        }
+        }*/
+        Image avatar = imageService.getUserImage(userLogged);
+        req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
 
         // Update user rank
         if (rankService.findByUser(userLogged) != null) {

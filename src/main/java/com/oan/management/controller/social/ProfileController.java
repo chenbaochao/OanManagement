@@ -44,12 +44,8 @@ public class ProfileController {
             User paramUser = userService.findById(id);
             if (paramUser != null) {
                 model.addAttribute("paramUser", paramUser);
-                Image avatar_of_id = imageService.findByTitle(paramUser.getId()+".png");
-                if (avatar_of_id != null) {
-                    model.addAttribute("avatar", "/img"+avatar_of_id.getUrl());
-                } else {
-                    model.addAttribute("avatar", "/img/avatar/0.png");
-                }
+                Image avatar = imageService.getUserImage(paramUser);
+                model.addAttribute("avatar", "/img/"+avatar.getUrl());
                 if (rankService.findByUser(paramUser) != null) {
                     // Update rank if changes were made
                     rankService.checkRank(paramUser);

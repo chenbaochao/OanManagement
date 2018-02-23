@@ -15,4 +15,5 @@ public interface ImageService {
     Image findById(Long id);
     Image findByTitle(String title);
     Image findFirstByTitle(String title);
+    Image getUserImage(User user);
 }
