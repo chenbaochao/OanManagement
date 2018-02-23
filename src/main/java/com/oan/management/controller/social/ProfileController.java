@@ -6,7 +6,7 @@ import com.oan.management.model.Rank;
 import com.oan.management.model.User;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
-import com.oan.management.service.user.RankService;
+import com.oan.management.service.rank.RankService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -44,19 +44,12 @@ public class ProfileController {
             User paramUser = userService.findById(id);
             if (paramUser != null) {
                 model.addAttribute("paramUser", paramUser);
+                // Get user avatar
                 Image avatar = imageService.getUserImage(paramUser);
                 model.addAttribute("avatar", "/img/"+avatar.getUrl());
-                if (rankService.findByUser(paramUser) != null) {
-                    // Update rank if changes were made
-                    rankService.checkRank(paramUser);
-                    // Save rank to model
-                    Rank userRank = rankService.findByUser(paramUser);
-                    model.addAttribute("paramUserRank", userRank);
-                } else {
-                    Rank userRank = rankService.setRank(paramUser, "Noob", 1);
-                    rankService.checkRank(paramUser);
-                    model.addAttribute("paramUserRank", userRank);
-                }
+                // Get user rank
+                Rank userRank = rankService.getUserRank(paramUser);
+                model.addAttribute("paramUserRank", userRank);
             } else {
                 return "redirect:/profile?id="+userLogged.getId();
             }

@@ -1,4 +1,4 @@
-package com.oan.management.service.user;
+package com.oan.management.service.rank;
 
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
@@ -55,17 +55,6 @@ public class RankServiceImpl implements RankService {
 
     }
 
-    /*public static final int RANK_TWO = 10;
-    public static final int RANK_THREE = 21;
-    public static final int RANK_FOUR = 31;
-    public static final int RANK_FIVE = 51;
-    public static final int RANK_SIX = 71;
-    public static final int RANK_SEVEN = 91;
-    public static final int RANK_EIGHT = 121;
-    public static final int RANK_NINE = 301;
-    public static final int RANK_TEN = 501;
-    public static final int RANK_ELEVEN = 701;*/
-
     public static List<Integer> nextRankList = Arrays.asList(10,21,31,51,71,91,121,301,501,701);
 
     @Override
@@ -95,6 +84,16 @@ public class RankServiceImpl implements RankService {
             updateRankByUser(user, "Legend Planner", 11);
         }
         return rank;
+    }
+
+    @Override
+    public Rank getUserRank(User user) {
+        Rank rank = rankRepository.findByUser(user);
+        if (rank != null) {
+            return rankService.checkRank(user);
+        } else {
+            return rankService.setRank(user, "Noob", 1);
+        }
     }
 
 }

@@ -4,8 +4,8 @@ import com.oan.management.model.*;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.rank.RankService;
 import com.oan.management.service.task.TaskService;
-import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.CustomTimeMessage;
 import com.oan.management.utility.RandomQuote;
@@ -76,18 +76,8 @@ public class MainController {
         Image avatar = imageService.getUserImage(userLogged);
         req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
 
-        // Update user rank
-        if (rankService.findByUser(userLogged) != null) {
-            // Update rank if changes were made
-            rankService.checkRank(userLogged);
-            // Save rank to model
-            Rank userRank = rankService.findByUser(userLogged);
-            model.addAttribute("userRank", userRank);
-        } else {
-            Rank userRank = rankService.setRank(userLogged, "Noob", 1);
-            rankService.checkRank(userLogged);
-            model.addAttribute("userRank", userRank);
-        }
+        Rank userRank = rankService.getUserRank(userLogged);
+        model.addAttribute("userRank", userRank);
         return "index";
     }
 }

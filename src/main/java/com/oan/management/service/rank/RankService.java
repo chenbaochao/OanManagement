@@ -1,4 +1,4 @@
-package com.oan.management.service.user;
+package com.oan.management.service.rank;
 
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
@@ -11,4 +11,5 @@ public interface RankService {
     Rank findByUser(User user);
     Rank updateRankByUser(User user, String title, int rankNumber);
     Rank checkRank(User user);
+    Rank getUserRank(User user);
 }
