@@ -66,7 +66,7 @@ public class TaskController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
             model.addAttribute("completedTasks", completedTasksList);
-            req.getSession().setAttribute("tasksLeftSession", taskList.size());
+            req.getSession().setAttribute("tasksLeft", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
         }
         String  today = new Date(Calendar.getInstance().getTime().getTime()).toString();

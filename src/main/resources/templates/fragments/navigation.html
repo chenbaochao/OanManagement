@@ -26,7 +26,7 @@
                 <li><a href="/">Home</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/calendar">Calendar</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/task-list">To-do's <span
-                        th:text="${session.tasksLeftSession}" class="badge badge-notify"></span></a></li>
+                        th:text="${session.tasksLeft}" class="badge badge-notify"></span></a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/contacts">Contacts</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/budget-list">Budget Manager</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/users">Users</a></li>

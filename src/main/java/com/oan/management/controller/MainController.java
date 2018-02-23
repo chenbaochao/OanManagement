@@ -55,27 +55,19 @@ public class MainController {
             CustomTimeMessage customTimeMessage = new CustomTimeMessage();
             model.addAttribute("timeGreeting", customTimeMessage.getMessage());
             // Tasks and unread messages
-            req.getSession().setAttribute("tasksLeftSession", taskList.size());
+            req.getSession().setAttribute("tasksLeft", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
             // Motivational messages
             String motivationMessage = taskService.getMotivationalMessage(taskList, userLogged);
             model.addAttribute("taskMotivation", motivationMessage);
         }
-
         // JSON to Object mapper
         RandomQuote randomQuote = new RandomQuote("https://talaikis.com/api/quotes/random/");
         model.addAttribute("quote", randomQuote.getQuote(randomQuote.getUrl()));
-
-        // Save profile picture for navigation bar
-        /*Image avatar_of_id = imageService.findByTitle(userLogged.getId()+".png");
-        if (avatar_of_id != null) {
-            req.getSession().setAttribute("myAvatar", "/img"+avatar_of_id.getUrl());
-        } else {
-            req.getSession().setAttribute("myAvatar", "/img/avatar/0.png");
-        }*/
+        // Get user avatar
         Image avatar = imageService.getUserImage(userLogged);
         req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
-
+        // Get user rank
         Rank userRank = rankService.getUserRank(userLogged);
         model.addAttribute("userRank", userRank);
         return "index";
