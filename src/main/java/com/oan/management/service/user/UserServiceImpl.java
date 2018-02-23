@@ -66,6 +66,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype, String github, String email, String username) {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setCountry(country);
+        user.setAge(age);
+        user.setFacebook(facebook);
+        user.setSkype(skype);
+        user.setGithub(github);
+        user.setEmail(email);
+        user.setUsername(username);
+        return userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {

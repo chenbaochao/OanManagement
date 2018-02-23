@@ -13,4 +13,6 @@ public interface UserService extends UserDetailsService {
     User findById(Long id);
     List<User> findAll();
     void addBugReport(User userLogged);
+    User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype,
+                    String github, String email, String username);
 }

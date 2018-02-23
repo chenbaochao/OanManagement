@@ -69,19 +69,8 @@ public class AdminController {
     @PostMapping("/admin/manageusers/{id}")
     public String editUser(Model model, User user, @PathVariable Long id) {
         User paramUser = userService.findById(id);
-        // Basic
-        paramUser.setFirstName(user.getFirstName());
-        paramUser.setLastName(user.getLastName());
-        paramUser.setCountry(user.getCountry());
-        paramUser.setAge(user.getAge());
-        // Social
-        paramUser.setFacebook(user.getFacebook());
-        paramUser.setSkype(user.getSkype());
-        paramUser.setGithub(user.getGithub());
-        // Unique
-        paramUser.setEmail(user.getEmail());
-        paramUser.setUsername(user.getUsername());
-
+        userService.editByUser(paramUser, user.getFirstName(), user.getLastName(), user.getCountry(), user.getAge(),
+                user.getFacebook(), user.getSkype(), user.getGithub(), user.getEmail(), user.getUsername());
         userRepository.save(paramUser);
         return "redirect:/admin/manageusers/"+paramUser.getId();
     }
