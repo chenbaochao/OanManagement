@@ -19,58 +19,50 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
 
     <script>
         $(document).ready(function() {
             var table = $('#contactstable').DataTable( {
                 lengthChange: false,
                 dom: 'Bfrtip',
-                buttons: ['print', 'excel', 'pdf']
+                buttons: ['print', 'excel', 'pdf', 'colvis']
             } );
         } );
     </script>
 
     <div class="container">
         <h1><span class="fa fa-address-book"></span> Contacts <a href="/contact-new" class="btn btn-success pull-right"><span class="fa fa-user-plus"></span> New contact</a></h1>
-        <div id="test" class="panel panel-login table-responsive">
-            <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="dt-buttons btn-group">
-
-                        </div>
-                    </div>
-                </div>
-                <table id="contactstable" class="table table-hover table-striped">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Email</th>
-                            <th>Mobile number</th>
-                            <th>Address</th>
-                            <th>Notes</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="contact : ${contacts}">
-                            <td th:text="${contact.firstName}"></td>
-                            <td th:text="${contact.lastName}"></td>
-                            <td>
-                                <a th:href = "'mailto:' + ${contact.email}" th:text="${contact.email}"></a>
-                            </td>
-                            <td th:text="${contact.mobileNumber}"></td>
-                            <td><a th:text="${contact.address}" target="_blank" th:href="@{https://www.google.com/maps/search/} + ${#strings.replace(contact.address,' ','+')}"></a></td>
-                            <td th:text="${contact.notes}"></td>
-                            <td>
-                                <a th:href="@{/contacts-edit(id=${contact.id})}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="up" title="Edit this contact">Edit</a>
-                                <a th:href="@{/contacts-delete(id=${contact.id})}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Delete">Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="panel panel-login table-responsive">
+            <table id="contactstable" class="table table-hover table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Mobile number</th>
+                        <th>Address</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="contact : ${contacts}">
+                        <td th:text="${contact.firstName}"></td>
+                        <td th:text="${contact.lastName}"></td>
+                        <td>
+                            <a th:href = "'mailto:' + ${contact.email}" th:text="${contact.email}"></a>
+                        </td>
+                        <td th:text="${contact.mobileNumber}"></td>
+                        <td><a th:text="${contact.address}" target="_blank" th:href="@{https://www.google.com/maps/search/} + ${#strings.replace(contact.address,' ','+')}"></a></td>
+                        <td th:text="${contact.notes}"></td>
+                        <td>
+                            <a th:href="@{/contacts-edit(id=${contact.id})}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="up" title="Edit this contact">Edit</a>
+                            <a th:href="@{/contacts-delete(id=${contact.id})}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Delete">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
