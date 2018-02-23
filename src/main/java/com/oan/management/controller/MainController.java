@@ -1,6 +1,5 @@
 package com.oan.management.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oan.management.model.*;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
@@ -9,6 +8,7 @@ import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.RankService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.CustomTimeMessage;
+import com.oan.management.utility.RandomQuote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 @Controller
@@ -65,15 +63,8 @@ public class MainController {
         }
 
         // JSON to Object mapper
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            Quote quote = mapper.readValue(new URL("https://talaikis.com/api/quotes/random/"), Quote.class);
-            model.addAttribute("quote", quote);
-        } catch (IOException e) {
-            // This is just added so I could work offline in the train
-            Quote quote = new Quote("A late start with motivation is better than an earlier start without any motivation", "Oan Stultjens", "motivation");
-            model.addAttribute("quote", quote);
-        }
+        RandomQuote randomQuote = new RandomQuote("https://talaikis.com/api/quotes/random/");
+        model.addAttribute("quote", randomQuote.getQuote(randomQuote.getUrl()));
 
         // Save profile picture for navigation bar
         Image avatar_of_id = imageService.findByTitle(userLogged.getId()+".png");

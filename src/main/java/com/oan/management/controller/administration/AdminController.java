@@ -42,7 +42,6 @@ public class AdminController {
     public String getUserManagement(Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         List<User> users = userService.findAll();
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("users", users);
@@ -54,7 +53,6 @@ public class AdminController {
     public String getUserManagement(Model model, Authentication authentication, @PathVariable Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         List<User> users = userService.findAll();
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             if (id != null) {

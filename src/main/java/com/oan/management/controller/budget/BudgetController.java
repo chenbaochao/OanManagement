@@ -63,14 +63,10 @@ public class BudgetController {
     @PostMapping("/budget-new")
     public String saveNewBudget(Model model, Budget budget, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
-        if (budget.getTitle().length() >= 3 ) {
-            if (budget.getBudgetAmount() >= 1) {
-                Budget userBudget = new Budget(budget.getTitle(), budget.getBudgetAmount(), userLogged);
-                budgetService.save(userBudget);
-                return "redirect:/budget-list?success";
-            } else {
-                return "redirect:/budget-new?error";
-            }
+        if (budget.getTitle().length() >= 3 && budget.getBudgetAmount() >= 1) {
+            Budget userBudget = new Budget(budget.getTitle(), budget.getBudgetAmount(), userLogged);
+            budgetService.save(userBudget);
+            return "redirect:/budget-list?success";
         } else {
             return "redirect:/budget-new?error";
         }
@@ -79,7 +75,6 @@ public class BudgetController {
     @GetMapping("/budget")
     public String showBudget(Model model, Authentication authentication, @RequestParam(required = false) Long id) {
         User userLogged = userService.findByUser(authentication.getName());
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("expense", new Expense());
@@ -99,7 +94,6 @@ public class BudgetController {
                 Double leftOver = (paramBudget.getBudgetAmount() + (totalIncome - totalExpense));
                 Double expensesPercent = totalExpense / (totalIncome+paramBudget.getBudgetAmount()) * 100;
                 Double incomesPercent = 100 - expensesPercent;
-
                 // Settings attributes
                 model.addAttribute("paramBudget", paramBudget);
                 model.addAttribute("totalIncome", totalIncome);
@@ -121,7 +115,6 @@ public class BudgetController {
     @GetMapping("budget-delete")
     public String deleteBudget(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
-
         Budget paramBudget = budgetService.findById(id);
         if (paramBudget.getUser() == userLogged) {
             budgetService.deleteById(id);
@@ -185,7 +178,6 @@ public class BudgetController {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
         Expense paramExpense = expenseService.findById(id);
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("previousBudget", paramExpense.getBudget().getId());
@@ -214,7 +206,6 @@ public class BudgetController {
             return "redirect:/budget?error";
         }
     }
-
 
     @GetMapping("expense-delete")
     public String deleteExpense(Authentication authentication, @RequestParam Long id) {

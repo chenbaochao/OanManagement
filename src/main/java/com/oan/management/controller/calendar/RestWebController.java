@@ -36,13 +36,6 @@ public class RestWebController {
     public String getEvents(Authentication authentication) {
         String jsonMessage = null;
         try {
-      /*      List<Event> events = new ArrayList<Event>();
-            Event event = new Event();
-            event.setTitle("Test");
-            event.setStart("2018-01-26");
-            event.setEnd("2018-01-28");
-            events.add(event);*/
-
             User userLogged = userService.findByUser(authentication.getName());
             List<Event> events = eventService.findAllByUser(userLogged);
             List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
@@ -52,7 +45,6 @@ public class RestWebController {
                     events.add(new Event(task.getDescription(), "To-Do: " + task.getDescription(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, "#E57373", "#E57373", false));
                 }
             }
-
             ObjectMapper mapper = new ObjectMapper();
             jsonMessage = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
         } catch (IOException ex) {

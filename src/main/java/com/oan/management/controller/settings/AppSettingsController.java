@@ -69,8 +69,6 @@ public class AppSettingsController {
                 userLogged.setShowEmail(true);
                 userRepository.save(userLogged);
             }
-
-
         }
         return "redirect:/appsettings?success";
     }

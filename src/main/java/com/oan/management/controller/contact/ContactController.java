@@ -111,11 +111,9 @@ public class ContactController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
         }
-
         contactService.save(new Contact(userLogged, contact.getFirstName(), contact.getLastName(), contact.getEmail(),
                 contact.getMobileNumber(), contact.getNotes(), contact.getAddress()));
         contactService.deleteById(contact.getId());
-
         return "redirect:contacts";
     }
 

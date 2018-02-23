@@ -51,14 +51,12 @@ public class CalendarController {
     @PostMapping("/calendar")
     public String addEvent(Model model, Event event, Authentication authentication, @RequestParam("start") String startdate, @RequestParam("end") String enddate) {
         User userLogged = userService.findByUser(authentication.getName());
-
         if (!event.getTitle().isEmpty()) {
             eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, event.getBackgroundColor(), event.getBackgroundColor(), true));
         } else {
             System.out.println("test: "+event.getTitle());
             return "redirect:/calendar?notitle";
         }
-
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
         userRepository.save(userLogged);
         return "redirect:/calendar";
@@ -88,5 +86,4 @@ public class CalendarController {
         eventService.save(updateEvent);
         return "redirect:/calendar";
     }
-
 }

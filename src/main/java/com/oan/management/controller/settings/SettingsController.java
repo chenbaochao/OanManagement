@@ -38,7 +38,6 @@ public class SettingsController {
     // https://stackoverflow.com/questions/44421036/check-if-name-is-valid-with-proper-case-and-max-one-space
     static boolean chkNamVldFnc(String namVar) {
         String namRegExpVar = "^[A-Z][a-z]{2,}(?: [A-Z][a-z]*)*$";
-
         Pattern pVar = Pattern.compile(namRegExpVar);
         Matcher mVar = pVar.matcher(namVar);
         return mVar.matches();
