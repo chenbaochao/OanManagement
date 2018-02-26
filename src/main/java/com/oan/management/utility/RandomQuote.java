@@ -8,6 +8,7 @@ import java.net.URL;
 
 /**
  * Created by Oan on 23/02/2018.
+ * @author Oan Stultjens
  */
 public class RandomQuote {
     private String url;
@@ -19,6 +20,11 @@ public class RandomQuote {
         this.url = url;
     }
 
+    /**
+     * @param url an absolute URL giving the base location (JSON) of the quote
+     * @return a Quote from the specified URL
+     * @see Quote
+     */
     public Quote getQuote(String url) {
         ObjectMapper mapper = new ObjectMapper();
         try {

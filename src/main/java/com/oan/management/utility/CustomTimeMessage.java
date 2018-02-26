@@ -6,6 +6,12 @@ import java.util.Calendar;
  * Created by Oan on 20/02/2018.
  */
 public class CustomTimeMessage {
+    /**
+     * Returns a String object which represents the greeting
+     * according to the current time.
+     * @return A string greeting the user according by the current time
+     * @see com.oan.management.model.Message
+    */
     public String getMessage() {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);

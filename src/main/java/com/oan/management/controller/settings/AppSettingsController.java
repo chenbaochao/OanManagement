@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Oan on 1/02/2018.
+ * @author Oan Stultjens
+ * @since 1/02/2018
  */
 @Controller
 public class AppSettingsController {

@@ -1,5 +1,6 @@
 package com.oan.management.controller.administration;
 
+import com.oan.management.config.CustomSettings;
 import com.oan.management.model.Bug;
 import com.oan.management.model.User;
 import com.oan.management.service.bug.BugService;
@@ -20,6 +21,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 29/01/2018.
+ * This controls all pages related to bugs
+ * From bug reports to fix/notify reported bugs.
  */
 
 @Controller
@@ -42,12 +45,14 @@ public class BugController {
         }
         return "/report-bug";
     }
-
+    /**
+    * POST controller for submitting a new bug
+    */
     @PostMapping("/report-bug")
     public String reportBugSubmit(Authentication authentication, Bug bug, Model model) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged.getRoles().contains("ROLE_USER")) {
-            if (userLogged.getBugsReported() < 10) {
+            if (userLogged.getBugsReported() < CustomSettings.MAXIMUM_BUG_REPORTS) {
                 bugService.save(new Bug(userLogged, bug.getDescription(), new Date(Calendar.getInstance().getTime().getTime())));
                 userService.addBugReport(userLogged);
                 return "redirect:/report-bug?reported";

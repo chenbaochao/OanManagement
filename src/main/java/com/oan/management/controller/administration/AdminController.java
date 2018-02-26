@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 5/02/2018.
+ * Controls all administration tools inside the application, which can
+ * only be used by users with the ROLE_ADMIN role
  */
 @Controller
 public class AdminController {
