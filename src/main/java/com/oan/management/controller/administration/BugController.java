@@ -91,11 +91,10 @@ public class BugController {
             model.addAttribute("loggedUser", userLogged);
             if (param == null) {
                 model.addAttribute("bugs", bugs);
-
             } else if (param == 1) {
                 model.addAttribute("fixedBugs", fixedBugs);
             } else {
-                return "redirect:bugreports";
+                return "redirect:/bugreports";
             }
         }
         return "bugreports";

@@ -46,4 +46,13 @@ public class EventServiceImpl implements EventService {
         event.setDescription(event.getDescription());
         return eventRepository.save(event);
     }
+
+    @Override
+    public Event editEventAndColour(Event event, String title, String description, String backgroundColour, String borderColour) {
+        event.setTitle(title);
+        event.setDescription(description);
+        event.setBackgroundColor(backgroundColour);
+        event.setBorderColor(borderColour);
+        return eventRepository.save(event);
+    }
 }

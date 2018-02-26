@@ -54,7 +54,6 @@ public class CalendarController {
         if (!event.getTitle().isEmpty()) {
             eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, event.getBackgroundColor(), event.getBackgroundColor(), true));
         } else {
-            System.out.println("test: "+event.getTitle());
             return "redirect:/calendar?notitle";
         }
         userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
@@ -79,11 +78,7 @@ public class CalendarController {
     @PostMapping("calendar-update")
     public String updateEventPost(Event event) {
         Event updateEvent = eventService.findById(event.getId());
-        updateEvent.setTitle(event.getTitle());
-        updateEvent.setDescription(event.getDescription());
-        updateEvent.setBackgroundColor(event.getBackgroundColor());
-        updateEvent.setBorderColor(event.getBackgroundColor());
-        eventService.save(updateEvent);
+        eventService.editEventAndColour(updateEvent, event.getTitle(), event.getDescription(), event.getBackgroundColor(), event.getBackgroundColor());
         return "redirect:/calendar";
     }
 }

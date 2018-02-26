@@ -14,4 +14,5 @@ public interface EventService {
     void delete(Event event);
     Event findById(Long id);
     Event editById(Long id, String title, String start, String end);
+    Event editEventAndColour(Event event, String title, String description, String backgroundColour, String borderColour);
 }
