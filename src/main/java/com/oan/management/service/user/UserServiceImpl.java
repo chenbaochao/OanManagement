@@ -92,6 +92,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User setSocialSettings(User user, String facebook, String twitter, String skype, String github) {
+        user.setFacebook(facebook);
+        user.setTwitter(twitter);
+        user.setSkype(skype);
+        user.setGithub(github);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User setName(User user, String firstName, String lastName) {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        return userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {

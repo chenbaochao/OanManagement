@@ -41,13 +41,9 @@ public class SettingsController {
                 userLogged.setAge(user.getAge());
                 if (user.getFirstName().length() >= 2 && user.getFirstName().length() <= 20 && user.getLastName().length() > 2 && user.getLastName().length() <= 40)
                     if (user.getFirstName().trim().chars().allMatch(Character::isLetter) && NameValidator.check(user.getLastName())) {
-                        userLogged.setFirstName(user.getFirstName());
-                        userLogged.setLastName(user.getLastName());
+                        userService.setName(userLogged, user.getFirstName(), user.getLastName());
                         if (user.getSkype().trim().length() <= 25 && user.getTwitter().trim().length() <= 25 && user.getFacebook().trim().length() <= 25 && user.getGithub().trim().length() <= 25) {
-                            userLogged.setFacebook(user.getFacebook());
-                            userLogged.setTwitter(user.getTwitter());
-                            userLogged.setSkype(user.getSkype());
-                            userLogged.setGithub(user.getGithub());
+                            userService.setSocialSettings(userLogged, user.getFacebook(), user.getTwitter(), user.getSkype(), user.getGithub());
                         } else {
                             return "redirect:/settings?error";
                         }

@@ -44,13 +44,13 @@
                                         First name:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${loggedUser.firstName}" th:field="*{firstName}"></input>
+                                        <input autocomplete="off" class="form-control" th:value="${loggedUser.firstName}" th:field="*{firstName}"></input>
                                     </div>
                                     <div class="col-md-2">
                                         Last name:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${loggedUser.lastName}" th:field="*{lastName}"></input>
+                                        <input autocomplete="off" class="form-control" th:value="${loggedUser.lastName}" th:field="*{lastName}"></input>
                                     </div>
                                 </div>
                                 <br/>
@@ -76,10 +76,10 @@
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <span class="fa fa-skype"></span> Skype:
+                                        <span class="fa fa-facebook-official"></span> Facebook:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${loggedUser.skype}" th:field="*{skype}"></input>
+                                        <input autocomplete="off" class="form-control" th:value="${loggedUser.facebook}" th:field="*{facebook}"></input>
                                     </div>
                                 </div>
                                 <br/>
@@ -88,22 +88,22 @@
                                         <span class="fa fa-twitter"></span> Twitter:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${loggedUser.twitter}" th:field="*{twitter}"></input>
+                                        <input autocomplete="off" class="form-control" th:value="${loggedUser.twitter}" th:field="*{twitter}"></input>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <span class="fa fa-facebook-official"></span> Facebook:
+                                        <span class="fa fa-skype"></span> Skype:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${loggedUser.facebook}" th:field="*{facebook}"></input>
+                                        <input autocomplete="off" class="form-control" th:value="${loggedUser.skype}" th:field="*{skype}"></input>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <span class="fa fa-github"></span> GitHub:
+                                        <span autocomplete="off" class="fa fa-github"></span> GitHub:
                                     </div>
                                     <div class="col-md-3">
                                         <input class="form-control" th:value="${loggedUser.github}" th:field="*{github}"></input>

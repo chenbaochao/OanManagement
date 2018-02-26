@@ -17,4 +17,6 @@ public interface UserService extends UserDetailsService {
                     String github, String email, String username);
     void incrementMessagesReceivedStats(User user);
     void incrementMessagesSentStats(User user);
+    User setSocialSettings(User user, String facebook, String twitter, String skype, String github);
+    User setName(User user, String firstName, String lastName);
 }
