@@ -76,12 +76,9 @@ public class MessageController {
             Message msg = messageService.getMessageById(id);
             model.addAttribute("message", msg);
             msg.setOpened(1);
-            Image imageUrlOfSender = imageService.findFirstByTitle(msg.getSender().getId()+".png");
-            if (imageUrlOfSender != null) {
-                model.addAttribute("avatar", "/img"+imageUrlOfSender.getUrl());
-            } else {
-                model.addAttribute("avatar", "/img/avatar/0.png");
-            }
+            // Get sender's avatar avatar
+            Image avatar = imageService.getUserImage(msg.getSender());
+            model.addAttribute("avatar", "/img/"+avatar.getUrl());
             messageService.save(msg);
             return "message";
         }
@@ -94,7 +91,6 @@ public class MessageController {
     public String deleteMessage(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
-
         if (messages.contains(messageService.getMessageById(id))) {
             messageService.deleteMessageById(id);
             return "redirect:/messages";
@@ -120,17 +116,13 @@ public class MessageController {
             model.addAttribute("loggedUser", userLogged);
         }
 
-        User receiver_username = userService.findByUser(message.getReceiver().getUsername());
+        User receiver = userService.findByUser(message.getReceiver().getUsername());
         if (message.getReceiver().getId() != userLogged.getId()) {
-            if (receiver_username != null) {
-                System.out.println("recepient: " + receiver_username);
-                messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver_username));
+            if (receiver.getUsername() != null) {
+                messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver));
                 // Update statistics
-                userLogged.setMessagesSent(userLogged.getMessagesSent()+1);
-                User receiver_user = userService.findByUser(message.getReceiver().getUsername());
-                receiver_user.setMessagesReceived(receiver_user.getMessagesReceived()+1);
-                userRepository.save(userLogged);
-                userRepository.save(receiver_user);
+                userService.incrementMessagesSentStats(userLogged);
+                userService.incrementMessagesReceivedStats(receiver);
                 return "redirect:/messages?success";
             } else {
                 model.addAttribute("recepienterror", true);
@@ -175,10 +167,8 @@ public class MessageController {
         if (target != null) {
             messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, target));
             // Update statistics
-            userLogged.setMessagesSent(userLogged.getMessagesSent()+1);
-            target.setMessagesReceived(target.getMessagesReceived()+1);
-            userRepository.save(target);
-            userRepository.save(userLogged);
+            userService.incrementMessagesSentStats(userLogged);
+            userService.incrementMessagesReceivedStats(target);
             return "redirect:/messages?success";
         } else {
             return "redirect:/message-to?error";

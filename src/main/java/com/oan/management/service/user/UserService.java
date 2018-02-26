@@ -15,4 +15,6 @@ public interface UserService extends UserDetailsService {
     void addBugReport(User userLogged);
     User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype,
                     String github, String email, String username);
+    void incrementMessagesReceivedStats(User user);
+    void incrementMessagesSentStats(User user);
 }

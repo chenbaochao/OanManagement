@@ -80,6 +80,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void incrementMessagesReceivedStats(User user) {
+        user.setMessagesReceived(user.getMessagesReceived()+1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void incrementMessagesSentStats(User user) {
+        user.setMessagesSent(user.getMessagesSent()+1);
+        userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
