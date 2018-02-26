@@ -43,12 +43,14 @@
             </div>
         </div>
         <div th:if="${param.erroruser}">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 This user does not exist
             </div>
         </div>
         <div th:if="${param.success}">
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Your message has been sent!
             </div>
         </div>

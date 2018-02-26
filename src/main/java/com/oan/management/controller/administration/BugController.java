@@ -1,7 +1,6 @@
 package com.oan.management.controller.administration;
 
 import com.oan.management.model.Bug;
-import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.service.bug.BugService;
 import com.oan.management.service.message.MessageService;
@@ -106,15 +105,7 @@ public class BugController {
     public String notifyReporter(Authentication authentication, @RequestParam("id") Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         Bug bug = bugService.findById(id);
-        Message notifyMessage = new Message();
-        notifyMessage.setSender(userLogged);
-        notifyMessage.setReceiver(bug.getUser());
-        notifyMessage.setSubject("Your reported bug #"+bug.getId()+" has been fixed.");
-        notifyMessage.setMessageText("<p>Hello "+bug.getUser().getFirstName() + ",</p><br/>You have reported the following bug: <blockquote>"+bug.getDescription()+"<footer>"+bug.getUser().getUsername()+" on "+bug.getDate().toString()+"</footer>"+
-        "</blockquote><p>This bug has been fixed. We thank you for reporting it to us!</p><br/>Regards");
-        notifyMessage.setOpened(0);
-        notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
-        messageService.save(notifyMessage);
+        messageService.bugNotifyMessage(userLogged, bug.getUser(), bug);
         return "redirect:/admin/bugreports?notified";
     }
 }

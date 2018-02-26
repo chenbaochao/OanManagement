@@ -1,5 +1,6 @@
 package com.oan.management.service.message;
 
+import com.oan.management.model.Bug;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
 
@@ -15,4 +16,5 @@ public interface MessageService {
     Message save(Message message);
     List<Message> getAllByReceiverAndOpenedIsFalse(User user);
     List<Message> findByReceiverAndOpenedIs(User user, int read);
+    Message bugNotifyMessage(User sender, User receiver, Bug bug);
 }

@@ -3,7 +3,6 @@ package com.oan.management.controller.social;
 import com.oan.management.model.Image;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.user.UserService;
@@ -35,9 +34,6 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
