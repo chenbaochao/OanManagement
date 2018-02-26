@@ -50,6 +50,13 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.findByReceiverAndOpenedIs(user, read);
     }
 
+    /**
+     * Notifies the reporter of a bug with a {@link Message}
+     * @param sender {@link User}
+     * @param receiver {@link User}
+     * @param bug {@link Bug}
+     * @return Message
+     */
     @Override
     public Message bugNotifyMessage(User sender, User receiver, Bug bug) {
         Message notifyMessage = new Message();

@@ -22,6 +22,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 25/01/2018.
+ * @author Oan Stultjens
+ * Controller for the Messaging System
  */
 
 @Controller

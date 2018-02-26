@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by Oan on 1/02/2018.
  * @author Oan Stultjens
  * @since 1/02/2018
+ * Controller for the Application Settings in the Settings page
+ * Users can change the bahavior of their planner management
  */
 @Controller
 public class AppSettingsController {

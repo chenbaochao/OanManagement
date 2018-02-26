@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @author Oan Stultjens
+ * Controller for the Profile page
+ */
+
 @Controller
 public class ProfileController {
     @Autowired

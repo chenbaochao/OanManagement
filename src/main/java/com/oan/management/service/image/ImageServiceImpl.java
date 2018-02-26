@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Oan on 30/01/2018.
+ * Implementation of {@link ImageService}
  */
 
 @Service
@@ -48,6 +49,11 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.findFirstByTitle(title);
     }
 
+    /**
+     * Method to get the user avatar ({@link Image}) of a specific {@link User}
+     * @param user User
+     * @return Image of the specified {@link User}
+     */
     @Override
     public Image getUserImage(User user) {
         Image image = imageRepository.findByTitle(user.getId()+".png");
@@ -58,6 +64,13 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
+    /**
+     * Uploads a new user avatar
+     * @param file {@link MultipartFile}
+     * @param path String of the path
+     * @param user {@link User}
+     * @return Image
+     */
     @Override
     public Image uploadImage(MultipartFile file, String path, User user) {
         String folder = ROOT + path;

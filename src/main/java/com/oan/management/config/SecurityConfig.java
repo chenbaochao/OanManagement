@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * @author Oan Stultjens
+ * This is the Spring Security Configuration class extended by {@link WebSecurityConfigurerAdapter}
+ * Important security options are enabled such as which pages can be visited by who
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired

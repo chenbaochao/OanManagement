@@ -19,6 +19,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author Oan Stultjens
+ * Implementation for the {@link UserService}
+ */
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -32,6 +37,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * Registering an user by the {@link UserRegistrationDto}
+     * @param registration {@link UserRegistrationDto}
+     * @return User
+     */
     public User save(UserRegistrationDto registration) {
         User user = new User();
         user.setUsername(registration.getUsername());
@@ -59,6 +69,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Increments the value of the specified User's bugsReported value
+     * @param userLogged
+     */
     @Override
     public void addBugReport(User userLogged) {
         userLogged.setBugsReported(userLogged.getBugsReported()+1);
@@ -79,12 +93,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Increment messagesReceivedStats from {@link User}
+     * @param user User
+     */
     @Override
     public void incrementMessagesReceivedStats(User user) {
         user.setMessagesReceived(user.getMessagesReceived()+1);
         userRepository.save(user);
     }
 
+    /**
+     * Increment incrementMessagesSentStats from {@link User}
+     * @param user User
+     */
     @Override
     public void incrementMessagesSentStats(User user) {
         user.setMessagesSent(user.getMessagesSent()+1);
@@ -107,6 +129,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * This method is used to login with an username and password
+     * If the login is succesful, the authorities will be granted (mapped from a Collection) to the {@link User}
+     * @param username String of the username
+     * @return UserDetails from Spring Security
+     * @throws UsernameNotFoundException When username hasn't been found
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -118,6 +147,11 @@ public class UserServiceImpl implements UserService {
                 mapRolesToAuthorities(user.getRoles()));
     }
 
+    /**
+     * This method extends {@link GrantedAuthority} from SpringSecurity
+     * It maps the roles of an user as authorities
+     * @param roles Collection of Role's
+     */
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

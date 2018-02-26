@@ -7,6 +7,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.AssertTrue;
 import java.sql.Date;
 
+/**
+ * @author Oan Stultjens
+ * This is a model of a User used for the registration process to validate the user
+ * @see com.oan.management.controller.authentication.UserRegistrationController
+ */
+
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
         @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")

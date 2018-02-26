@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 28/01/2018.
+ * @author Oan Stultjens
+ * Conroller for the Users page
  */
 
 @Controller

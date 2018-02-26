@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Oan on 1/02/2018.
+ * @author Oan Stultjens
+ * Controller for the Change Password page
  */
 @Controller
 public class ChangePasswordController {

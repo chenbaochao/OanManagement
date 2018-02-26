@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 29/01/2018.
+ * @author Oan Stultjens
+ * Implementation of {@link BugService}
  */
 
 @Service

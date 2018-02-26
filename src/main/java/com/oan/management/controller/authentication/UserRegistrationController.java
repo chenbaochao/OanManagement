@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * @author Oan Stultjens
+ * Controller for the registration and validation of the {@link UserRegistrationDto}
+ */
+
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {

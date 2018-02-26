@@ -73,6 +73,12 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findByUserAndCompletedIsTrue(user);
     }
 
+    /**
+     * Returns a String of a motivational text, according to the amount of tasks to complete for the User
+     * @param taskList List of Task's
+     * @param user {@link User}
+     * @return String of motivation text
+     */
     @Override
     public String getMotivationalMessage(List<Task> taskList, User user) {
 

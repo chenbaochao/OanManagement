@@ -20,6 +20,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 18/01/2018.
+ * @author Oan Stultjens
+ * Controller for the Calendar
  */
 
 @Controller

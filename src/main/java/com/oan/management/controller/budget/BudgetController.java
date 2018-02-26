@@ -23,6 +23,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 9/02/2018.
+ * @author Oan Stultjens
+ * Controller for the Budget Management
  */
 
 @Controller

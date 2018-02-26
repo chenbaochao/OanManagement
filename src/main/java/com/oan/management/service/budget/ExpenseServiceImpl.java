@@ -46,6 +46,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseRepository.save(expense);
     }
 
+    /**
+     * Edits an expense by id
+     * @param id ID of the expense
+     * @param description Expense description
+     * @param amount Expense amount
+     * @return Expense
+     */
     @Override
     public Expense editById(Long id, String description, Double amount) {
         Expense expense = expenseRepository.findById(id);

@@ -28,6 +28,11 @@ public class IncomeServiceImpl implements IncomeService {
         return incomeRepository.findAllByBudget(budget);
     }
 
+    /**
+     * Calculates a total value from a List of income's.
+     * @param incomeList List of Income's
+     * @return Double of the total value
+     */
     @Override
     public Double getTotalIncome(List<Income> incomeList) {
         Double total = 0.0;

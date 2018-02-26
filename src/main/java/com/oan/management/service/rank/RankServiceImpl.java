@@ -24,6 +24,13 @@ public class RankServiceImpl implements RankService {
     @Autowired
     RankService rankService;
 
+    /**
+     * Sets a rank of a specified User
+     * @param user {@link User}
+     * @param title String of the rank title
+     * @param rankNumber int of a rank number
+     * @return Rank
+     */
     @Override
     public Rank setRank(User user, String title, int rankNumber) {
         Rank rank = new Rank();
@@ -40,6 +47,13 @@ public class RankServiceImpl implements RankService {
         return rankRepository.findByUser(user);
     }
 
+    /**
+     * Updates a rank by the specified User and sets the next rank score
+     * @param user {@link User}
+     * @param title String of rank title
+     * @param rankNumber int of rank number
+     * @return Rank
+     */
     @Override
     public Rank updateRankByUser(User user, String title, int rankNumber) {
         Rank rank = rankRepository.findByUser(user);
@@ -57,6 +71,11 @@ public class RankServiceImpl implements RankService {
 
     public static List<Integer> nextRankList = Arrays.asList(10,21,31,51,71,91,121,301,501,701);
 
+    /**
+     * Checks the rank of a specified user and automatically sets it according to it's current "score" (tasks completed)
+     * @param user {@link User}
+     * @return Rank
+     */
     @Override
     public Rank checkRank(User user) {
         Rank rank = rankRepository.findByUser(user);
@@ -86,6 +105,11 @@ public class RankServiceImpl implements RankService {
         return rank;
     }
 
+    /**
+     * Gets the current rank of the specified user
+     * @param user {@link User}
+     * @return Rank
+     */
     @Override
     public Rank getUserRank(User user) {
         Rank rank = rankRepository.findByUser(user);

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Created by Oan on 16/02/2018.
- * This is the API for the website to get user data
+ * This is the API for the website to get (specific) user data
  */
 @RestController
 public class JsonUsersController {

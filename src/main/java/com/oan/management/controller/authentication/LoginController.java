@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by Oan on 24/01/2018.
+ * @author Oan Stultjens
+ * This controller only contains the GET controller to show the login pages
  */
 
 @Controller

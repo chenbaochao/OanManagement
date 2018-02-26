@@ -19,6 +19,8 @@ import java.util.List;
 
 /**
  * Created by Oan on 26/01/2018.
+ * @author Oan Stultjens
+ * RestController for the Events, also maps the To-Do (task)'s to the calendar
  */
 
 @RestController

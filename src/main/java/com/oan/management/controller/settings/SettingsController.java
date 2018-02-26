@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Created by Oan on 1/02/2018.
+ * Controller for the profile settings from the settings page
  */
 @Controller
 public class SettingsController {

@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Oan on 30/01/2018.
+ * @author Oan Stultjens
+ * Controller for the Upload Avatar page
  */
 @Controller
 public class ImageController {
