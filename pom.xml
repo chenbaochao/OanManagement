@@ -46,6 +46,19 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <version>1.3.0.RELEASE</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
 
         <!-- bootstrap and jquery -->
         <dependency>
@@ -58,7 +71,6 @@
             <artifactId>jquery</artifactId>
             <version>3.2.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars.bower/bootstrap-form-helpers -->
 
         <!-- mysql connector -->
         <dependency>
@@ -79,7 +91,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.webjars/pace -->
+        <!-- Webjars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>pace</artifactId>
@@ -98,36 +110,17 @@
             <version>3.8.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>font-awesome</artifactId>
             <version>5.0.6</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.webjars/datatables -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>datatables</artifactId>
             <version>1.9.4-2</version>
         </dependency>
-
-
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <version>1.3.0.RELEASE</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>3.1.2.RELEASE</version>
-        </dependency>
-
     </dependencies>
 
     <build>
