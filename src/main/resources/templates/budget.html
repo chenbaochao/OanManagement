@@ -65,7 +65,7 @@
                                             <td class="greentext">+ <span th:text="${income.amount}"></span></td>
                                             <td>
                                                 <!-- Income Actions -->
-                                                <a th:href="@{/income-edit(id=${income.id})}" data-toggle="tooltip" data-placement="right" title="Edit" class="btn btn-warning btn-sm fa fa-pencil"></a>
+                                                <a th:href="@{/income-edit(id=${income.id})}" data-toggle="tooltip" data-placement="right" title="Edit" class="btn btn-warning btn-sm fa fa-pencil-alt"></a>
                                                 <a th:href="@{/income-delete(id=${income.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default btn-sm fa fa-trash"></a>
 
                                             </td>
@@ -119,7 +119,7 @@
                                         <td th:text="${expense.description}"></td>
                                         <td class="redtext">- <span th:text="${expense.amount}"></span></td>
                                         <td>
-                                            <a th:href="@{/expense-edit(id=${expense.id})}" data-toggle="tooltip" data-placement="right" title="Edit" class="btn btn-warning btn-sm fa fa-pencil"></a>
+                                            <a th:href="@{/expense-edit(id=${expense.id})}" data-toggle="tooltip" data-placement="right" title="Edit" class="btn btn-warning btn-sm fa fa-pencil-alt"></a>
                                             <a th:href="@{/expense-delete(id=${expense.id})}" data-toggle="tooltip" data-placement="right" title="Delete" class="btn btn-default btn-sm fa fa-trash"></a>
 
                                         </td>

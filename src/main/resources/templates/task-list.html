@@ -86,7 +86,7 @@
                             <!--
                             <a th:href="@{/task-edit(id=${task.id})}" class="btn btn-warning">Edit</a>
                             -->
-                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil"></span></a>
+                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil-alt"></span></a>
                             <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
 
                         </td>
@@ -113,7 +113,7 @@
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger btn-sm">Incomplete</a></td>
                         <td>
-                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil"></span></a>
+                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil-alt"></span></a>
                             <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
                         </td>
                     </tr>
