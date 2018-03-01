@@ -19,4 +19,6 @@ public interface UserService extends UserDetailsService {
     void incrementMessagesSentStats(User user);
     User setSocialSettings(User user, String facebook, String twitter, String skype, String github);
     User setName(User user, String firstName, String lastName);
+    void incrementTasksCreated(User user);
+    void decrementTasksCreated(User user);
 }

@@ -94,16 +94,18 @@ public class TaskController {
             e.printStackTrace();
         }
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted() ));
-        userLogged.setTasksMade(userLogged.getTasksMade()+1);
+        userService.incrementTasksCreated(userLogged);
         userRepository.save(userLogged);
         return "redirect:/task-list";
     }
 
     @GetMapping("/task-delete")
     public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+        User userLogged = getLoggedUser(authentication);
         // Check if it's user's task
         if (taskService.findByUser(getLoggedUser(authentication)).contains(taskService.getOne(id))) {
             taskService.deleteTaskById(id);
+            userService.decrementTasksCreated(userLogged);
             return "redirect:/task-list?deleted";
         } else {
             return "redirect:/task-list?notfound";
