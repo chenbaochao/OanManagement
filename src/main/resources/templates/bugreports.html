@@ -10,20 +10,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
 
-    <script>
-        $(document).ready(function() {
-            $('#bugstable').DataTable({
-                "columnDefs": [
-                    { "type": "date", "targets": 1 }
-                ],
-                "order": [ 0, 'desc' ],
-                language: {
-                    searchPlaceholder: "Search bug"
-                }
-                }
-            );
-        } );
-    </script>
+    <script src="/js/dataTablesConfig/bugreports_dt.js"></script>
 
     <div class="container">
         <div class="container">

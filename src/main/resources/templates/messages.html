@@ -9,24 +9,9 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+    <script src="js/tooltip.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#messagestable').DataTable( {
-                    "columnDefs": [
-                        { "type": "date", "targets": 2 }
-                    ],
-                    "order": [ 3, 'asc' ],
-                    language: {
-                        searchPlaceholder: "Search message"
-                    }
-                }
-            );
-        } );
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
+    <script src="js/dataTablesConfig/messages_dt.js"></script>
 
     <div class="container">
         <h1><span class="fa fa-inbox"></span> Messages: <a href="/message-new" class="btn btn-success pull-right"><span class="fa fa-plus"></span> New message</a><br/></h1>

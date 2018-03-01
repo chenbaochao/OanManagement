@@ -32,18 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/img/**",
                             "/api/**",
                             "/webjars/**").permitAll()
-                    .antMatchers("/calendar",
-                            "/calendar-delete",
-                            "/contacts",
-                            "/",
+                    .antMatchers("/calendar", "/calendar-delete", "/calendar-edit",
+                            "/contacts","/contact-edit",
+                            "/", "/index",
                             "/budget", "/budget-new", "/budget-list",
+                            "expense-edit", "income-edit",
                             "/task-list",
-                            "/profile",
+                            "/profile", "/upload-avatar",
                             "/users",
                             "/settings","/appsettings","/changepassword",
                             "/messages", "/message", "/message-new","/message-to",
                             "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_TESTER")
-                    .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/admin",
+                            "/manageusers", "/edituser", "/bugreports").hasAuthority("ROLE_ADMIN")
 
                     .antMatchers("/registration**").not().authenticated().anyRequest().permitAll()
                 .and()

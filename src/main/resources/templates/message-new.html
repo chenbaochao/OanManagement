@@ -11,12 +11,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <script src="js/loadSummernote.js"></script>
 
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
     <div class="container">
         <h1><span class="glyphicon glyphicon-envelope"></span> New Message</h1>
         <form th:action="@{/message-new}" th:object="${message}" method="post">

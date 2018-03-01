@@ -9,25 +9,9 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+    <script src="js/tooltip.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#completedTaskList').DataTable( {
-                    "columnDefs": [
-                        { "type": "date", "targets": 1 }
-                    ],
-                    "order": [ 1, 'desc' ],
-                    language: {
-                        searchPlaceholder: "Search task"
-                    }
-                }
-
-            );
-        } );
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
+    <script src="js/dataTablesConfig/task-list_dt.js"></script>
 
     <div class="container">
         <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>
@@ -102,8 +86,8 @@
                             <!--
                             <a th:href="@{/task-edit(id=${task.id})}" class="btn btn-warning">Edit</a>
                             -->
-                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit this task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil"></span></a>
-                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete this task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
+                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil"></span></a>
+                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
 
                         </td>
                     </tr>
@@ -129,8 +113,8 @@
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger btn-sm">Incomplete</a></td>
                         <td>
-                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit this task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil"></span></a>
-                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete this task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
+                            <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil"></span></a>
+                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
                         </td>
                     </tr>
                 </tbody>
