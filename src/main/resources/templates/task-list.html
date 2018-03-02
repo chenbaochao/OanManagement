@@ -12,12 +12,13 @@
     <script src="js/tooltip.js"></script>
 
     <script src="js/dataTablesConfig/task-list_dt.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
 
     <div class="container">
         <div th:if="${not #lists.isEmpty(pendingTasks)}">
             <div class="alert alert-success alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                You have <span th:text="${#lists.size(pendingTasks)}"></span> pending tasks. <a href="/tasks-pending">Bring me there</a>
+                You have <span th:text="${#lists.size(pendingTasks)}"></span> pending task(s). <a href="/tasks-pending">Bring me there</a>
             </div>
         </div>
         <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>

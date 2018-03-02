@@ -61,6 +61,9 @@ public class MainController {
             // Tasks and unread messages
             req.getSession().setAttribute("tasksLeft", taskList.size());
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            // Check for pending tasks
+            List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
+            model.addAttribute("pendingTasks", pendingTasks);
             // Motivational messages
             String motivationMessage = taskService.getMotivationalMessage(taskList, userLogged);
             model.addAttribute("taskMotivation", motivationMessage);

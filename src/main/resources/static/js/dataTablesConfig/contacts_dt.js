@@ -2,6 +2,7 @@ $(document).ready(function() {
     var table = $('#contactstable').DataTable( {
         lengthChange: false,
         dom: 'Bfrtip',
+        responsive: true,
         //buttons: ['print', 'excel', 'pdf', 'colvis']
         buttons: [
             {
