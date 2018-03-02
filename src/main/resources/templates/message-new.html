@@ -17,10 +17,22 @@
             <div class="panel panel-login">
                 <div class="form-group">
                     <!--<label for="reciepent" class="control-label col-sm-2">To (username): </label>-->
-                    <div th:if="${param.error}">
+                    <div th:if="${param.notfound}">
                         <div class="alert alert-danger alert-dismissable">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             This recipient does not exist
+                        </div>
+                    </div>
+                    <div th:if="${param.self}">
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            You cannot send messages to yourself
+                        </div>
+                    </div>
+                    <div th:if="${param.emptytext}">
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Subject and message text cannot be empty
                         </div>
                     </div>
                     <div class="input-group">
@@ -32,9 +44,6 @@
                                required="required"
                                placeholder="Recepient"/>
                     </div>
-                    <p class="error-message"
-                       th:each="error : ${#fields.errors('receiver.username')}"
-                       th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group">
                     <label for="subject" class="control-label col-md-3">Subject: </label>

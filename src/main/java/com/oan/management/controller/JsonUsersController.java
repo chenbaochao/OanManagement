@@ -40,6 +40,11 @@ public class JsonUsersController {
         return userService.findById(id);
     }
 
+    @GetMapping("/api/users/id/{id}/username")
+    public String getUsernameById(@PathVariable Long id) {
+        return userService.findById(id).getUsername();
+    }
+
     @GetMapping("/api/users/username/{username}")
     public User getUserByUsername(@PathVariable String username) {
         return userService.findByUser(username);

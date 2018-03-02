@@ -5,6 +5,7 @@ import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public List<Task> findByUser(User user) {
@@ -123,6 +127,13 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void approveTask(Task task) {
         task.setApproved(true);
+        // Increment stats for assign/received
+        User user = userService.findById(task.getUser().getId());
+        userService.incrementTasksReceived(user);
+        User creatorUser = userService.findById(task.getCreator().getId());
+        userService.incrementTasksAssigned(creatorUser);
+        // Increment the user (who got the task)'s tasksCreated
+        userService.incrementTasksCreated(user);
         taskRepository.save(task);
     }
 

@@ -116,18 +116,22 @@ public class MessageController {
 
         User receiver = userService.findByUser(message.getReceiver().getUsername());
         if (message.getReceiver().getId() != userLogged.getId()) {
-            if (receiver.getUsername() != null) {
-                messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver));
-                // Update statistics
-                userService.incrementMessagesSentStats(userLogged);
-                userService.incrementMessagesReceivedStats(receiver);
-                return "redirect:/messages?success";
+            if (receiver != null) {
+                if (!(message.getSubject().isEmpty()) && !(message.getMessageText().isEmpty())) {
+                    messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, receiver));
+                    // Update statistics
+                    userService.incrementMessagesSentStats(userLogged);
+                    userService.incrementMessagesReceivedStats(receiver);
+                    return "redirect:/messages?success";
+                } else {
+                    return "redirect:/message-new?emptytext";
+                }
+
             } else {
-                model.addAttribute("recepienterror", true);
-                return "redirect:/message-new?error";
+                return "redirect:/message-new?notfound";
             }
         } else {
-            return "redirect:/messages?error";
+            return "redirect:/message-new?self";
         }
     }
 
