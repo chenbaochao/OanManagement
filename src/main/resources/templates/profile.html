@@ -34,9 +34,9 @@
                             <div th:if="${paramUser.id} != ${loggedUser.id}" class="profileActions">
                                 <hr/>
                                 <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
-                                <button type="button" class="btn btn-success btn-sm">
+                                <a th:href="@{/task-assign(id=${paramUser.id})}" class="btn btn-success btn-sm">
                                     <span class="fas fa-calendar-check"></span> Assign task
-                                </button>
+                                </a>
                             </div>
 
                             <!--If user is visiting his profile, other options-->

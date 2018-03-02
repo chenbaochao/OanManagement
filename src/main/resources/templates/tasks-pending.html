@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<title>To-Do</title>
+
+<body>
+    <div th:replace="fragments/navigation :: navigation"></div>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" type="text/css"/>
+    <script src="js/tooltip.js"></script>
+
+    <script src="js/dataTablesConfig/tasks-pending_dt.js"></script>
+
+    <div class="container">
+        <h1><span class="fas fa-tasks marginright"></span> Pending tasks </h1>
+        <div class="panel panel-login">
+            <div th:if="${param.notfound}">
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Task not found
+                </div>
+            </div>
+            <div th:if="${param.approved}">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    You have approved this task, you can find it in your <a href="/task-list">To-Do's</a>
+                </div>
+            </div>
+            <div th:if="${param.denied}">
+                <div class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    You have denied this task. This user will receive a notification
+                </div>
+            </div>
+            <table id="pendingTasksList" class="table table-hover table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="col-md-7">Description</th>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>Approve</th>
+                        <th>Deny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="task : ${pendingTasks}">
+                        <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger">Today</span></td>
+                        <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
+                        <td th:text="${task.creator.username}"></td>
+                        <td><a th:href="@{/task-approve(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Approve task" class="btn btn-success btn-sm"><span class="fas fa-check-circle"></span></a></td>
+                        <td>
+                            <a th:href="@{/task-deny(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Deny task" class="btn btn-danger btn-sm"><span class="fas fa-ban"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

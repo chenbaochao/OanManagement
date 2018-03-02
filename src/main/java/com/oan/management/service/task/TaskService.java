@@ -22,4 +22,9 @@ public interface TaskService {
     List<Task> findByUserAndCompletedIsFalse(User user);
     List<Task> findByUserAndCompletedIsTrue(User user);
     String getMotivationalMessage(List<Task> taskList, User user);
+    List<Task> findByUserAndCompletedIsFalseAndApprovedIsTrue(User user);
+    List<Task> findByUserAndCompletedIsTrueAndApprovedIsTrue(User user);
+    List<Task> findByUserAndApprovedIsFalse(User user);
+    void approveTask(Task task);
+    void denyTask(Task task);
 }

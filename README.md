@@ -8,6 +8,8 @@ This project was intended for my graduation project at INTEC Brussels.
   Events can be added, edited, deleted and coloured!
 - Resize & drag 'n drop calendar events
 - To-Do's (tasks can also be seen in the calendar)
+- Assign tasks to other users
+- Approve and deny tasks from other users, denied tasks will be notified!
 - Contact list
 - User list
 - User profiles and avatars

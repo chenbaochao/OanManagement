@@ -21,4 +21,8 @@ public interface UserService extends UserDetailsService {
     User setName(User user, String firstName, String lastName);
     void incrementTasksCreated(User user);
     void decrementTasksCreated(User user);
+    void incrementTasksReceived(User user);
+    void decrementTasksReceived(User user);
+    void incrementTasksAssigned(User user);
+    void decrementTasksAssigned(User user);
 }

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/", "/index",
                             "/budget", "/budget-new", "/budget-list",
                             "expense-edit", "income-edit",
-                            "/task-list",
+                            "/task-list", "/task-assign","/tasks-pending", "/task-approve", "/task-deny",
                             "/profile", "/upload-avatar",
                             "/users",
                             "/settings","/appsettings","/changepassword",

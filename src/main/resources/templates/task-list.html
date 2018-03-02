@@ -14,6 +14,12 @@
     <script src="js/dataTablesConfig/task-list_dt.js"></script>
 
     <div class="container">
+        <div th:if="${not #lists.isEmpty(pendingTasks)}">
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                You have <span th:text="${#lists.size(pendingTasks)}"></span> pending tasks. <a href="/tasks-pending">Bring me there</a>
+            </div>
+        </div>
         <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>
         <form th:action="@{/task-list}" th:object="${task}" method="post">
             <div class="panel panel-login">
@@ -21,6 +27,18 @@
                     <div class="alert alert-danger alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Task not found
+                    </div>
+                </div>
+                <div th:if="${param.usernotfound}">
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        User not found
+                    </div>
+                </div>
+                <div th:if="${param.self}">
+                    <div class="alert alert-info alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        You can add tasks for yourself here
                     </div>
                 </div>
                 <div th:if="${param.deleted}">
@@ -35,6 +53,7 @@
                         Task has been updated
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="description" class="control-label col-sm-2">Description: </label>
                     <input id="description" type="text" autocomplete="off" th:field="*{description}"
@@ -66,7 +85,7 @@
         </form>
 
         <!--<h1><span class="glyphicon glyphicon-check"></span> <span th:text="${loggedUser.firstName}"></span>'s Tasks: </h1>-->
-        <h1><span class="glyphicon glyphicon-check"></span> To-Do </h1>
+        <h1><span class="fas fa-tasks marginright"></span> To-Do </h1>
         <div class="panel panel-login">
             <table class="table table-hover table-striped">
                 <thead class="thead-inverse">
@@ -95,7 +114,7 @@
             </table>
         </div>
 
-        <h1><span class="glyphicon glyphicon-ok"></span> Completed Tasks: </h1>
+        <h1><span class="fas fa-check-circle"></span> Completed Tasks: </h1>
         <div class="panel panel-login">
             <table id="completedTaskList" class="table table-hover table-striped">
                 <thead class="thead-inverse">

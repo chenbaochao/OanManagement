@@ -1,12 +1,15 @@
 package com.oan.management.service.task;
 
+import com.oan.management.model.Message;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.TaskRepository;
+import com.oan.management.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -16,6 +19,9 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    MessageService messageService;
 
     @Override
     public List<Task> findByUser(User user) {
@@ -97,6 +103,41 @@ public class TaskServiceImpl implements TaskService {
         } else {
             return "Error";
         }
+    }
+
+    @Override
+    public List<Task> findByUserAndCompletedIsFalseAndApprovedIsTrue(User user) {
+        return taskRepository.findByUserAndCompletedIsFalseAndApprovedIsTrue(user);
+    }
+
+    @Override
+    public List<Task> findByUserAndCompletedIsTrueAndApprovedIsTrue(User user) {
+        return taskRepository.findByUserAndCompletedIsTrueAndApprovedIsTrue(user);
+    }
+
+    @Override
+    public List<Task> findByUserAndApprovedIsFalse(User user) {
+        return taskRepository.findByUserAndApprovedIsFalse(user);
+    }
+
+    @Override
+    public void approveTask(Task task) {
+        task.setApproved(true);
+        taskRepository.save(task);
+    }
+
+    @Override
+    public void denyTask(Task task) {
+        deleteTaskById(task.getId());
+        Message notifyMessage = new Message();
+        notifyMessage.setReceiver(task.getCreator());
+        notifyMessage.setSender(task.getUser());
+        notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+        notifyMessage.setOpened(0);
+        notifyMessage.setSubject("Your assigned task to "+task.getUser().getUsername()+" has been denied.");
+        notifyMessage.setMessageText("<p>Hello "+task.getCreator().getUsername() + ",</p><br/>You have assigned the following task to "+task.getUser().getUsername()+": <blockquote>"+task.getDescription()+
+                "</blockquote><p>This user has denied your task.</p><p class='font-weight-light font-italic'>This is an automated message and not written by the user self.</p>");
+        messageService.save(notifyMessage);
     }
 
     @Override

@@ -55,12 +55,17 @@ public class TaskController {
         User userLogged = getLoggedUser(authentication);
         model.addAttribute("task", new Task());
         // Get uncompleted tasks and sort by date
-        List<Task> taskList = taskService.findByUserAndCompletedIsFalse(userLogged);
+        List<Task> taskList = taskService.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
         taskList.sort(Comparator.comparing(Task::getTargetDate));
         // get completed tasks and sort by date
-        List<Task> completedTasksList = taskService.findByUserAndCompletedIsTrue(userLogged);
+        List<Task> completedTasksList = taskService.findByUserAndCompletedIsTrueAndApprovedIsTrue(userLogged);
         completedTasksList.sort(Comparator.comparing(Task::getTargetDate));
+
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
+
+        // Check for pending tasks
+        List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
+        model.addAttribute("pendingTasks", pendingTasks);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -73,6 +78,15 @@ public class TaskController {
         model.addAttribute("today", today);
         System.out.println(taskService.getOne(8L).getTargetDate().toString());
         return "task-list";
+    }
+
+    @GetMapping("/tasks-pending")
+    public String getPendingTasksPage(Model model, Authentication authentication) {
+        User userLogged = getLoggedUser(authentication);
+        model.addAttribute("loggedUser", userLogged);
+        List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
+        model.addAttribute("pendingTasks", pendingTasks);
+        return "tasks-pending";
     }
 
     @PostMapping("/task-list")
@@ -93,10 +107,86 @@ public class TaskController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted() ));
+        taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted(), userLogged, true ));
         userService.incrementTasksCreated(userLogged);
-        userRepository.save(userLogged);
+        userRepository.save(userLogged); // TODO This can be removed I guess
         return "redirect:/task-list";
+    }
+
+    @GetMapping("/task-assign")
+    public String assignTaskPage(Model model, Authentication authentication, Task task, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        User recepient = userService.findById(id);
+        if (recepient != null) {
+            if (userLogged.getId() != id) {
+                model.addAttribute("recepient",recepient);
+                model.addAttribute("loggedUser", userLogged);
+                model.addAttribute("task", new Task());
+                task.setUser(recepient);
+                return "task-assign";
+            } else {
+                return "redirect:task-list?self";
+            }
+        } else {
+            return "redirect:task-list?usernotfound";
+        }
+    }
+
+    @PostMapping("/task-assign")
+    public String assignTask(Model model, Task task, Authentication authentication, @RequestParam Long id, @RequestParam("targetDate") String date) {
+        User userLogged = getLoggedUser(authentication);
+        if (userLogged != null) {
+            model.addAttribute("loggedUser", userLogged);
+        }
+
+        // HTML String date to Date
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); //TODO: Make utility
+        try {
+            java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
+            task.setTargetDate(sqlDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        User target = userService.findById(id);
+        if (target != null) {
+            taskService.save(new Task(target, task.getDescription(), task.getTargetDate(), false, userLogged, false ));
+            // userService.incrementTasksCreated(userLogged); // TODO This has to execute when user accepted the task
+            return "redirect:/profile?id="+target.getId();
+        } else {
+            return "redirect:task-list?usernotfound";
+        }
+    }
+
+    @GetMapping("/task-approve")
+    public String approveTask(Authentication authentication, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        if (id != null) {
+            if (taskService.findByUser(userLogged).contains(taskService.getOne(id))) {
+                taskService.approveTask(taskService.findById(id));
+                return "redirect:/tasks-pending?approved";
+            } else {
+                return "redirect:/tasks-pending?notfound";
+            }
+        } else {
+            return "redirect:/tasks-pending?notfound";
+        }
+    }
+
+    @GetMapping("/task-deny")
+    public String denyTask(Authentication authentication, @RequestParam Long id) {
+        User userLogged = getLoggedUser(authentication);
+        if (id != null) {
+            if (taskService.findByUser(userLogged).contains(taskService.getOne(id))) {
+                taskService.denyTask(taskService.findById(id));
+                return "redirect:/tasks-pending?denied";
+            } else {
+                return "redirect:/tasks-pending?notfound";
+            }
+        } else {
+            return "redirect:/tasks-pending?notfound";
+        }
     }
 
     @GetMapping("/task-delete")

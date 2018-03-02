@@ -24,6 +24,11 @@ public class Task {
 
     private boolean completed;
 
+    private boolean approved;
+
+    @ManyToOne
+    private User creator;
+
     public Task() {
     }
 
@@ -32,6 +37,15 @@ public class Task {
         this.targetDate = targetDate;
         this.description = description;
         this.completed = completed;
+    }
+
+    public Task(User user,String description, Date targetDate, boolean completed, User creator, boolean approved) {
+        this.user = user;
+        this.targetDate = targetDate;
+        this.description = description;
+        this.completed = completed;
+        this.creator = creator;
+        this.approved = approved;
     }
 
     public String getDescription() {
@@ -73,5 +87,21 @@ public class Task {
 
     public void setTargetDate(Date targetDate) {
         this.targetDate = targetDate;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }

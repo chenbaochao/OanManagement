@@ -141,6 +141,30 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void incrementTasksReceived(User user) {
+        user.setTasksReceived(user.getTasksReceived()+1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void decrementTasksReceived(User user) {
+        user.setTasksReceived(user.getTasksReceived()-1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void incrementTasksAssigned(User user) {
+        user.setTasksAssigned(user.getTasksAssigned()+1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void decrementTasksAssigned(User user) {
+        user.setTasksAssigned(user.getTasksAssigned()-1);
+        userRepository.save(user);
+    }
+
     /**
      * This method is used to login with an username and password
      * If the login is succesful, the authorities will be granted (mapped from a Collection) to the {@link User}

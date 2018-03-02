@@ -26,6 +26,8 @@ public class User {
     private int bugsReported;
     private int tasksMade;
     private int tasksCompleted;
+    private int tasksReceived;
+    private int tasksAssigned;
     private int messagesReceived;
     private int messagesSent;
     private int eventsCreated;
@@ -90,6 +92,22 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public int getTasksReceived() {
+        return tasksReceived;
+    }
+
+    public void setTasksReceived(int tasksReceived) {
+        this.tasksReceived = tasksReceived;
+    }
+
+    public int getTasksAssigned() {
+        return tasksAssigned;
+    }
+
+    public void setTasksAssigned(int tasksAssigned) {
+        this.tasksAssigned = tasksAssigned;
     }
 
     public Rank getRank() {
