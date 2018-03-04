@@ -41,7 +41,7 @@ public class RestWebController {
         try {
             User userLogged = userService.findByUser(authentication.getName());
             List<Event> events = eventService.findAllByUser(userLogged);
-            List<Task> tasks = taskService.findByUserAndCompletedIsFalse(userLogged);
+            List<Task> tasks = taskService.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
 
             if (userLogged.isTodoToCalendar()) {
                 for (Task task : tasks) {

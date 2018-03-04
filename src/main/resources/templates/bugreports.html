@@ -12,6 +12,7 @@
 
     <script src="/js/dataTablesConfig/bugreports_dt.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css" type="text/css"/>
 
 
     <div class="container">
@@ -36,14 +37,14 @@
                         </div>
                     </div>
                     <div class="panel panel-login">
-                        <table id="bugstable" class="table table-hover table-striped">
+                        <table id="bugstable" class="table table-hover table-striped display responsive nowrap">
                             <thead class="thead-inverse">
                                 <tr>
                                     <th>ID</th>
                                     <th>Date</th>
                                     <th>Reporter</th>
                                     <th>Bug</th>
-                                    <th>Action</th>
+                                    <th>Not fixed</th>
                                     <th th:if="${param.view}">Notify</th>
                                 </tr>
                             </thead>
