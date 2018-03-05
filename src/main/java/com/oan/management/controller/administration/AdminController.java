@@ -2,8 +2,6 @@ package com.oan.management.controller.administration;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.message.MessageService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,12 +26,6 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private MessageService messageService;
 
 
     @GetMapping("/admin")

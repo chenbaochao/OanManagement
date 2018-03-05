@@ -2,8 +2,6 @@ package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.message.MessageService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.NameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +24,6 @@ public class SettingsController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private TaskService taskService;
 
     @GetMapping("/settings")
     public String getSettings(Model model, Authentication authentication, HttpServletRequest req) {

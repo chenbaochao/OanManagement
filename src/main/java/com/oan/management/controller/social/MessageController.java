@@ -5,7 +5,6 @@ import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,9 +36,6 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
-
-    @Autowired
-    private TaskService taskService;
 
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());

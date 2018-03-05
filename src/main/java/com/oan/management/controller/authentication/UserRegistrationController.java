@@ -5,8 +5,8 @@ import com.oan.management.repository.UserRepository;
 import com.oan.management.service.user.UserService;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,8 +36,12 @@ public class UserRegistrationController {
     }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
-        return "registration";
+    public String showRegistrationForm(Authentication authentication) {
+        if (authentication == null) {
+            return "registration";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping

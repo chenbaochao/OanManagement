@@ -8,8 +8,6 @@ import com.oan.management.model.User;
 import com.oan.management.service.budget.BudgetService;
 import com.oan.management.service.budget.ExpenseService;
 import com.oan.management.service.budget.IncomeService;
-import com.oan.management.service.message.MessageService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -43,12 +41,6 @@ public class BudgetController {
 
     @Autowired
     private ExpenseService expenseService;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private MessageService messageService;
 
     @GetMapping("/budget-list")
     public String getBudgetManager(Model model, Authentication authentication, HttpServletRequest req) {

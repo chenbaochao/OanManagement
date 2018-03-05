@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="progress mobileMarginTop">
-                            <div class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=${loggedUser.tasksCompleted}/${userRank.nextRankScore}*100" aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${loggedUser.tasksCompleted}/${userRank.nextRankScore}*100+'%;'">
+                            <div th:if="${loggedUser.tasksMade} > 0" class="progress-bar progress-bar-success" role="progressbar" th:attr="aria-valuenow=${loggedUser.tasksCompleted}/${userRank.nextRankScore}*100" aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${loggedUser.tasksCompleted}/${userRank.nextRankScore}*100+'%;'">
 
                             </div>
                         </div>

@@ -179,6 +179,18 @@ public class UserServiceImpl implements UserService {
         updateUserAvatar(user, req);
     }
 
+    @Override
+    public void incrementTasksCompleted(User user) {
+        user.setTasksCompleted(user.getTasksCompleted()+1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void decrementTasksCompleted(User user) {
+        user.setTasksCompleted(user.getTasksCompleted()-1);
+        userRepository.save(user);
+    }
+
     /**
      * This method is used to login with an username and password
      * If the login is succesful, the authorities will be granted (mapped from a Collection) to the {@link User}

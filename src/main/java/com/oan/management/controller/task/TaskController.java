@@ -3,7 +3,6 @@ package com.oan.management.controller.task;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.message.MessageService;
 import com.oan.management.service.rank.RankService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
@@ -38,9 +37,6 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
-
-    @Autowired
-    private MessageService messageService;
 
     @Autowired
     private RankService rankService;
@@ -144,11 +140,9 @@ public class TaskController {
             e.printStackTrace();
         }
 
-
         User target = userService.findById(id);
         if (target != null) {
             taskService.save(new Task(target, task.getDescription(), task.getTargetDate(), false, userLogged, false ));
-            // userService.incrementTasksCreated(userLogged); // TODO This has to execute when user accepted the task
             return "redirect:/profile?id="+target.getId();
         } else {
             return "redirect:task-list?usernotfound";
@@ -189,7 +183,7 @@ public class TaskController {
     }
 
     @GetMapping("/task-delete")
-    public String deleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+    public String deleteTask(@RequestParam Long id, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         // Check if it's user's task
         if (taskService.findByUser(getLoggedUser(authentication)).contains(taskService.getOne(id))) {
@@ -202,7 +196,7 @@ public class TaskController {
     }
 
     @GetMapping("/task-edit")
-    public String editTaskOnScreen(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+    public String editTaskOnScreen(Model model, @RequestParam Long id, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Task> taskList = taskService.findByUser(userLogged);
         if (userLogged != null) {
@@ -231,34 +225,26 @@ public class TaskController {
     }
 
     @GetMapping("/task-complete")
-    public String completeTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+    public String completeTask(@RequestParam Long id, Authentication authentication) {
         taskService.completeTaskById(id);
         User userLogged = getLoggedUser(authentication);
         // Update statistics
-        userLogged.setTasksCompleted(userLogged.getTasksCompleted()+1);
+        userService.incrementTasksCompleted(userLogged);
         // Update rank
         if (rankService.findByUser(userLogged)==null) {
             rankService.setRank(userLogged, "Newbie", 1);
         } else {
             rankService.checkRank(userLogged);
         }
-        // Save user
-        userRepository.save(userLogged);
         return "redirect:/task-list";
     }
 
     @GetMapping("/task-uncomplete")
-    public String uncompleteTask(Model model, Task task, @RequestParam Long id, Authentication authentication) {
+    public String uncompleteTask(@RequestParam Long id, Authentication authentication) {
         taskService.uncompleteTaskById(id);
         User userLogged = getLoggedUser(authentication);
         // Update statistics
-        userLogged.setTasksCompleted(userLogged.getTasksCompleted()-1);
-        userRepository.save(userLogged);
+        userService.decrementTasksCompleted(userLogged);
         return "redirect:/task-list";
-    }
-
-    public void updateNotifications(HttpServletRequest req, Authentication authentication) {
-        req.setAttribute("tasksPending", taskService.findByUserAndApprovedIsFalse(getLoggedUser(authentication)));
-        req.setAttribute("unreadMessages", messageService.findByReceiverAndOpenedIs(getLoggedUser(authentication), 0).size());
     }
 }

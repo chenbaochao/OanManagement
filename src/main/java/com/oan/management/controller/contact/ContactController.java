@@ -3,7 +3,6 @@ package com.oan.management.controller.contact;
 import com.oan.management.model.Contact;
 import com.oan.management.model.User;
 import com.oan.management.service.contact.ContactService;
-import com.oan.management.service.message.MessageService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,6 @@ public class ContactController {
     private UserService userService;
 
     @Autowired
-    private MessageService messageService;
-
-    @Autowired
     private ContactService contactService;
 
     @Autowired
@@ -50,9 +46,7 @@ public class ContactController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
-            userService.updateUserAvatar(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "contacts";
     }

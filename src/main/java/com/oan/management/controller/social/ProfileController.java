@@ -4,9 +4,7 @@ import com.oan.management.model.Image;
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
 import com.oan.management.service.image.ImageService;
-import com.oan.management.service.message.MessageService;
 import com.oan.management.service.rank.RankService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,16 +26,10 @@ public class ProfileController {
     private UserService userService;
 
     @Autowired
-    private MessageService messageService;
-
-    @Autowired
     private ImageService imageService;
 
     @Autowired
     private RankService rankService;
-
-    @Autowired
-    private TaskService taskService;
 
     @GetMapping("/profile")
     public String root(HttpServletRequest req, Model model, Authentication authentication, @RequestParam(required = false) Long id) {
