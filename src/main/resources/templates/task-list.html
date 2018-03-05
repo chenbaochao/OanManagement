@@ -102,12 +102,8 @@
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="!${task.completed}"><a th:href="@{/task-complete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Complete" class="btn btn-success btn-sm">I did it!</a></td>
                         <td class="col-md-2">
-                            <!--
-                            <a th:href="@{/task-edit(id=${task.id})}" class="btn btn-warning">Edit</a>
-                            -->
                             <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil-alt"></span></a>
                             <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
-
                         </td>
                     </tr>
                 </tbody>
@@ -134,6 +130,7 @@
                         <td>
                             <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil-alt"></span></a>
                             <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
+                            <a id="deleteTask" th:value="${task.id}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
                         </td>
                     </tr>
                 </tbody>
