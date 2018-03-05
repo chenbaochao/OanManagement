@@ -4,6 +4,7 @@ import com.oan.management.model.User;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -22,7 +23,7 @@ public interface UserService extends UserDetailsService {
     void incrementTasksCreated(User user);
     void decrementTasksCreated(User user);
     void incrementTasksReceived(User user);
-    void decrementTasksReceived(User user);
     void incrementTasksAssigned(User user);
-    void decrementTasksAssigned(User user);
+    void updateUserAvatar(User user, HttpServletRequest req);
+    void updateUserAttributes(User user, HttpServletRequest req);
 }

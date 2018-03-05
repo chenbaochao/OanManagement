@@ -5,6 +5,7 @@ import com.oan.management.model.Bug;
 import com.oan.management.model.User;
 import com.oan.management.service.bug.BugService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -36,12 +38,16 @@ public class BugController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private TaskService taskService;
+
     @GetMapping("/report-bug")
-    public String reportBugPage(Authentication authentication, Model model) {
+    public String reportBugPage(Authentication authentication, Model model, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("bug", new Bug());
+            userService.updateUserAttributes(userLogged, req);
         }
         return "/report-bug";
     }

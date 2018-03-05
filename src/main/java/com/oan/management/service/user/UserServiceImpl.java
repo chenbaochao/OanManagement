@@ -1,8 +1,12 @@
 package com.oan.management.service.user;
 
+import com.oan.management.model.Image;
 import com.oan.management.model.Role;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
+import com.oan.management.service.image.ImageService;
+import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -26,9 +31,17 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -148,21 +161,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void decrementTasksReceived(User user) {
-        user.setTasksReceived(user.getTasksReceived()-1);
-        userRepository.save(user);
-    }
-
-    @Override
     public void incrementTasksAssigned(User user) {
         user.setTasksAssigned(user.getTasksAssigned()+1);
         userRepository.save(user);
     }
 
     @Override
-    public void decrementTasksAssigned(User user) {
-        user.setTasksAssigned(user.getTasksAssigned()-1);
-        userRepository.save(user);
+    public void updateUserAvatar(User user, HttpServletRequest req) {
+        Image avatar = imageService.getUserImage(user);
+        req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
+    }
+
+    @Override
+    public void updateUserAttributes(User user, HttpServletRequest req) {
+        taskService.updateAttributes(user, req);
+        messageService.updateAttributes(user, req);
+        updateUserAvatar(user, req);
     }
 
     /**

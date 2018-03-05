@@ -42,8 +42,7 @@ public class ListUsersController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("users", users);
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "users";
     }

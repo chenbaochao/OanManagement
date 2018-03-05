@@ -46,8 +46,7 @@ public class ProfileController {
         model.addAttribute("loggedUser", userLogged);
 
         if (userLogged != null) {
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
 
         if (id != null) {

@@ -41,8 +41,7 @@ public class AppSettingsController {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "appsettings";
     }

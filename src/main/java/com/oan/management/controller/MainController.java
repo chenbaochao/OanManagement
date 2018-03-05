@@ -1,9 +1,7 @@
 package com.oan.management.controller;
 
-import com.oan.management.model.Image;
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
-import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.rank.RankService;
@@ -29,9 +27,6 @@ public class MainController {
     private UserService userService;
 
     @Autowired
-    private TaskRepository taskRepository;
-
-    @Autowired
     private TaskService taskService;
 
     @Autowired
@@ -52,17 +47,14 @@ public class MainController {
             // Get the custom greeting by time
             CustomTimeMessage customTimeMessage = new CustomTimeMessage();
             model.addAttribute("timeGreeting", customTimeMessage.getMessage());
-            // Update message attributes: 'lastMessage',
-            messageService.updateAttributes(userLogged, req);
-            // Update attributes for 'tasksLeft', 'taskMotivation' and 'pendingTasksCount'
-            taskService.updateAttributes(userLogged, req);
+
+            // Update all attributes
+            userService.updateUserAttributes(userLogged, req);
         }
         // JSON to Object mapper
         RandomQuote randomQuote = new RandomQuote("https://talaikis.com/api/quotes/random/");
         model.addAttribute("quote", randomQuote.getQuote(randomQuote.getUrl()));
-        // Get user avatar
-        Image avatar = imageService.getUserImage(userLogged);
-        req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
+
         // Get user rank
         Rank userRank = rankService.getUserRank(userLogged);
         model.addAttribute("userRank", userRank);

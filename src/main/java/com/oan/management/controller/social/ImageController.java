@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Oan on 30/01/2018.
  * @author Oan Stultjens
@@ -27,10 +29,11 @@ public class ImageController {
     private ImageService imageService;
 
     @GetMapping("/upload-avatar")
-    public String uploadAvatarPage(Model model, Authentication authentication) {
+    public String uploadAvatarPage(Model model, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         model.addAttribute("loggedUser", userLogged);
         model.addAttribute("image", new Image());
+        userService.updateUserAttributes(userLogged, req);
         return "/upload-avatar";
     }
 

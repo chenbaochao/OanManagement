@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Oan on 1/02/2018.
  * @author Oan Stultjens
@@ -28,10 +30,11 @@ public class ChangePasswordController {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/changepassword")
-    public String changePasswordPage(Model model, Authentication authentication) {
+    public String changePasswordPage(Model model, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "changepassword";
     }

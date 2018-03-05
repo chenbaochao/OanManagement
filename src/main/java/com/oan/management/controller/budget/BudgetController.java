@@ -58,8 +58,7 @@ public class BudgetController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("budgetList", budgetList);
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "budget-list";
     }

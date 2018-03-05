@@ -1,6 +1,5 @@
 package com.oan.management.controller.task;
 
-import com.oan.management.model.Message;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
@@ -61,8 +60,6 @@ public class TaskController {
         List<Task> completedTasksList = taskService.findByUserAndCompletedIsTrueAndApprovedIsTrue(userLogged);
         completedTasksList.sort(Comparator.comparing(Task::getTargetDate));
 
-        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
-
         // Check for pending tasks
         List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
         model.addAttribute("pendingTasks", pendingTasks);
@@ -72,12 +69,10 @@ public class TaskController {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("tasks", taskList);
             model.addAttribute("completedTasks", completedTasksList);
-            req.getSession().setAttribute("tasksLeft", taskList.size());
-            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            userService.updateUserAttributes(userLogged, req);
         }
-        String  today = new Date(Calendar.getInstance().getTime().getTime()).toString();
+        String today = new Date(Calendar.getInstance().getTime().getTime()).toString();
         model.addAttribute("today", today);
-        System.out.println(taskService.getOne(8L).getTargetDate().toString());
         return "task-list";
     }
 

@@ -52,6 +52,7 @@ public class ContactController {
             model.addAttribute("contacts", contactList);
             taskService.updateAttributes(userLogged, req);
             messageService.updateAttributes(userLogged, req);
+            userService.updateUserAvatar(userLogged, req);
         }
         return "contacts";
     }

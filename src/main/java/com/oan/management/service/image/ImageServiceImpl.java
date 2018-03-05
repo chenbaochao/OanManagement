@@ -44,11 +44,6 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.findFirstByTitle(title);
     }
 
-    @Override
-    public Image findFirstByTitle(String title) {
-        return imageRepository.findFirstByTitle(title);
-    }
-
     /**
      * Method to get the user avatar ({@link Image}) of a specific {@link User}
      * @param user User

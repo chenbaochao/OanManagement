@@ -39,8 +39,7 @@ public class SettingsController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("currentCountry", userLogged.getCountry());
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "settings";
     }

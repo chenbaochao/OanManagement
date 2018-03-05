@@ -56,8 +56,7 @@ public class MessageController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
-            taskService.updateAttributes(userLogged, req);
-            messageService.updateAttributes(userLogged, req);
+            userService.updateUserAttributes(userLogged, req);
         }
         return "messages";
     }
@@ -65,12 +64,11 @@ public class MessageController {
     @GetMapping("/message")
     public String openMessage(HttpServletRequest req, Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
-        List<Message> messages = messageService.getMessagesByUser(userLogged);
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
         // Get username and messages
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
-            model.addAttribute("messages", messages);
+
             if (unreadMessages.size() >= 1) {
                 req.getSession().setAttribute("unreadMessages", unreadMessages.size()-1);
             }

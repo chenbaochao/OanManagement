@@ -48,6 +48,7 @@ public class CalendarController {
             model.addAttribute("event", new Event());
             taskService.updateAttributes(userLogged, req);
             messageService.updateAttributes(userLogged, req);
+            userService.updateUserAvatar(userLogged, req);
         }
         return "calendar";
     }
