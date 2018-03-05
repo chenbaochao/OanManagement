@@ -65,7 +65,7 @@ public class TaskController {
 
         // Check for pending tasks
         List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
-        model.addAttribute("pendingTasks", pendingTasks);
+        req.getSession().setAttribute("pendingTasks", pendingTasks);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);

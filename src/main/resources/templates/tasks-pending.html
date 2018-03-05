@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="task : ${pendingTasks}">
+                    <tr th:each="task : ${session.pendingTasks}">
                         <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger">Today</span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td><a th:text="${task.creator.username}" th:href="@{/profile(id=${task.creator.id})}"></a></td>

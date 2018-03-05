@@ -45,7 +45,7 @@ public class MainController {
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
-        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalse(userLogged);
+        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
         // Get list of unread messages and get last message
         List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
         if (unreadMessages.size() > 0) {
@@ -63,7 +63,7 @@ public class MainController {
             req.getSession().setAttribute("unreadMessages", unreadMessages.size());
             // Check for pending tasks
             List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
-            model.addAttribute("pendingTasks", pendingTasks);
+            req.getSession().setAttribute("pendingTasks", pendingTasks);
             // Motivational messages
             String motivationMessage = taskService.getMotivationalMessage(taskList, userLogged);
             model.addAttribute("taskMotivation", motivationMessage);
