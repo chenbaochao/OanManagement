@@ -65,7 +65,8 @@ public class TaskController {
 
         // Check for pending tasks
         List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
-        req.getSession().setAttribute("pendingTasks", pendingTasks);
+        model.addAttribute("pendingTasks", pendingTasks);
+        model.addAttribute("pendingTasksCount", pendingTasks.size());
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -160,11 +161,14 @@ public class TaskController {
     }
 
     @GetMapping("/task-approve")
-    public String approveTask(Authentication authentication, @RequestParam Long id) {
+    public String approveTask(Authentication authentication, @RequestParam Long id, HttpServletRequest req) {
         User userLogged = getLoggedUser(authentication);
+        List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
+        req.setAttribute("pendingTasksCount", pendingTasks.size());
         if (id != null) {
             if (taskService.findByUser(userLogged).contains(taskService.getOne(id))) {
                 taskService.approveTask(taskService.findById(id));
+                    req.getSession().setAttribute("pendingTasksCount", pendingTasks.size()-1);
                 return "redirect:/tasks-pending?approved";
             } else {
                 return "redirect:/tasks-pending?notfound";
@@ -256,5 +260,10 @@ public class TaskController {
         userLogged.setTasksCompleted(userLogged.getTasksCompleted()-1);
         userRepository.save(userLogged);
         return "redirect:/task-list";
+    }
+
+    public void updateNotifications(HttpServletRequest req, Authentication authentication) {
+        req.setAttribute("tasksPending", taskService.findByUserAndApprovedIsFalse(getLoggedUser(authentication)));
+        req.setAttribute("unreadMessages", messageService.findByReceiverAndOpenedIs(getLoggedUser(authentication), 0).size());
     }
 }

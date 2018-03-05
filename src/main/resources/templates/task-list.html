@@ -14,10 +14,10 @@
     <script src="js/dataTablesConfig/task-list_dt.js"></script>
 
     <div class="container">
-        <div th:if="${not #lists.isEmpty(session.pendingTasks)}">
+        <div th:if="${pendingTasksCount} > 0">
             <div class="alert alert-success alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <span class="fas fa-info-circle marginright"></span> You have <span th:text="${#lists.size(session.pendingTasks)}"></span> pending task(s). <a href="/tasks-pending">Bring me there</a>
+                <span class="fas fa-info-circle marginright"></span> You have <span th:text="${pendingTasksCount}"></span> pending task(s). <a href="/tasks-pending">Bring me there</a>
             </div>
         </div>
         <h1><span class="glyphicon glyphicon-edit"></span> Add a new task </h1>
