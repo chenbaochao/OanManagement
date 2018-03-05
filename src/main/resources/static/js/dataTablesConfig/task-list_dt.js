@@ -3,7 +3,7 @@ $(document).ready(function() {
             "columnDefs": [
                 { "type": "date", "targets": 1 }
             ],
-            "order": [ 1, 'desc' ],
+            "order": [ 1, 'asc' ],
             language: {
                 searchPlaceholder: "Search task"
             }
