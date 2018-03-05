@@ -33,7 +33,7 @@
                 <div class="panel panel-login">
                     <h3>Tasks</h3>
                     <p th:if="${loggedUser.MotivationalTaskMessage}" th:text="${taskMotivation}"></p>
-                    <p th:if="!${loggedUser.MotivationalTaskMessage}">You have <strong><span th:text="${session.tasksLeft}"></span></strong> tasks.</p>
+                    <p th:if="!${loggedUser.MotivationalTaskMessage}">You have <strong><span th:text="${session.tasksLeft}"></span></strong> task(s).</p>
                     <p th:if="${not #lists.isEmpty(pendingTasks)}">You have <strong><span th:text="${#lists.size(pendingTasks)}"></span></strong> pending tasks to review.</p>
                 </div>
             </a>
@@ -101,6 +101,7 @@
                         <span th:if="${userRank.rankNumber} == 11">Max</span>
                     </div>
                 </div>
+                <small style="color: #666666"><span class="fas fa-info-circle"></span> Complete tasks to rank up!</small>
 
             </div>
         </div>
