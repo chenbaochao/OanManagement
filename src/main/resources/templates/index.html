@@ -20,7 +20,7 @@
             <a class="link-unstyled" href="/task-list">
                 <div class="panel panel-login">
                     <h3>Tasks</h3>
-                    <p th:if="${loggedUser.MotivationalTaskMessage}" th:text="${taskMotivation}"></p>
+                    <p th:if="${loggedUser.MotivationalTaskMessage}" th:text="${session.taskMotivation}"></p>
                     <p th:if="!${loggedUser.MotivationalTaskMessage}">You have <strong><span th:text="${session.tasksLeft}"></span></strong> task(s).</p>
                     <!--<p th:if="${not #lists.isEmpty(pendingTasks)}">You have <strong><span th:text="${#lists.size(pendingTasks)}"></span></strong> pending tasks to review.</p>-->
                 </div>
@@ -51,8 +51,8 @@
                     <h3>Messages</h3>
                     <p th:if="${session.unreadMessages} > 0">You have <strong><span th:text="${session.unreadMessages}"></span></strong> unread message(s)</p>
                     <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
-                    <div th:if="${lastMessage}">
-                        <small style="color: #666666">Last unread message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></small>
+                    <div th:if="${session.lastMessage}">
+                        <small style="color: #666666">Last unread message from <span th:text="${session.lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(session.lastMessage.date, 'dd/MM/yyyy')}"></span></small>
                     </div>
                     <!--<span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>-->
                 </div>

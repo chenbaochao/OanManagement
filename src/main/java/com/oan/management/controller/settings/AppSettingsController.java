@@ -2,6 +2,8 @@ package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
+import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Oan on 1/02/2018.
@@ -26,11 +30,19 @@ public class AppSettingsController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TaskService taskService;
+
+    @Autowired
+    MessageService messageService;
+
     @GetMapping("/appsettings")
-    public String getSettings(Model model, Authentication authentication, @RequestParam(value = "motivationText", required = false) String checkbox) {
+    public String getSettings(Model model, Authentication authentication, HttpServletRequest req, @RequestParam(value = "motivationText", required = false) String checkbox) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "appsettings";
     }

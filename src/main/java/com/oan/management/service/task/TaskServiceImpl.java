@@ -9,6 +9,7 @@ import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -149,6 +150,16 @@ public class TaskServiceImpl implements TaskService {
         notifyMessage.setMessageText("<p>Hello "+task.getCreator().getUsername() + ",</p><br/>You have assigned the following task to me: <blockquote>"+task.getDescription()+
                 "</blockquote><p>I hereby inform you that I have to deny your task.</p><small><em>This is an automated message and not written by the user self.</em></small>");
         messageService.save(notifyMessage);
+    }
+
+    @Override
+    public void updateAttributes(User user, HttpServletRequest req) {
+        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalseAndApprovedIsTrue(user);
+        req.getSession().setAttribute("tasksLeft", taskList.size());
+        String motivationMessage = getMotivationalMessage(taskList, user);
+        req.getSession().setAttribute("taskMotivation", motivationMessage);
+        List<Task> pendingTasks = findByUserAndApprovedIsFalse(user);
+        req.getSession().setAttribute("pendingTasksCount", pendingTasks.size());
     }
 
     @Override

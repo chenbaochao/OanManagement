@@ -4,6 +4,7 @@ import com.oan.management.model.Bug;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,4 +18,5 @@ public interface MessageService {
     List<Message> getAllByReceiverAndOpenedIsFalse(User user);
     List<Message> findByReceiverAndOpenedIs(User user, int read);
     Message bugNotifyMessage(User sender, User receiver, Bug bug);
+    void updateAttributes(User user, HttpServletRequest req);
 }

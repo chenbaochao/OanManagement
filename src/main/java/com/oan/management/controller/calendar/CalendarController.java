@@ -1,11 +1,11 @@
 package com.oan.management.controller.calendar;
 
 import com.oan.management.model.Event;
-import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
 import com.oan.management.service.calendar.EventService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created by Oan on 18/01/2018.
@@ -38,14 +37,17 @@ public class CalendarController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TaskService taskService;
+
     @GetMapping("/calendar")
     public String calendar(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
-        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("event", new Event());
-            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "calendar";
     }

@@ -28,13 +28,13 @@ import java.util.List;
 @Controller
 public class BugController {
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @Autowired
-    public BugService bugService;
+    private BugService bugService;
 
     @Autowired
-    public MessageService messageService;
+    private MessageService messageService;
 
     @GetMapping("/report-bug")
     public String reportBugPage(Authentication authentication, Model model) {

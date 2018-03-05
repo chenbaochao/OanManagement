@@ -1,6 +1,8 @@
 package com.oan.management.controller;
 
-import com.oan.management.model.*;
+import com.oan.management.model.Image;
+import com.oan.management.model.Rank;
+import com.oan.management.model.User;
 import com.oan.management.repository.TaskRepository;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
@@ -16,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Controller for the Home (index) page with widgets which can be customized by the /appsettings page
@@ -45,28 +46,16 @@ public class MainController {
     @GetMapping("/")
     public String root(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
-        List<Task> taskList = taskRepository.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
-        // Get list of unread messages and get last message
-        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
-        if (unreadMessages.size() > 0) {
-            Message lastMessage = unreadMessages.get(unreadMessages.size()-1);
-            model.addAttribute("lastMessage", lastMessage);
-        }
-        // loggedUser and motivational texts
+
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             // Get the custom greeting by time
             CustomTimeMessage customTimeMessage = new CustomTimeMessage();
             model.addAttribute("timeGreeting", customTimeMessage.getMessage());
-            // Tasks and unread messages
-            req.getSession().setAttribute("tasksLeft", taskList.size());
-            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
-            // Check for pending tasks
-            List<Task> pendingTasks = taskService.findByUserAndApprovedIsFalse(userLogged);
-            req.getSession().setAttribute("pendingTasksCount", pendingTasks.size());
-            // Motivational messages
-            String motivationMessage = taskService.getMotivationalMessage(taskList, userLogged);
-            model.addAttribute("taskMotivation", motivationMessage);
+            // Update message attributes: 'lastMessage',
+            messageService.updateAttributes(userLogged, req);
+            // Update attributes for 'tasksLeft', 'taskMotivation' and 'pendingTasksCount'
+            taskService.updateAttributes(userLogged, req);
         }
         // JSON to Object mapper
         RandomQuote randomQuote = new RandomQuote("https://talaikis.com/api/quotes/random/");

@@ -1,8 +1,8 @@
 package com.oan.management.controller.social;
 
-import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +27,9 @@ public class ListUsersController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private TaskService taskService;
+
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
     }
@@ -35,12 +38,12 @@ public class ListUsersController {
     public String listUsers(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<User> users = userService.findAll();
-        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
 
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("users", users);
-            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "users";
     }

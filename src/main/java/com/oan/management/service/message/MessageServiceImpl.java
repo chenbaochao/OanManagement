@@ -7,6 +7,7 @@ import com.oan.management.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -68,5 +69,15 @@ public class MessageServiceImpl implements MessageService {
         notifyMessage.setOpened(0);
         notifyMessage.setDate(new Date(Calendar.getInstance().getTime().getTime()));
         return messageRepository.save(notifyMessage);
+    }
+
+    @Override
+    public void updateAttributes(User user, HttpServletRequest req) {
+        List<Message> unreadMessages = findByReceiverAndOpenedIs(user, 0);
+        if (unreadMessages.size() > 0) {
+            Message lastMessage = unreadMessages.get(unreadMessages.size()-1);
+            req.getSession().setAttribute("lastMessage", lastMessage);
+        }
+        req.getSession().setAttribute("unreadMessages", unreadMessages.size());
     }
 }

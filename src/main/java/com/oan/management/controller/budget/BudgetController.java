@@ -8,6 +8,8 @@ import com.oan.management.model.User;
 import com.oan.management.service.budget.BudgetService;
 import com.oan.management.service.budget.ExpenseService;
 import com.oan.management.service.budget.IncomeService;
+import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,25 +33,33 @@ import java.util.List;
 @Controller
 public class BudgetController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    BudgetService budgetService;
+    private BudgetService budgetService;
 
     @Autowired
-    IncomeService incomeService;
+    private IncomeService incomeService;
 
     @Autowired
-    ExpenseService expenseService;
+    private ExpenseService expenseService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/budget-list")
-    public String getBudgetManager(Model model, Authentication authentication) {
+    public String getBudgetManager(Model model, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
         budgetList.sort(Comparator.comparing(Budget::getId).reversed());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("budgetList", budgetList);
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "budget-list";
     }

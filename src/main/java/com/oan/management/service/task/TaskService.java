@@ -3,6 +3,7 @@ package com.oan.management.service.task;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.List;
 
@@ -27,4 +28,5 @@ public interface TaskService {
     List<Task> findByUserAndApprovedIsFalse(User user);
     void approveTask(Task task);
     void denyTask(Task task);
+    void updateAttributes(User user, HttpServletRequest req);
 }

@@ -2,6 +2,8 @@ package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
+import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.NameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Oan on 1/02/2018.
@@ -23,12 +27,20 @@ public class SettingsController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
+    private TaskService taskService;
+
     @GetMapping("/settings")
-    public String getSettings(Model model, Authentication authentication) {
+    public String getSettings(Model model, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("currentCountry", userLogged.getCountry());
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "settings";
     }

@@ -5,6 +5,7 @@ import com.oan.management.model.Message;
 import com.oan.management.model.User;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
+import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,6 +38,9 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private TaskService taskService;
+
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());
     }
@@ -45,13 +49,15 @@ public class MessageController {
     public String getInbox(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
-        List<Message> unreadMessages = messageService.findByReceiverAndOpenedIs(userLogged, 0);
+
         // Sort by id, last id's last (newest messages on top)
         messages.sort(Comparator.comparing(Message::getId).reversed());
+
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
-            req.getSession().setAttribute("unreadMessages", unreadMessages.size());
+            taskService.updateAttributes(userLogged, req);
+            messageService.updateAttributes(userLogged, req);
         }
         return "messages";
     }
