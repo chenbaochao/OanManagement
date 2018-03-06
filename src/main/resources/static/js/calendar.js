@@ -6,13 +6,14 @@ $(document).ready(function () {
     };
 
     var calendar = $('#calendar').fullCalendar({
-        defaultView: window.mobilecheck() ? "agendaDay" : "month",
+        defaultView: Cookies.get('fullCalendarCurrentView') || "month",
+        defaultDate: Cookies.get('fullCalendarCurrentDate') || null,
         businessHours: {
             // days of week. an array of zero-based day of week integers (0=Sunday)
             dow: [ 1, 2, 3, 4, 5],
 
-            start: '9:00', // a start time
-            end: '18:00', // an end time
+            start: '9:00',
+            end: '18:00',
         },
         height: 800,
         aspectRatio: 1,
@@ -29,16 +30,12 @@ $(document).ready(function () {
         allDayText: 'Whole day',
         views: {
             month: {
-                eventLimit: 6
+                eventLimit: 4
             }
         },
         eventColor: '#5C6BC0',
         firstDay: 1,
         googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
-        /*events: {
-            url : '/api/event/all',
-            googleCalendarId: 'https://calendar.google.com/calendar?cid=MGVoYXR1ZGxuaTVkMjQ5dHE0cnVybXZiaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
-        },*/
         eventSources: [
             {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
@@ -51,6 +48,10 @@ $(document).ready(function () {
             }
         ],
 
+        viewRender: function(view) {
+            Cookies.set('fullCalendarCurrentView', view.name, {path: ''});
+            Cookies.set('fullCalendarCurrentDate', view.intervalStart.format(), {path: ''});
+        },
 
         eventClick:  function(event, jsEvent, view) {
             endtime = $.fullCalendar.moment(event.end).format('h:mm');
@@ -79,52 +80,73 @@ $(document).ready(function () {
                 var end = $('#endEditTime').attr("value");
                 var colour = $('#eventEditColour').val();
                 var title = $('#modalEditTitle').val();
-                var desc = $('#modalEditDesc').val();
+                var description = $('#modalEditDesc').val();
                 event.id = eventID;
                 event.title = title;
-                event.desc = desc;
+                event.description = description;
                 event.backgroundColor = colour;
                 event.borderColor = colour;
+                if (event.title.length == 0 ) {
+                    event.title="Event";
+                }
                 $.ajax({
                     url: 'calendar-updateEvent',
-                    data: {title: title, start: start, end: end, id: eventID, colour: colour, desc: desc},
+                    data: {title: title, start: start, end: end, id: eventID, colour: colour, desc: description},
                     type: "GET"
                 });
                 calendar.fullCalendar('updateEvent', event);
             })
-
-            // $('#calendar').fullCalendar('updateEvent', event);
         },
         select: function(start, end, jsEvent) {
-            endtime = $.fullCalendar.moment(end).format('dddd, DD/MM/YYYY h:mm');
-            starttime = $.fullCalendar.moment(start).format('dddd, DD/MM/YYYY h:mm'); // dddd, Do MMMM YYYY h:mm
+            var endtime = $.fullCalendar.moment(end).format('dddd, DD/MM/YYYY h:mm');
+            var starttime = $.fullCalendar.moment(start).format('dddd, DD/MM/YYYY h:mm'); // dddd, Do MMMM YYYY h:mm
             var mywhen = starttime + ' - ' + endtime;
-            start = moment(start).format();
-            end = moment(end).format();
-            $('#createEventModal #startTime').val(start);
-            $('#createEventModal #endTime').val(end);
+
             $('#createEventModal #when').text(mywhen);
             $('#createEventModal').modal('toggle');
             $(".fc-highlight").css("background", "#2196F3");
+
+            $('#submitButton').on('click', function (e) {
+                $("#createEventModal").modal('hide');
+
+                var data_row = {
+                    'start': moment(start).format(),
+                    'end': moment(end).format(),
+                    'title': $('#theTitle').val(),
+                    'description': $('#theDescription').val(),
+                    'colour': $('#theColor').val()
+                }
+
+                console.log("Start date: "+moment(start).format());
+                console.log("End date: "+moment(end).format());
+
+                $('#theTitle').val("");
+                $('#theDescription').val("");
+                $('#theColor').val("");
+
+                $.ajax({
+                    url: 'calendar-addEvent',
+                    data: data_row,
+                    type: "GET",
+                    cache: false,
+                    success: function () {
+                        $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
+                    }
+                });
+            });
         },
         eventDrop: function(event, delta){
             $.ajax({
                 url: '/calendar-update',
                 data: {title: event.title, start: moment(event.start).format(), end: moment(event.end).format(), id: event.id},
-                type: "GET",
-                success: function(json) {
-                    //alert(json);
-                }
+                type: "GET"
             });
         },
         eventResize: function(event) {
             $.ajax({
                 url: '/calendar-update',
                 data: {title: event.title, start: moment(event.start).format(), end: moment(event.end).format(), id: event.id},
-                type: "GET",
-                success: function(json) {
-                    //alert(json);
-                }
+                type: "GET"
             });
         },
         header: {
@@ -132,22 +154,12 @@ $(document).ready(function () {
             center: 'title',
             right: 'month, agendaWeek, agendaDay, listWeek'
         }
-        /*    eventSources: [
-                '/api/event/all',
-                {
-                    url: 'https://calendar.google.com/calendar?cid=MGVoYXR1ZGxuaTVkMjQ5dHE0cnVybXZiaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
-                }
-            ],*/
     })
     $('#deleteButton').on('click', function(e){
         // We don't want this to act as a link so cancel the link action
         e.preventDefault();
         doDelete();
     });
-
-    function doEdit(event) {
-
-    }
 
     function doDelete(view){
         $("#editEventModal").modal('hide');

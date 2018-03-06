@@ -5,6 +5,8 @@
     <script src='webjars/fullcalendar/3.8.0/dist/fullcalendar.js'></script>
     <script src="js/gcal.min.js"></script>
     <script src="js/calendar.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <title>Calendar</title>
 
     <body>
@@ -22,7 +24,7 @@
             </div>
 
             <!-- Modal -->
-            <form th:action="@{/calendar}" th:object="${event}" method="post">
+            <!--<form th:action="@{/calendar}" th:object="${event}" method="post">-->
                 <div id="createEventModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
@@ -34,23 +36,23 @@
                             </div>
                             <div class="modal-body">
                                 <div class="control-group">
-                                    <label class="control-label" for="theTitle">Title: </label>
+                                    <label class="control-label">Title: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:field="*{title}" id="theTitle" name="title" placeholder="Title" type="text" value="" />
+                                        <input id="theTitle" class="form-control" autocomplete="off" name="title" placeholder="Title" type="text" autofocus="true"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="control-group">
-                                    <label class="control-label" for="theDescription">Description: </label>
+                                    <label class="control-label">Description: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:field="*{description}" id="theDescription" name="title" placeholder="Description" type="text" value="" />
+                                        <input id="theDescription" class="form-control" autocomplete="off" name="title" placeholder="Description" type="text"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="control-group">
-                                    <label class="control-label" for="theColor">Colour: </label>
+                                    <label class="control-label">Colour: </label>
                                     <div class="field desc">
-                                        <select th:field="*{backgroundColor}" name="color" class="form-control" id="theColor">
+                                        <select name="color" class="form-control" id="theColor">
                                             <option value="#5C6BC0">Choose</option>
                                             <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
                                             <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
@@ -59,13 +61,10 @@
                                             <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
                                             <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
                                             <option style="color:#000;" value="#000">&#9724; Black</option>
-
                                         </select>
                                     </div>
                                 </div>
 
-                                <input th:field="*{start}" type="hidden" id="startTime"/>
-                                <input th:field="*{end}" type="hidden" id="endTime"/>
                                 <br/>
                                 <div class="control-group">
                                     <label class="control-label" for="when">When: </label>
@@ -76,13 +75,13 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                                <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                                <a class="btn btn-primary" id="submitButton">Save</a>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </form>
+            <!--</form>-->
 
 
             <!--EDIT EVENT MODAL-->
@@ -100,14 +99,14 @@
                                 <div class="control-group">
                                     <label class="control-label" for="theTitle">Title: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:value="${title}" id="modalEditTitle" name="title" placeholder="Title" type="text"/>
+                                        <input class="form-control" autocomplete="off" th:value="${title}" id="modalEditTitle" autofocus="true" name="title" placeholder="Title" type="text"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="control-group">
                                     <label class="control-label" for="theDescription">Description: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:value="${description}" id="modalEditDesc" name="title" placeholder="Description" type="text"/>
+                                        <input class="form-control" autocomplete="off" th:value="${description}" id="modalEditDesc" name="desc" placeholder="Description" type="text"/>
                                     </div>
                                 </div>
                                 <br/>
