@@ -5,7 +5,7 @@ $(document).ready(function () {
         return check;
     };
 
-    $('#calendar').fullCalendar({
+    var calendar = $('#calendar').fullCalendar({
         defaultView: window.mobilecheck() ? "agendaDay" : "month",
         businessHours: {
             // days of week. an array of zero-based day of week integers (0=Sunday)
@@ -134,11 +134,11 @@ $(document).ready(function () {
             type: "GET",
             success: function(json) {
                 if(json == 1)
-                    $("#calendar").fullCalendar('removeEvents',eventID);
+                    calendar.fullCalendar('removeEvents',eventID);
                 else
                     return false;
             }
         });
-        location.reload();
+        calendar.fullCalendar('removeEvents',eventID);
     }
 });
