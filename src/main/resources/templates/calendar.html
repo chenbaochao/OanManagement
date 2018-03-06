@@ -87,7 +87,7 @@
 
             <!--EDIT EVENT MODAL-->
             <!-- Modal -->
-            <form th:action="@{/calendar-update}" th:object="${event}" method="post">
+            <!--<form th:action="@{/calendar-update}" th:object="${event}" method="post">-->
                 <div id="editEventModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
@@ -100,21 +100,21 @@
                                 <div class="control-group">
                                     <label class="control-label" for="theTitle">Title: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:field="*{title}" th:value="${title}" id="modalEditTitle" name="title" placeholder="Title" type="text" value="" />
+                                        <input class="form-control" autocomplete="off" th:value="${title}" id="modalEditTitle" name="title" placeholder="Title" type="text"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="control-group">
                                     <label class="control-label" for="theDescription">Description: </label>
                                     <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:value="${description}" th:field="*{description}" id="modalEditDesc" name="title" placeholder="Description" type="text" value="" />
+                                        <input class="form-control" autocomplete="off" th:value="${description}" id="modalEditDesc" name="title" placeholder="Description" type="text"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="control-group">
                                     <label class="control-label" for="theColor">Colour: </label>
                                     <div class="field desc">
-                                        <select th:field="*{backgroundColor}" th:value="${backgroundColor}" name="color" class="form-control" id="eventEditColour">
+                                        <select th:value="${backgroundColor}" name="color" class="form-control" id="eventEditColour">
                                             <option value="#5C6BC0">Choose</option>
                                             <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
                                             <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
@@ -128,22 +128,22 @@
                                     </div>
                                 </div>
 
-                                <input th:field="*{id}" th:value="${id}" type="hidden" id="eventEditID"/>
-                                <input th:field="*{start}" th:value="${start}" type="hidden" id="startEditTime"/>
-                                <input th:field="*{end}" th:value="${end}" type="hidden" id="endEditTime"/>
+                                <input th:value="${id}" type="hidden" id="eventEditID"/>
+                                <input th:value="${start}" type="hidden" id="startEditTime"/>
+                                <input th:value="${end}" type="hidden" id="endEditTime"/>
                                 <br/>
 
                             </div>
                             <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                                 <a class="btn btn-danger pull-left" id="deleteButton">Delete</a>
-                                <button type="submit" class="btn btn-primary" id="submitEditButton">Save</button>
+                                <a class="btn btn-primary" id="submitEditButton">Save</a>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </form>
+            <!--</form>-->
         </div>
     </body>
 </html>

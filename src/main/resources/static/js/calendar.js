@@ -70,7 +70,30 @@ $(document).ready(function () {
 
             $('#editEventModal').modal('toggle');
 
-            //$('#calendar').fullCalendar('updateEvent', event);
+            $('#submitEditButton').on('click', function (e) {
+                e.preventDefault();
+                var item = calendar.fullCalendar( 'clientEvents', event.id );
+                $("#editEventModal").modal('hide');
+                var eventID = event.id;
+                var start = $('#startEditTime').attr("value");
+                var end = $('#endEditTime').attr("value");
+                var colour = $('#eventEditColour').val();
+                var title = $('#modalEditTitle').val();
+                var desc = $('#modalEditDesc').val();
+                event.id = eventID;
+                event.title = title;
+                event.desc = desc;
+                event.backgroundColor = colour;
+                event.borderColor = colour;
+                $.ajax({
+                    url: 'calendar-updateEvent',
+                    data: {title: title, start: start, end: end, id: eventID, colour: colour, desc: desc},
+                    type: "GET"
+                });
+                calendar.fullCalendar('updateEvent', event);
+            })
+
+            // $('#calendar').fullCalendar('updateEvent', event);
         },
         select: function(start, end, jsEvent) {
             endtime = $.fullCalendar.moment(end).format('dddd, DD/MM/YYYY h:mm');
@@ -122,6 +145,10 @@ $(document).ready(function () {
         doDelete();
     });
 
+    function doEdit(event) {
+
+    }
+
     function doDelete(view){
         $("#editEventModal").modal('hide');
         var eventID = $('#eventEditID').val();
@@ -131,13 +158,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'calendar-delete',
             data: {id: eventID},
-            type: "GET",
-            success: function(json) {
-                if(json == 1)
-                    calendar.fullCalendar('removeEvents',eventID);
-                else
-                    return false;
-            }
+            type: "GET"
         });
         calendar.fullCalendar('removeEvents',eventID);
     }

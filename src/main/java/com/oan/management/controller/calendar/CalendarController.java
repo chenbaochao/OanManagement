@@ -74,6 +74,14 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
+    @GetMapping("/calendar-updateEvent")
+    public String updateEventNew(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id, @RequestParam String colour, @RequestParam String desc) {
+        User userLogged = userService.findByUser(authentication.getName());
+        Event event = eventService.findById(id);
+        eventService.editEventAndColour(event, title, desc, colour,  colour);
+        return "redirect:/calendar";
+    }
+
     @PostMapping("calendar-update")
     public String updateEventPost(Event event) {
         Event updateEvent = eventService.findById(event.getId());
