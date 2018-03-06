@@ -12,7 +12,6 @@ $(document).ready(function() {
     );
     $('#completedTaskList').on( 'click', '#deleteCompletedTask', function () {
         var task_id = $(this).attr('value');
-        console.log(task_id);
 
         $.ajax({
             url: 'task-delete',
@@ -23,12 +22,10 @@ $(document).ready(function() {
             .row( $(this).parents('tr') )
             .remove()
             .draw();
-        console.log("DELETED");
     } );
 
     $('#TodoList').on( 'click', '#deleteTask', function () {
         var task_id = $(this).attr('value');
-        console.log(task_id);
 
         $.ajax({
             url: 'task-delete',
@@ -36,6 +33,5 @@ $(document).ready(function() {
             type: 'GET'
         })
         $('#todoTableRow').remove();
-        console.log("DELETED");
     } );
 } );

@@ -44,7 +44,7 @@
         </div>
 
         <div class="panel panel-login table-responsive">
-            <table id="messagestable" class="table table-hover table-striped">
+            <table id="messagesTable" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                      <tr>
                          <th class="col-md-5">Subject</th>
@@ -63,7 +63,8 @@
                     <td th:text="${#dates.format(message.date, 'dd MMMMM yyyy')}"></td>
                     <!--<td th:text="${message.date}"></td>-->
                     <td>
-                        <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="left" title="Delete this message" class="btn btn-danger btn-sm fa fa-trash"></a>
+                        <!--OLD delete button (refreshes page) <a th:href="@{/message-delete(id=${message.id})}" data-toggle="tooltip" data-placement="left" title="Delete this message" class="btn btn-danger btn-sm fa fa-trash"></a>-->
+                        <a id="deleteMessage" th:value="${message.id}" data-toggle="tooltip" data-placement="left" title="Delete this message" class="btn btn-danger btn-sm fa fa-trash"></a>
                         <a class="btn btn-default btn-sm fa fa-reply" th:href="@{/message-to(id=${message.sender.id})}" data-toggle="tooltip" data-placement="right" title="Reply"></a>
                     </td>
                 </tr>
