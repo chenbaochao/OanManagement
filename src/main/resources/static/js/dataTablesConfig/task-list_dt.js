@@ -10,21 +10,32 @@ $(document).ready(function() {
         }
 
     );
-    $('#completedTaskList').on( 'click', '#deleteTask', function () {
+    $('#completedTaskList').on( 'click', '#deleteCompletedTask', function () {
         var task_id = $(this).attr('value');
         console.log(task_id);
 
         $.ajax({
             url: 'task-delete',
             data: {id: task_id},
-            type: 'GET',
-            success: function (json) {
-                table
-                    .row( $(this).parents('tr') )
-                    .remove()
-                    .draw();
-                    console.log("DELETED");
-            }
+            type: 'GET'
         })
+        table
+            .row( $(this).parents('tr') )
+            .remove()
+            .draw();
+        console.log("DELETED");
+    } );
+
+    $('#TodoList').on( 'click', '#deleteTask', function () {
+        var task_id = $(this).attr('value');
+        console.log(task_id);
+
+        $.ajax({
+            url: 'task-delete',
+            data: {id: task_id},
+            type: 'GET'
+        })
+        $('#todoTableRow').remove();
+        console.log("DELETED");
     } );
 } );

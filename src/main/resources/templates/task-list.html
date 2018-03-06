@@ -87,7 +87,7 @@
         <!--<h1><span class="glyphicon glyphicon-check"></span> <span th:text="${loggedUser.firstName}"></span>'s Tasks: </h1>-->
         <h1><span class="fas fa-tasks marginright"></span> To-Do </h1>
         <div class="panel panel-login">
-            <table class="table table-hover table-striped">
+            <table id="TodoList" class="table table-hover table-striped">
                 <thead class="thead-inverse">
                     <tr>
                         <th class="col-md-7">Description</th>
@@ -97,13 +97,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="task : ${tasks}">
+                    <tr id="todoTableRow" th:each="task : ${tasks}">
                         <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger marginleft">Today</span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.username}"></span></a> </small></span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="!${task.completed}"><a th:href="@{/task-complete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Complete" class="btn btn-success btn-sm">I did it!</a></td>
                         <td class="col-md-2">
                             <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft glyphicon fa fa-pencil-alt"></span></a>
-                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
+                            <!--<a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>-->
+                            <a id="deleteTask" th:value="${task.id}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
                         </td>
                     </tr>
                 </tbody>
@@ -129,8 +130,8 @@
                         <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger btn-sm">Incomplete</a></td>
                         <td>
                             <a th:href="@{/task-edit(id=${task.id})}" data-toggle="tooltip" data-placement="left" title="Edit task" class="btn btn-warning btn-sm"><span class="marginleft fa fa-pencil-alt"></span></a>
-                            <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
-                            <a id="deleteTask" th:value="${task.id}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
+                            <!--OLD DELETE BUTTON (refresh page): <a th:href="@{/task-delete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>-->
+                            <a id="deleteCompletedTask" th:value="${task.id}" data-toggle="tooltip" data-placement="right" title="Delete task" class="btn btn-danger btn-sm"><span class="fa fa-trash marginleft"></span></a>
                         </td>
                     </tr>
                 </tbody>
